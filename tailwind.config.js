@@ -2,7 +2,12 @@
 export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        comfortaa: ['Comfortaa', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif']
+      }
+    }
   },
   plugins: []
 };
