@@ -1,10 +1,14 @@
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y-positive-tabindex -->
 <svg
 	xmlns="http://www.w3.org/2000/svg"
+	type="button"
 	fill="none"
 	viewBox="0 0 24 24"
-	stroke-width="2"
+	stroke-width="2.5"
 	stroke="currentColor"
-	class="w-6 h-6"
+	tabindex="1"
+	class="w-5 h-5 focus:text-emerald-600"
 >
 	<path
 		stroke-linecap="round"

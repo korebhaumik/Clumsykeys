@@ -6,37 +6,83 @@
 	import LockSvg from '../assets/LockSVG.svelte';
 	import MailSvg from '../assets/MailSVG.svelte';
 	import ShieldSvg from '../assets/ShieldSVG.svelte';
-	import TerminalSvg from '../assets/TerminalSVG.svelte';
+	import { theme, game } from '$lib/components/store';
+
+	const bgVar = {
+		command: 'bg-cardboard-command-bg'
+	};
+	const textVar = {
+		unhighlighted: 'text-cardboard-unhighlighted',
+		highlighted: 'text-cardboard-highlighted',
+		'command-text': 'text-cardboard-command-text',
+		credits: `text-cardboard-credits`
+	};
+	let opac = 'opacity-100';
+	$: {
+		if ($theme === 'dark-forest') {
+			bgVar.command = 'bg-dark-forest-command-bg';
+			textVar['command-text'] = 'text-dark-forest-command-text';
+			textVar.credits = `text-dark-forest-credits`;
+			textVar.highlighted = 'text-dark-forest-highlighted';
+		}
+		if ($theme === 'cardboard') {
+			bgVar.command = 'bg-cardboard-command-bg';
+			textVar['command-text'] = 'text-cardboard-command-text';
+			textVar.credits = `text-dark-forest-credits`;
+			textVar.highlighted = 'text-cardboard-highlighted';
+		}
+	}
+	$: {
+		if ($game === 'playing') opac = 'opacity-0';
+		if ($game != 'playing') opac = 'opacity-100';
+	}
 </script>
 
-<div class="absolute bottom-10 left-10 right-10">
+<div
+	class="absolute mx-auto mt-10 bottom-10 w-fit big:w-full big:bottom-10 big:max-w-6xl big:mx-auto"
+>
 	<!-- commands -->
-	<div class="mb-3 text-sm sm:text-base">
+	<div class="mb-5 text-sm sm:text-base">
 		<!-- <TerminalSvg /> -->
 		<div class="flex items-center text-sm">
 			<div class="items-center hidden sm:flex">
-				<p class="font-bold">
-					<span class="inline-block p-2 rounded bg-zinc-900 text-zinc-100 w-fit">tab</span> +
-					<span class="inline-block p-2 rounded bg-zinc-900 text-zinc-100 w-fit">enter</span>
+				<p class="font-medium">
+					<span
+						class={`inline-block px-3 py-1 rounded ${bgVar.command} ${textVar['command-text']} w-fit`}
+						>tab</span
+					>
+					+
+					<span
+						class={`inline-block px-3 py-1 rounded ${bgVar.command} ${textVar['command-text']} w-fit`}
+						>enter</span
+					>
 				</p>
-				<li class="ml-3">Restart Test</li>
+				<li class={`ml-3 ${textVar.credits}`}>Restart Test</li>
 			</div>
-			<div class="flex items-center sm:ml-10">
-				<p class="font-bold">
-					<span class="inline-block p-2 rounded bg-zinc-900 text-zinc-100 w-fit">cmd</span> +
-					<span class="p-2 px-3.5 bg-zinc-900 text-zinc-100 w-fit inline-block rounded">k</span>
+			<div class={`flex items-center sm:ml-10 ${opac}`}>
+				<p class="font-medium">
+					<span
+						class={`inline-block px-3 py-1 rounded ${bgVar.command} ${textVar['command-text']} w-fit`}
+						>cmd</span
+					>
+					+
+					<span
+						class={`px-3 py-1 ${bgVar.command} ${textVar['command-text']} w-fit inline-block rounded`}
+						>k</span
+					>
 				</p>
-				<li class="ml-3">Settings Menu</li>
+				<li class={`ml-3 ${textVar.credits}`}>Settings Menu</li>
 			</div>
 		</div>
 	</div>
 	<!-- credits -->
-	<div class="flex items-center justify-between">
-		<div class="flex w-80 md:w-[40rem] flex-wrap justify-between font-semibold">
-			<div class="flex items-center">
+
+	<div class={`flex items-center ${textVar.credits} ${opac} justify-between w-fit big:w-auto`}>
+		<div class={`flex w-80 md:w-[40rem] flex-wrap justify-between font-semibold`}>
+			<button class="flex items-center transition cursor-pointer hover:text-cardboard-900">
 				<MailSvg />
 				<span class="ml-1.5 text-xs">Contact</span>
-			</div>
+			</button>
 			<div class="flex items-center">
 				<GithubSvg />
 				<span class="ml-1.5 text-xs">Github</span>
@@ -53,7 +99,7 @@
 				<DocumentSvg />
 				<span class="ml-1.5 text-xs">Terms</span>
 			</div>
-			<div class="items-center hidden md:flex ">
+			<div class="items-center hidden md:flex">
 				<LockSvg />
 				<span class="ml-1.5 text-xs">Privacy</span>
 			</div>
@@ -62,6 +108,12 @@
 				<span class="ml-1.5 text-xs">Support</span>
 			</div>
 		</div>
-		<p class="hidden text-xs sm:inline">developed by <span class="text-amber-700">@korebhaumik</span></p>
+		<p class="hidden text-xs big:block">
+			developed by <a
+				class="text-amber-700 hover:underline"
+				href="https://google.com"
+				target="_blank">@korebhaumik</a
+			>
+		</p>
 	</div>
 </div>
