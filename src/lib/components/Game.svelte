@@ -6,25 +6,34 @@
 	import { theme } from './store';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
 	import { game, setGameState } from './store';
-	// import { createTimer, resetTest, count, TimerCount } from './store';
+	import { createTimer, resetTest, count, TimerCount, wordIndex } from './store';
 
 	type GameState = 'waiting' | 'playing' | 'finished';
 
+	// const textVar = {
+	// 	highlighted: 'text-dark-forest-highlighted',
+	// 	['accent-error']: 'text-dark-forest-accent-error',
+	// 	unhighlighted: 'text-dark-forest-unhighlighted'
+	// };
+
 	const textVar = {
-		unhighlighted: 'text-cardboard-unhighlighted',
 		highlighted: 'text-cardboard-highlighted',
-		'accent-error': 'text-cardboard-accent-error'
+		['accent-error']: 'text-cardboard-accent-error',
+		unhighlighted: 'text-cardboard-unhighlighted '
 	};
 
 	const bgVar = {
 		caret: 'bg-cardboard-caret'
 	};
 
+	// let k = 'bg-blue-700';
+	let k = 'bg-cardboard-caret';
+
 	$: {
 		if ($theme === 'dark-forest') {
 			textVar.highlighted = 'text-dark-forest-highlighted';
 			textVar['accent-error'] = 'text-dark-forest-accent-error';
-			textVar.unhighlighted = 'text-dark-forest-unhighlighted opacity-50';
+			textVar.unhighlighted = 'text-dark-forest-unhighlighted ';
 			bgVar.caret = 'bg-dark-forest-caret';
 		}
 		if ($theme === 'cardboard') {
@@ -59,7 +68,7 @@
 
 	// let game: GameState = 'waiting';
 	let typedLetter = '';
-	let wordIndex = 0;
+	// let wordIndex = 0;
 	let letterIndex = 0;
 
 	let caretEl: HTMLDivElement;
@@ -129,16 +138,16 @@
 
 	$: {
 		if (letterIndex && intervalId === null) {
-			// intervalId = createTimer();
+			intervalId = createTimer();
 			console.log('intervalId: ', intervalId);
 		}
 	}
 
 	$: {
-		// if ($count === $TimerCount) {
-		// 	setGameState('finished');
-		// }
-		if (wordIndex === WordCount) {
+		if ($count === $TimerCount) {
+			setGameState('finished');
+		}
+		if ($wordIndex === WordCount) {
 			setGameState('finished');
 		}
 	}
@@ -172,7 +181,7 @@
 	}
 
 	function populateWords() {
-		wordsDataArr[wordIndex] = {
+		wordsDataArr[$wordIndex] = {
 			correctChars: 0,
 			rawChars: 0,
 			missedChars: 0,
@@ -185,8 +194,8 @@
 	}
 
 	const updateGameState = () => {
-		if (wordIndex === wordsArr.length - 1 && letterIndex === wordsArr[wordIndex].length - 1) {
-			wordsDataArr[wordIndex].wpm = 60000 / (Date.now() - wordsDataArr[wordIndex].startTime);
+		if ($wordIndex === wordsArr.length - 1 && letterIndex === wordsArr[$wordIndex].length - 1) {
+			wordsDataArr[$wordIndex].wpm = 60000 / (Date.now() - wordsDataArr[$wordIndex].startTime);
 			setGameState('finished');
 			// goto('/result');
 			return;
@@ -205,30 +214,30 @@
 	// };
 
 	const setLetter = () => {
-		const isWordCompleted = letterIndex > wordsArr[wordIndex].length - 1;
-		const isLastWord = wordIndex === wordsArr.length - 1;
-		const isFirstWord = wordIndex === 0;
-		if (letterIndex + 1 < wordsArr[wordIndex].length - 1) {
-			nextLetterEl = wordsEl.children[wordIndex].children[letterIndex + 1] as HTMLSpanElement;
+		const isWordCompleted = letterIndex > wordsArr[$wordIndex].length - 1;
+		const isLastWord = $wordIndex === wordsArr.length - 1;
+		const isFirstWord = $wordIndex === 0;
+		if (letterIndex + 1 < wordsArr[$wordIndex].length - 1) {
+			nextLetterEl = wordsEl.children[$wordIndex].children[letterIndex + 1] as HTMLSpanElement;
 		} else {
 			if (isLastWord) {
-				nextLetterEl = wordsEl.children[wordIndex].children[0] as HTMLSpanElement;
+				nextLetterEl = wordsEl.children[$wordIndex].children[0] as HTMLSpanElement;
 			} else {
-				nextLetterEl = wordsEl.children[wordIndex + 1].children[0] as HTMLSpanElement;
+				nextLetterEl = wordsEl.children[$wordIndex + 1].children[0] as HTMLSpanElement;
 			}
 		}
 		if (letterIndex === 0 && !isFirstWord) {
-			prevLetterEl = wordsEl.children[wordIndex - 1].children[
-				wordsArr[wordIndex - 1].length - 1
+			prevLetterEl = wordsEl.children[$wordIndex - 1].children[
+				wordsArr[$wordIndex - 1].length - 1
 			] as HTMLSpanElement;
 		} else {
-			prevLetterEl = wordsEl.children[wordIndex].children[letterIndex - 1] as HTMLSpanElement;
+			prevLetterEl = wordsEl.children[$wordIndex].children[letterIndex - 1] as HTMLSpanElement;
 		}
 		if (!isWordCompleted) {
-			letterEl = wordsEl.children[wordIndex].children[letterIndex] as HTMLSpanElement;
+			letterEl = wordsEl.children[$wordIndex].children[letterIndex] as HTMLSpanElement;
 		}
 		if (!isLastWord) {
-			nextwordEl = wordsEl.children[wordIndex + 1].children[0] as HTMLSpanElement;
+			nextwordEl = wordsEl.children[$wordIndex + 1].children[0] as HTMLSpanElement;
 		}
 	};
 
@@ -238,9 +247,11 @@
 			timeDataArr.at(-1)!.correctChars += 1;
 			timeDataArr.at(-1)!.rawChars += 1;
 
-			wordsDataArr.at(wordIndex)!.correctChars += 1;
-			wordsDataArr.at(wordIndex)!.rawChars += 1;
+			wordsDataArr.at($wordIndex)!.correctChars += 1;
+			wordsDataArr.at($wordIndex)!.rawChars += 1;
 			letterEl.className = textVar.highlighted;
+			// letterEl.style.color = 'white';
+			// letterEl.style.textDecoration = 'underline';
 		}
 
 		if (letterEl.innerHTML !== typedLetter) {
@@ -248,14 +259,14 @@
 			timeDataArr.at(-1)!.incorrectChars += 1;
 			timeDataArr.at(-1)!.rawChars += 1;
 
-			wordsDataArr.at(wordIndex)!.incorrectChars += 1;
-			wordsDataArr.at(wordIndex)!.rawChars += 1;
+			wordsDataArr.at($wordIndex)!.incorrectChars += 1;
+			wordsDataArr.at($wordIndex)!.rawChars += 1;
 			letterEl.className = `${textVar['accent-error']} underline`;
 		}
 	};
 
 	const nextLetter = () => {
-		if (letterIndex === wordsArr[wordIndex].length) {
+		if (letterIndex === wordsArr[$wordIndex].length) {
 			return;
 		}
 		letterIndex += 1;
@@ -263,10 +274,10 @@
 
 	function nextWord() {
 		const isNotFirstLetter = letterIndex !== 0;
-		const isOneLetterWord = wordsArr[wordIndex].length === 1;
+		const isOneLetterWord = wordsArr[$wordIndex].length === 1;
 
 		if (isNotFirstLetter || isOneLetterWord) {
-			wordIndex += 1;
+			wordIndex.update((prev) => (prev += 1));
 			letterIndex = 0;
 		}
 	}
@@ -277,8 +288,8 @@
 			setLetter();
 			letterEl.className = textVar.unhighlighted;
 		} else {
-			wordIndex -= 1;
-			const lastLetterIndex = wordsArr[wordIndex].length - 1;
+			wordIndex.update((prev) => (prev -= 1));
+			const lastLetterIndex = wordsArr[$wordIndex].length - 1;
 			letterIndex = lastLetterIndex;
 			setLetter();
 			letterEl.className = textVar.unhighlighted;
@@ -294,7 +305,7 @@
 			e.preventDefault();
 		}
 
-		if ($game === 'waiting') {
+		if ($game === 'waiting' && e.code != 'Tab') {
 			setGameState('playing');
 		}
 
@@ -305,11 +316,11 @@
 			}
 			// logDataPerWord();
 			if (e.code === 'Space') {
-				const isLastLetter = wordIndex + 1 >= wordsArr.length;
+				const isLastLetter = $wordIndex + 1 >= wordsArr.length;
 				if (letterIndex === 0) return;
 				if (!isLastLetter) {
-					wordsDataArr[wordIndex].endTime = Date.now();
-					wordsDataArr[wordIndex].wpm = 60000 / (Date.now() - wordsDataArr[wordIndex].startTime);
+					wordsDataArr[$wordIndex].endTime = Date.now();
+					wordsDataArr[$wordIndex].wpm = 60000 / (Date.now() - wordsDataArr[$wordIndex].startTime);
 					timeDataArr.at(-1)!.correctChars += 1;
 					timeDataArr.at(-1)!.rawChars += 1;
 					nextWord();
@@ -318,7 +329,7 @@
 				}
 			}
 			if (e.code === 'Backspace') {
-				if (wordIndex === 0 && letterIndex === 0) return;
+				if ($wordIndex === 0 && letterIndex === 0) return;
 				if (nextLetterEl?.offsetTop > prevLetterEl?.offsetTop) {
 					if (letterIndex === 0) return;
 				}
@@ -428,18 +439,40 @@
 	on:click={() => {
 		//@ts-ignore
 		clearInterval(intervalId);
-		// resetTest();
+		letterIndex = 0;
+		caretEl.style.left = '0px';
+		caretEl.style.top = '3px';
+		typedLetter = '';
+		resetTest();
 		setGameState('waiting');
 		getWords(100);
 		inputEl.focus();
+		for (let i = 0; i < wordsArr.length; i++) {
+			for (let j = 0; j < wordsArr[i].length; j++) {
+				wordsEl.children[i].children[j].className = textVar.unhighlighted;
+			}
+		}
 	}}
 	on:keydown={(e) => {
 		if (e.key === 'Enter') {
-			// resetTest();
+			resetTest();
 			//@ts-ignore
 			clearInterval(intervalId);
+			// console.log(intervalId);
+			intervalId = null;
+			count.set(0);
+			letterIndex = 0;
+			caretEl.style.left = '0px';
+			caretEl.style.top = '3px';
+			typedLetter = '';
 			getWords(100);
 			setGameState('waiting');
+
+			for (let i = 0; i < wordsArr.length; i++) {
+				for (let j = 0; j < wordsArr[i].length; j++) {
+					wordsEl.children[i].children[j].className = textVar.unhighlighted;
+				}
+			}
 			inputEl.focus();
 		}
 	}}

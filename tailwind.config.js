@@ -45,7 +45,7 @@ export default {
           'command-bg': "#080909",
           'command-text': "#EDEBE3",
           'credits': "#989481",
-          'caret': 'rgb(29 78 216 / var(--tw-bg-opacity))'
+          'caret': '#1d4ed8'
         },
         "dark-forest": {
           primary: "#151B1D",

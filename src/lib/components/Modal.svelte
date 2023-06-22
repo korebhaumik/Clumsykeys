@@ -63,34 +63,34 @@
 		highlighted: 'placeholder-cardboard-highlighted'
 	};
 
-	$: {
-		if ($theme === 'dark-forest') {
-			textVar.highlighted = 'text-dark-forest-highlighted';
-			textVar.unhighlighted = 'text-dark-forest-unhighlighted';
-			borderVar.highlighted = 'border-dark-forest-highlighted';
-			borderVar.unhighlighted = 'border-dark-forest-unhighlighted';
-			placeholderVar.highlighted = 'placeholder-dark-forest-highlighted';
-			placeholderVar.unhighlighted = 'placeholder-dark-forest-unhighlighted';
-			borderVar.fade = 'border-dark-forest-fade';
-			placeholderVar.fade = 'placeholder-dark-forest-fade';
-			textVar.fade = 'text-dark-forest-fade';
-			textVar.credits = `text-dark-forest-credits`;
-			bgVar.primary = 'bg-dark-forest-primary';
-		}
-		if ($theme === 'cardboard') {
-			textVar.highlighted = 'text-cardboard-highlighted';
-			textVar.unhighlighted = 'text-cardboard-unhighlighted';
-			borderVar.highlighted = 'border-cardboard-highlighted';
-			borderVar.unhighlighted = 'border-cardboard-unhighlighted';
-			placeholderVar.highlighted = 'placeholder-cardboard-highlighted';
-			placeholderVar.unhighlighted = 'placeholder-cardboard-unhighlighted';
-			borderVar.fade = 'border-cardboard-fade';
-			placeholderVar.fade = 'placeholder-cardboard-fade';
-			textVar.fade = 'text-cardboard-fade';
-			textVar.credits = `text-cardboard-credits`;
-			bgVar.primary = 'bg-cardboard-primary';
-		}
-	}
+	// $: {
+	// 	if ($theme === 'dark-forest') {
+	// 		textVar.highlighted = 'text-dark-forest-highlighted';
+	// 		textVar.unhighlighted = 'text-dark-forest-unhighlighted';
+	// 		borderVar.highlighted = 'border-dark-forest-highlighted';
+	// 		borderVar.unhighlighted = 'border-dark-forest-unhighlighted';
+	// 		placeholderVar.highlighted = 'placeholder-dark-forest-highlighted';
+	// 		placeholderVar.unhighlighted = 'placeholder-dark-forest-unhighlighted';
+	// 		borderVar.fade = 'border-dark-forest-fade';
+	// 		placeholderVar.fade = 'placeholder-dark-forest-fade';
+	// 		textVar.fade = 'text-dark-forest-fade';
+	// 		textVar.credits = `text-dark-forest-credits`;
+	// 		bgVar.primary = 'bg-dark-forest-primary';
+	// 	}
+	// 	if ($theme === 'cardboard') {
+	// 		textVar.highlighted = 'text-cardboard-highlighted';
+	// 		textVar.unhighlighted = 'text-cardboard-unhighlighted';
+	// 		borderVar.highlighted = 'border-cardboard-highlighted';
+	// 		borderVar.unhighlighted = 'border-cardboard-unhighlighted';
+	// 		placeholderVar.highlighted = 'placeholder-cardboard-highlighted';
+	// 		placeholderVar.unhighlighted = 'placeholder-cardboard-unhighlighted';
+	// 		borderVar.fade = 'border-cardboard-fade';
+	// 		placeholderVar.fade = 'placeholder-cardboard-fade';
+	// 		textVar.fade = 'text-cardboard-fade';
+	// 		textVar.credits = `text-cardboard-credits`;
+	// 		bgVar.primary = 'bg-cardboard-primary';
+	// 	}
+	// }
 </script>
 
 {#if $modalConfig.isVisible}

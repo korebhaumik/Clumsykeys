@@ -1,15 +1,16 @@
-<script>
+<script lang="ts">
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
 	import Game from '$lib/components/Game.svelte';
 	import TestConfigBar from '$lib/components/TestConfigBar.svelte';
 	import {
 		theme,
 		game,
-		// count,
-		// WordCount,
-		// WordIndex,
-		// TimerCount,
-		// resetTest
+		count,
+		WordCount,
+		wordIndex,
+		TimerCount,
+		resetTest,
+		timeDataArr
 	} from '$lib/components/store';
 
 	const textVar = {
@@ -22,7 +23,7 @@
 	$: {
 		if ($theme === 'dark-forest') {
 			textVar.highlighted = 'text-dark-forest-highlighted';
-			textVar.unhighlighted = 'text-dark-forest-unhighlighted opacity-50';
+			textVar.unhighlighted = 'text-dark-forest-unhighlighted';
 			textVar['accent-main'] = 'text-dark-forest-accent-main';
 		}
 		if ($theme === 'cardboard') {
@@ -43,10 +44,25 @@
 		}
 	}
 	let remaining = -1;
-	// $: {
-		// remaining = $TimerCount;
-		// remaining -= $count;
-	// }
+	$: {
+		if ($game === 'waiting') {
+			k = 'opacity-100';
+		}
+		if ($game === 'playing') {
+			k = 'opacity-0';
+			opac = 'opacity-100';
+		}
+		if ($game != 'playing') {
+			k = 'opacity-100';
+			opac = 'opacity-0';
+		}
+	}
+	let speed: number | undefined = 0;
+	$: {
+		speed = $timeDataArr.at(-1)?.wpm;
+		remaining = $TimerCount;
+		remaining -= $count;
+	}
 </script>
 
 <!-- <h1>Hello World</h1> -->
@@ -61,7 +77,7 @@
 	<div class={`absolute ${opac} text-xl ${textVar['accent-main']} transition`}>
 		<span>{remaining} s</span>
 		<span class="mx-5">|</span>
-		<span>98 wpm</span>
+		<span>{speed}</span>
 		<span class="mx-5">|</span>
 		<span>100%</span>
 	</div>
@@ -80,7 +96,6 @@
 	</p> -->
 
 	<!-- ResetSVG -->
-
 </section>
 
 <style lang="postcss">

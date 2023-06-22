@@ -34,14 +34,6 @@
 			textVar.credits = `text-dark-forest-credits`;
 			textVar['logo-icon-fg'] = 'text-dark-forest-logo-icon-fg';
 			textVar['logo-icon-bg'] = 'text-dark-forest-logo-icon-bg';
-			if ($game === 'playing') {
-				textVar['logo-text-subheading'] = 'text-slate-400';
-				textVar['logo-text-heading'] = 'text-slate-400';
-			}
-			if ($game === 'waiting') {
-				textVar['logo-text-subheading'] = 'text-dark-forest-logo-text-subheading';
-				textVar['logo-text-heading'] = 'text-dark-forest-logo-text-heading';
-			}
 		}
 		if ($theme === 'cardboard') {
 			bgVar.command = 'bg-cardboard-command-bg';
@@ -52,6 +44,16 @@
 			textVar['logo-icon-fg'] = 'text-cardboard-logo-icon-fg';
 			textVar['logo-icon-bg'] = 'text-cardboard-logo-icon-bg';
 		}
+	}
+	$:{
+		if ($game === 'playing') {
+				textVar['logo-text-subheading'] = 'text-slate-400';
+				textVar['logo-text-heading'] = 'text-slate-400';
+			}
+			if ($game === 'waiting') {
+				textVar['logo-text-subheading'] = 'text-dark-forest-logo-text-subheading';
+				textVar['logo-text-heading'] = 'text-dark-forest-logo-text-heading';
+			}
 	}
 </script>
 

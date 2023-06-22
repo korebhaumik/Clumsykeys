@@ -104,7 +104,7 @@ interface timeDataType {
 export const game = writable('waiting' as GameState);
 
 export function setGameState(state: GameState) {
-	game.update(prev => state);
+	game.set(state);
 }
 
 export const wordsDataArr = writable([] as wordsDataType[]);
@@ -115,59 +115,59 @@ export const timeDataArr = writable([
 		correctChars: 0,
 		rawChars: 0,
 		incorrectChars: 0,
-		wpm: -1,
+		wpm: 0,
 		raw: -1
 	}
 ] as timeDataType[]);
 
 // export const TimerCount = writable(-1 as number);
-// export const TimerCount = writable(30 as number);
-// export const WordCount = writable(50 as number);
-// export const WordIndex = writable(0 as number);
+export const TimerCount = writable(30 as number);
+export const WordCount = writable(50 as number);
+export const wordIndex = writable(0 as number);
 
-// export const count = writable(0 as number);
+export const count = writable(0 as number);
 let tempCount = 0;
 
-// export function createTimer() {
-// 	const intervalId = setInterval(() => {
-// 		// console.log(`Count: ${count}`);
-// 		timeDataArr.update(prev => {
-// 			return [...prev, {
-// 				//Change value of 20
-// 				time: tempCount === 0 ? 1 : tempCount,
-// 				correctChars: 0,
-// 				rawChars: 0,
-// 				incorrectChars: 0,
-// 				wpm: -1,
-// 				raw: -1
-// 			}]
-// 		});
-// 		tempCount++;
-// 		count.set(tempCount);
-// 	}, 1000);
-// 	return intervalId;
-// }
+export function createTimer() {
+	const intervalId = setInterval(() => {
+		// console.log(`Count: ${count}`);
+		timeDataArr.update(prev => {
+			return [...prev, {
+				//Change value of 20
+				time: tempCount === 0 ? 1 : tempCount,
+				correctChars: 0,
+				rawChars: 0,
+				incorrectChars: 0,
+				wpm: Math.round(Math.random() * 100),
+				raw: -1
+			}]
+		});
+		tempCount++;
+		count.set(tempCount);
+	}, 1000);
+	return intervalId;
+}
 
 
-// export function resetTest() {
-// 	// TimerCount.set(-1);
-// 	// WordCount.set(50);
-// 	// clearInterval()
-// 	WordIndex.set(0);
-// 	count.set(0);
-// 	wordsDataArr.set([]);
-// 	timeDataArr.set([
-// 		{
-// 			time: 1,
-// 			correctChars: 0,
-// 			rawChars: 0,
-// 			incorrectChars: 0,
-// 			wpm: -1,
-// 			raw: -1
-// 		}
-// 	]);
-// 	game.set('waiting');
-// }
+export function resetTest() {
+	// TimerCount.set(-1);
+	// WordCount.set(50);
+	// clearInterval()
+	wordIndex.set(0);
+	tempCount = 0;
+	wordsDataArr.set([]);
+	timeDataArr.set([
+		{
+			time: 1,
+			correctChars: 0,
+			rawChars: 0,
+			incorrectChars: 0,
+			wpm: 0,
+			raw: -1
+		}
+	]);
+	// game.set('waiting');
+}
 
 
 
