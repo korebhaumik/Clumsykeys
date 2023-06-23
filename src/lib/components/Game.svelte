@@ -6,25 +6,38 @@
 	import { theme } from './store';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
 	import { game, setGameState } from './store';
-	import { createTimer, resetTest, count, TimerCount, wordIndex } from './store';
+	import {
+		createTimer,
+		resetTest,
+		count,
+		TimerCount,
+		wordIndex,
+		timeDataArr,
+		WordCount
+	} from './store';
 
 	type GameState = 'waiting' | 'playing' | 'finished';
 
+	const textVar = {
+		highlighted: 'text-dark-forest-highlighted',
+		['accent-error']: 'text-dark-forest-accent-error',
+		unhighlighted: 'text-dark-forest-unhighlighted'
+	};
+
 	// const textVar = {
-	// 	highlighted: 'text-dark-forest-highlighted',
-	// 	['accent-error']: 'text-dark-forest-accent-error',
-	// 	unhighlighted: 'text-dark-forest-unhighlighted'
+	// 	highlighted: 'text-cardboard-highlighted',
+	// 	['accent-error']: 'text-cardboard-accent-error',
+	// 	unhighlighted: 'text-cardboard-unhighlighted '
 	// };
 
-	const textVar = {
-		highlighted: 'text-cardboard-highlighted',
-		['accent-error']: 'text-cardboard-accent-error',
-		unhighlighted: 'text-cardboard-unhighlighted '
-	};
-
 	const bgVar = {
+		// caret: 'bg-cardboard-caret'
 		caret: 'bg-cardboard-caret'
 	};
+
+	// const focusVar = {
+	// 	highlighted: 'focus:text-dark-forest-highlighted',
+	// };
 
 	// let k = 'bg-blue-700';
 	let k = 'bg-cardboard-caret';
@@ -34,12 +47,15 @@
 			textVar.highlighted = 'text-dark-forest-highlighted';
 			textVar['accent-error'] = 'text-dark-forest-accent-error';
 			textVar.unhighlighted = 'text-dark-forest-unhighlighted ';
-			bgVar.caret = 'bg-dark-forest-caret';
+			// bgVar.caret = 'bg-dark-forest-caret';
+			// focusVar.highlighted = 'focus:text-dark-forest-highlighted';
+			bgVar.caret = 'bg-cardboard-caret';
 		}
 		if ($theme === 'cardboard') {
 			textVar.highlighted = 'text-cardboard-highlighted';
 			textVar['accent-error'] = 'text-cardboard-accent-error';
 			textVar.unhighlighted = 'text-cardboard-unhighlighted';
+			// focusVar.highlighted = 'focus:text-cardboard-highlighted';
 			bgVar.caret = 'bg-cardboard-caret';
 		}
 	}
@@ -83,7 +99,7 @@
 	let lineNum = 0;
 
 	async function getWords(limit: number) {
-		const response = await fetch(`/api/words?limit=${limit}`);
+		const response = await fetch(`/api/words?limit=${limit}&lang=${"english"}`);
 		wordsArr = await response.json();
 	}
 
@@ -102,19 +118,19 @@
 		raw: number;
 	}
 
-	let timeDataArr: timeDataType[] = [
-		{
-			time: 1,
-			correctChars: 0,
-			rawChars: 0,
-			incorrectChars: 0,
-			wpm: -1,
-			raw: -1
-		}
-	];
+	// let timeDataArr: timeDataType[] = [
+	// 	{
+	// 		time: 1,
+	// 		correctChars: 0,
+	// 		rawChars: 0,
+	// 		incorrectChars: 0,
+	// 		wpm: -1,
+	// 		raw: -1
+	// 	}
+	// ];
 
 	// let TimerCount = -1;
-	let WordCount = 100;
+	// let WordCount = 100;
 	// let count = 0;
 	let intervalId: number | null = null;
 	// $: RemainingTime = TimerCount - count;
@@ -147,7 +163,7 @@
 		if ($count === $TimerCount) {
 			setGameState('finished');
 		}
-		if ($wordIndex === WordCount) {
+		if ($wordIndex === $WordCount) {
 			setGameState('finished');
 		}
 	}
@@ -158,25 +174,33 @@
 			console.log(letterIndex, wordIndex);
 			const tempArr: number[] = [];
 			clearInterval(intervalId as number);
-			timeDataArr.forEach((timeLog, index) => {
-				if (index - 1 >= 0) {
-					let temp = (timeLog.correctChars / 5) * 60;
-					tempArr.push(temp);
-					const sum = tempArr.reduce((total, num) => total + num, 0);
-					timeLog.wpm = Math.floor(sum / tempArr.length);
-					temp = (timeLog.rawChars / 5) * 60;
-					timeLog.raw = Math.floor((temp + timeDataArr[index - 1].raw) / 2);
-				} else {
-					let temp = (timeLog.correctChars / 5) * 60;
-					tempArr.push(temp);
-					timeLog.wpm = Math.floor(temp);
-					temp = (timeLog.rawChars / 5) * 60;
-					timeLog.raw = temp;
-				}
+			timeDataArr.update((prev) => {
+				prev.pop();
+				return prev;
 			});
-			timeDataArr.pop();
+
+			// timeDataArr.update((prev) => {
+			// 	prev.forEach((timeLog, index) => {
+			// 		if (index - 1 >= 0) {
+			// 			let temp = (timeLog.correctChars / 5) * 60;
+			// 			tempArr.push(temp);
+			// 			const sum = tempArr.reduce((total, num) => total + num, 0);
+			// 			timeLog.wpm = Math.floor(sum / tempArr.length);
+			// 			temp = (timeLog.rawChars / 5) * 60;
+			// 			timeLog.raw = Math.floor((temp + prev[index - 1].raw) / 2);
+			// 		} else {
+			// 			let temp = (timeLog.correctChars / 5) * 60;
+			// 			tempArr.push(temp);
+			// 			timeLog.wpm = Math.floor(temp);
+			// 			temp = (timeLog.rawChars / 5) * 60;
+			// 			timeLog.raw = temp;
+			// 		}
+			// 	});
+			// 	prev.pop();
+			// 	return prev;
+			// });
 			console.log(wordsDataArr);
-			console.log(timeDataArr);
+			console.log($timeDataArr);
 		}
 	}
 
@@ -244,8 +268,8 @@
 	const checkLetter = () => {
 		if (letterEl.innerHTML === typedLetter) {
 			// console.log('correct');
-			timeDataArr.at(-1)!.correctChars += 1;
-			timeDataArr.at(-1)!.rawChars += 1;
+			$timeDataArr.at(-1)!.correctChars += 1;
+			$timeDataArr.at(-1)!.rawChars += 1;
 
 			wordsDataArr.at($wordIndex)!.correctChars += 1;
 			wordsDataArr.at($wordIndex)!.rawChars += 1;
@@ -256,8 +280,8 @@
 
 		if (letterEl.innerHTML !== typedLetter) {
 			// console.log('incorrect');
-			timeDataArr.at(-1)!.incorrectChars += 1;
-			timeDataArr.at(-1)!.rawChars += 1;
+			$timeDataArr.at(-1)!.incorrectChars += 1;
+			$timeDataArr.at(-1)!.rawChars += 1;
 
 			wordsDataArr.at($wordIndex)!.incorrectChars += 1;
 			wordsDataArr.at($wordIndex)!.rawChars += 1;
@@ -321,8 +345,8 @@
 				if (!isLastLetter) {
 					wordsDataArr[$wordIndex].endTime = Date.now();
 					wordsDataArr[$wordIndex].wpm = 60000 / (Date.now() - wordsDataArr[$wordIndex].startTime);
-					timeDataArr.at(-1)!.correctChars += 1;
-					timeDataArr.at(-1)!.rawChars += 1;
+					$timeDataArr.at(-1)!.correctChars += 1;
+					$timeDataArr.at(-1)!.rawChars += 1;
 					nextWord();
 					populateWords();
 					moveCaret('space');
@@ -455,16 +479,18 @@
 	}}
 	on:keydown={(e) => {
 		if (e.key === 'Enter') {
-			resetTest();
 			//@ts-ignore
 			clearInterval(intervalId);
 			// console.log(intervalId);
 			intervalId = null;
+			lineH = 0;
+			lineNum = 0;
 			count.set(0);
 			letterIndex = 0;
 			caretEl.style.left = '0px';
 			caretEl.style.top = '3px';
 			typedLetter = '';
+			resetTest();
 			getWords(100);
 			setGameState('waiting');
 
@@ -477,7 +503,9 @@
 		}
 	}}
 >
-	<ResetSvg />
+	<ResetSvg
+		variant={{ highlighted: `focus:${textVar.highlighted}`, unhighlighted: textVar.unhighlighted }}
+	/>
 </span>
 
 <!-- class="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" -->

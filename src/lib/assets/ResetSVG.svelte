@@ -1,5 +1,26 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <!-- svelte-ignore a11y-positive-tabindex -->
+<script lang="ts">
+	export let variant: { highlighted: string; unhighlighted: string; ['accent-main']?: string };
+	// import them
+	// const textVar = {
+	// 	unhighlighted: 'text-cardboard-unhighlighted',
+	// 	highlighted: 'text-cardboard-highlighted',
+	// 	['accent-main']: 'text-cardboard-accent-main'
+	// };
+	// $:{
+	// 	if ($theme === 'dark-forest') {
+	// 		textVar.highlighted = 'text-dark-forest-highlighted';
+	// 		textVar.unhighlighted = 'text-dark-forest-unhighlighted';
+	// 		textVar['accent-main'] = 'text-dark-forest-accent-main';
+	// 	}
+	// 	if ($theme === 'cardboard') {
+	// 		textVar.highlighted = 'text-cardboard-highlighted';
+	// 		textVar.unhighlighted = 'text-cardboard-unhighlighted ';
+	// 		textVar['accent-main'] = 'text-cardboard-accent-main';
+	// 	}
+	
+</script>
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	type="button"
@@ -8,7 +29,7 @@
 	stroke-width="2.5"
 	stroke="currentColor"
 	tabindex="1"
-	class="w-5 h-5 focus:text-emerald-600"
+	class={`w-5 h-5 ${variant.unhighlighted} ${variant.highlighted} outline-none border-none `}
 >
 	<path
 		stroke-linecap="round"

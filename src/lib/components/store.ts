@@ -33,6 +33,15 @@ export function updateTestConfigCounter<T extends Counter>(
 	value: CounterParams[T]
 ) {
 	const otherKeys = ['time', 'words', 'quotes'].filter((k) => k !== key) as Counter[];
+	if (key === 'time') {
+		isTimer.set(true);
+		TimerCount.update(() => value as number);
+	} else {
+		isTimer.set(false);
+		TimerCount.update(() => -1 as number);
+		WordCount.update(() => value as number);
+	}
+
 	newTextConfig.update((config) => {
 		return {
 			...config,
@@ -122,23 +131,43 @@ export const timeDataArr = writable([
 
 // export const TimerCount = writable(-1 as number);
 export const TimerCount = writable(30 as number);
+export const isTimer = writable(true as boolean);
 export const WordCount = writable(50 as number);
 export const wordIndex = writable(0 as number);
 
 export const count = writable(0 as number);
 let tempCount = 0;
-
+let tempArr: number[] = [];
 export function createTimer() {
 	const intervalId = setInterval(() => {
 		// console.log(`Count: ${count}`);
+		timeDataArr.update((prev) => {
+			const timeLog = prev.at(-1);
+			if (timeLog!.time - 1 > 0) {
+				let temp = (timeLog!.correctChars / 5) * 60;
+				tempArr.push(temp);
+				const sum = tempArr.reduce((total, num) => total + num, 0);
+				timeLog!.wpm = Math.floor(sum / tempArr.length);
+				console.log(timeLog!.wpm);
+			} else {
+				let temp = (timeLog!.correctChars / 5) * 60;
+				tempArr.push(temp);
+				timeLog!.wpm = Math.floor(temp);
+				console.log(timeLog!.wpm);
+			}
+			// prev.pop();
+			prev.at(-1)!.wpm = timeLog!.wpm;
+			return [...prev];
+		});
+
 		timeDataArr.update(prev => {
 			return [...prev, {
 				//Change value of 20
-				time: tempCount === 0 ? 1 : tempCount,
+				time: tempCount + 2,
 				correctChars: 0,
 				rawChars: 0,
 				incorrectChars: 0,
-				wpm: Math.round(Math.random() * 100),
+				wpm: -1,
 				raw: -1
 			}]
 		});
@@ -155,7 +184,18 @@ export function resetTest() {
 	// clearInterval()
 	wordIndex.set(0);
 	tempCount = 0;
+	tempArr = [];
 	wordsDataArr.set([]);
+	// timeDataArr.update(prev => [
+	// 	{
+	// 		time: 1,
+	// 		correctChars: 0,
+	// 		rawChars: 0,
+	// 		incorrectChars: 0,
+	// 		wpm: 0,
+	// 		raw: -1
+	// 	}
+	// ]);
 	timeDataArr.set([
 		{
 			time: 1,
