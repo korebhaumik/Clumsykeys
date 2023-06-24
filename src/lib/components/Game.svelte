@@ -361,7 +361,7 @@
 				populateWords();
 			}
 			// logDataPerWord();
-			if (e.keyCode === 32) {
+			if (e.code === 'Space') {
 				const isLastLetter = $wordIndex + 1 >= $wordsArr.length;
 				if (letterIndex === 0) return;
 				if (!isLastLetter) {
@@ -374,7 +374,7 @@
 					moveCaret('space');
 				}
 			}
-			if (e.keyCode === 9) {
+			if (e.code === 'Backspace') {
 				if ($wordIndex === 0 && letterIndex === 0) return;
 				if (nextLetterEl?.offsetTop > prevLetterEl?.offsetTop) {
 					if (letterIndex === 0) return;
@@ -494,10 +494,10 @@
 		resetTest();
 		setGameState('waiting');
 		getWords(500, {
-				lang: $newTextConfig.language.value,
-				isNumber: $newTextConfig.numbers,
-				isPunctuation: $newTextConfig.punctuations
-			});
+			lang: $newTextConfig.language.value,
+			isNumber: $newTextConfig.numbers,
+			isPunctuation: $newTextConfig.punctuations
+		});
 		inputEl.focus();
 		for (let i = 0; i < $wordsArr.length; i++) {
 			for (let j = 0; j < $wordsArr[i].length; j++) {
