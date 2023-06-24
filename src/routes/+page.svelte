@@ -13,9 +13,9 @@
 	} from '$lib/components/store';
 
 	const textVar = {
-		unhighlighted: 'text-cardboard-unhighlighted',
-		highlighted: 'text-cardboard-highlighted',
-		['accent-main']: 'text-cardboard-accent-main'
+		unhighlighted: 'text-dark-forest-unhighlighted',
+		highlighted: 'text-dark-forest-highlighted',
+		['accent-main']: 'text-dark-forest-accent-main'
 	};
 	let k = 'opacity-100';
 	let opac = 'opacity-0';
@@ -93,7 +93,5 @@
 		<div class="my-10">
 			<Game />
 		</div>
-
 	</section>
 {/if}
-
