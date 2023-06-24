@@ -72,12 +72,12 @@
 		class="absolute -translate-y-1/2 big:max-w-6xl right-5 left-5 sm:right-10 sm:left-10 big:mx-auto top-[calc(50%-3%)]"
 	>
 		<!-- Test Details Configuration Bar -->
-		<div class={`${k}`}>
+		<div class={`${k} transition`}>
 			<TestConfigBar />
 		</div>
 
 		<!-- Move this to the game section -->
-		<div class={`absolute ${opac} text-xl ${textVar['accent-main']} transition`}>
+		<div class={`absolute ${opac} text-xl ${textVar['accent-main']} mb-96 transition`}>
 			{#if $isTimer}
 				<span>{remaining} s</span>
 			{:else}
