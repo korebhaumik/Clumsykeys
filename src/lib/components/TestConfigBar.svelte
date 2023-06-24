@@ -133,7 +133,7 @@
 	<button
 		on:click={async () => {
 			updateTestConfigFormat('punctuations');
-			await getWords(200, {
+			getWords(200, {
 				lang: $newTextConfig.language.value,
 				isNumber: $newTextConfig.numbers,
 				isPunctuation: $newTextConfig.punctuations
@@ -148,9 +148,9 @@
 	<!-- Numbers -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={async () => {
+		on:click={() => {
 			updateTestConfigFormat('numbers');
-			await getWords(200, {
+			getWords(200, {
 				lang: $newTextConfig.language.value,
 				isNumber: $newTextConfig.numbers,
 				isPunctuation: $newTextConfig.punctuations
@@ -223,9 +223,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 15 ? variantConfig.due.class : null
 				}`}
-				on:click={async () => {
+				on:click={() => {
 					updateTestConfigCounter('time', 15);
-					await getWords(200, {
+					getWords(200, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -237,9 +237,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 30 ? variantConfig.due.class : null
 				}`}
-				on:click={async () => {
+				on:click={() => {
 					updateTestConfigCounter('time', 30);
-					await getWords(200, {
+					getWords(200, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -251,9 +251,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 60 ? variantConfig.due.class : null
 				}`}
-				on:click={async () => {
+				on:click={() => {
 					updateTestConfigCounter('time', 60);
-					await getWords(200, {
+					getWords(200, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -265,9 +265,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 120 ? variantConfig.due.class : null
 				}`}
-				on:click={async () => {
+				on:click={() => {
 					updateTestConfigCounter('time', 120);
-					await getWords(200, {
+					getWords(200, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -280,9 +280,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 25 ? variantConfig.due.class : null
 				}`}
-				on:click={async () => {
+				on:click={() => {
 					updateTestConfigCounter('words', 25);
-					await getWords($newTextConfig.words.value, {
+					getWords(25, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -295,9 +295,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 50 ? variantConfig.due.class : null
 				}`}
-				on:click={async () => {
+				on:click={() => {
 					updateTestConfigCounter('words', 50);
-					await getWords($newTextConfig.words.value, {
+					getWords(50, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -309,9 +309,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 75 ? variantConfig.due.class : null
 				}`}
-				on:click={async () => {
+				on:click={() => {
 					updateTestConfigCounter('words', 75);
-					await getWords($newTextConfig.words.value, {
+					getWords(75, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -323,9 +323,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 100 ? variantConfig.due.class : null
 				}`}
-				on:click={async () => {
+				on:click={() => {
 					updateTestConfigCounter('words', 100);
-					await getWords($newTextConfig.words.value, {
+					getWords(100, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
