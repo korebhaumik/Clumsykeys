@@ -37,7 +37,7 @@
 
 	const bgVar = {
 		// caret: 'bg-cardboard-caret'
-		caret: 'bg-dark-forest-caret'
+		caret: 'bg-cardboard-caret'
 	};
 
 	// const focusVar = {
