@@ -131,9 +131,9 @@
 	<!-- punctuations -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={() => {
+		on:click={async () => {
 			updateTestConfigFormat('punctuations');
-			getWords(200, {
+			await getWords(200, {
 				lang: $newTextConfig.language.value,
 				isNumber: $newTextConfig.numbers,
 				isPunctuation: $newTextConfig.punctuations
@@ -148,9 +148,9 @@
 	<!-- Numbers -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={() => {
+		on:click={async () => {
 			updateTestConfigFormat('numbers');
-			getWords(200, {
+			await getWords(200, {
 				lang: $newTextConfig.language.value,
 				isNumber: $newTextConfig.numbers,
 				isPunctuation: $newTextConfig.punctuations
@@ -167,9 +167,9 @@
 	<!-- Time -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={() => {
+		on:click={async () => {
 			updateTestConfigCounter('time', $newTextConfig.time.value);
-			getWords(200, {
+			await getWords(200, {
 				lang: $newTextConfig.language.value,
 				isNumber: $newTextConfig.numbers,
 				isPunctuation: $newTextConfig.punctuations
@@ -184,9 +184,9 @@
 	<!-- Words -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={() => {
+		on:click={async () => {
 			updateTestConfigCounter('words', $newTextConfig.words.value);
-			getWords($newTextConfig.words.value, {
+			await getWords($newTextConfig.words.value, {
 				lang: $newTextConfig.language.value,
 				isNumber: $newTextConfig.numbers,
 				isPunctuation: $newTextConfig.punctuations
@@ -200,9 +200,9 @@
 	<!-- Quotes -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={() => {
+		on:click={async () => {
 			updateTestConfigCounter('quotes', 'Random Quotes');
-			getWords(100, {
+			await getWords(100, {
 				type: 'quotes',
 				lang: 'english'
 			});
@@ -223,9 +223,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 15 ? variantConfig.due.class : null
 				}`}
-				on:click={() => {
+				on:click={async () => {
 					updateTestConfigCounter('time', 15);
-					getWords(200, {
+					await getWords(200, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -237,9 +237,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 30 ? variantConfig.due.class : null
 				}`}
-				on:click={() => {
+				on:click={async () => {
 					updateTestConfigCounter('time', 30);
-					getWords(200, {
+					await getWords(200, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -251,9 +251,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 60 ? variantConfig.due.class : null
 				}`}
-				on:click={() => {
+				on:click={async () => {
 					updateTestConfigCounter('time', 60);
-					getWords(200, {
+					await getWords(200, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -265,9 +265,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 120 ? variantConfig.due.class : null
 				}`}
-				on:click={() => {
+				on:click={async () => {
 					updateTestConfigCounter('time', 120);
-					getWords(200, {
+					await getWords(200, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -280,9 +280,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 25 ? variantConfig.due.class : null
 				}`}
-				on:click={() => {
+				on:click={async () => {
 					updateTestConfigCounter('words', 25);
-					getWords($newTextConfig.words.value, {
+					await getWords($newTextConfig.words.value, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -295,9 +295,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 50 ? variantConfig.due.class : null
 				}`}
-				on:click={() => {
+				on:click={async () => {
 					updateTestConfigCounter('words', 50);
-					getWords($newTextConfig.words.value, {
+					await getWords($newTextConfig.words.value, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -309,9 +309,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 75 ? variantConfig.due.class : null
 				}`}
-				on:click={() => {
+				on:click={async () => {
 					updateTestConfigCounter('words', 75);
-					getWords($newTextConfig.words.value, {
+					await getWords($newTextConfig.words.value, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations
@@ -323,9 +323,9 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 100 ? variantConfig.due.class : null
 				}`}
-				on:click={() => {
+				on:click={async () => {
 					updateTestConfigCounter('words', 100);
-					getWords($newTextConfig.words.value, {
+					await getWords($newTextConfig.words.value, {
 						lang: $newTextConfig.language.value,
 						isNumber: $newTextConfig.numbers,
 						isPunctuation: $newTextConfig.punctuations

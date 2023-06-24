@@ -103,9 +103,9 @@
 						<div class="flex flex-col items-start w-full py-3 text-sm">
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => {
+								on:click={async() => {
 									updateTestConfigLanguage('english');
-									getWords(100, {
+									await getWords(100, {
 										lang: 'english',
 										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 										isNumber: $newTextConfig.numbers,
@@ -116,9 +116,9 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => {
+								on:click={async() => {
 									updateTestConfigLanguage('english 1k');
-									getWords(1000, {
+									await getWords(1000, {
 										lang: 'english 1k',
 										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 										isNumber: $newTextConfig.numbers,
@@ -129,9 +129,9 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => {
+								on:click={async() => {
 									updateTestConfigLanguage('english 5k');
-									getWords(1000, {
+									await getWords(1000, {
 										lang: 'english 5k',
 										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 										isNumber: $newTextConfig.numbers,
@@ -142,9 +142,9 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => {
+								on:click={async() => {
 									updateTestConfigLanguage('code python');
-									getWords(100, {
+									await getWords(100, {
 										lang: 'code python',
 										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 										isNumber: $newTextConfig.numbers,
@@ -155,9 +155,9 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => {
+								on:click={async() => {
 									updateTestConfigLanguage('code javascript');
-									getWords(100, {
+									await getWords(100, {
 										lang: 'code javascript',
 										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 										isNumber: $newTextConfig.numbers,
@@ -180,9 +180,9 @@
 						<div class="flex flex-col items-start w-full py-3 text-sm">
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => {
+								on:click={async () => {
 									updateTestConfigCounter('time', 30);
-									getWords(1000, {
+									await getWords(1000, {
 										lang: $newTextConfig.language.value,
 										isNumber: $newTextConfig.numbers,
 										isPunctuation: $newTextConfig.punctuations
@@ -193,10 +193,10 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => {
+								on:click={async() => {
 									updateTestConfigCounter('words', 50);
 									updateModalCounter('words');
-									getWords(1000, {
+									await getWords(1000, {
 										lang: $newTextConfig.language.value,
 										isNumber: $newTextConfig.numbers,
 										isPunctuation: $newTextConfig.punctuations
@@ -206,10 +206,10 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => {
+								on:click={async() => {
 									updateTestConfigCounter('quotes', 'Random Quotes');
 									updateModalCounter('quotes');
-									getWords(100, {
+									await getWords(100, {
 										lang: $newTextConfig.language.value,
 										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words'
 									});

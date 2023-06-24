@@ -484,7 +484,7 @@
 <span
 	bind:this={resetEl}
 	class="block mx-auto mt-5 w-fit"
-	on:click={() => {
+	on:click={async() => {
 		//@ts-ignore
 		clearInterval(intervalId);
 		letterIndex = 0;
@@ -492,12 +492,13 @@
 		caretEl.style.top = '3px';
 		typedLetter = '';
 		resetTest();
-		setGameState('waiting');
-		getWords(500, {
+		await getWords(500, {
 			lang: $newTextConfig.language.value,
 			isNumber: $newTextConfig.numbers,
 			isPunctuation: $newTextConfig.punctuations
 		});
+		setGameState('waiting');
+
 		inputEl.focus();
 		for (let i = 0; i < $wordsArr.length; i++) {
 			for (let j = 0; j < $wordsArr[i].length; j++) {
@@ -505,7 +506,7 @@
 			}
 		}
 	}}
-	on:keydown={(e) => {
+	on:keydown={async(e) => {
 		if (e.key === 'Enter') {
 			//@ts-ignore
 			clearInterval(intervalId);
@@ -519,7 +520,7 @@
 			caretEl.style.top = '3px';
 			typedLetter = '';
 			resetTest();
-			getWords(500, {
+			await getWords(500, {
 				lang: $newTextConfig.language.value,
 				isNumber: $newTextConfig.numbers,
 				isPunctuation: $newTextConfig.punctuations
