@@ -185,7 +185,7 @@
 	$: {
 		if ($game === 'finished') {
 			// console.log(count);
-			goto('/result');
+
 			console.log(letterIndex, wordIndex);
 			const tempArr: number[] = [];
 			clearInterval(intervalId as number);
@@ -223,6 +223,9 @@
 			// });
 			console.log(wordsDataArr);
 			console.log($timeDataArr);
+			(async () => {
+				await goto('/result');
+			})();
 		}
 	}
 
@@ -484,7 +487,7 @@
 <span
 	bind:this={resetEl}
 	class="block mx-auto mt-5 w-fit"
-	on:click={async() => {
+	on:click={async () => {
 		//@ts-ignore
 		clearInterval(intervalId);
 		letterIndex = 0;
@@ -506,7 +509,7 @@
 			}
 		}
 	}}
-	on:keydown={async(e) => {
+	on:keydown={async (e) => {
 		if (e.key === 'Enter') {
 			//@ts-ignore
 			clearInterval(intervalId);
