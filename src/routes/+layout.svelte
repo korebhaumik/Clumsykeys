@@ -46,7 +46,7 @@
 <!-- <header /> -->
 <!-- <section class="mx-5 sm:mx-10 mt-10 big:max-w-6xl big:mx-auto"> -->
 {#if browser}
-	<section class="px-10 py-0 big:px-0 mt-10 big:max-w-6xl big:mx-auto">
+	<section class="px-5 py-0 big:px-0 mt-10 big:max-w-6xl big:mx-auto">
 		<Header />
 		<slot />
 		<Footer />

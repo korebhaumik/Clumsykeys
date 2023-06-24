@@ -361,7 +361,7 @@
 				populateWords();
 			}
 			// logDataPerWord();
-			if (e.code === 'Space') {
+			if (e.keyCode === 32) {
 				const isLastLetter = $wordIndex + 1 >= $wordsArr.length;
 				if (letterIndex === 0) return;
 				if (!isLastLetter) {
@@ -374,7 +374,7 @@
 					moveCaret('space');
 				}
 			}
-			if (e.code === 'Backspace') {
+			if (e.keyCode === 9) {
 				if ($wordIndex === 0 && letterIndex === 0) return;
 				if (nextLetterEl?.offsetTop > prevLetterEl?.offsetTop) {
 					if (letterIndex === 0) return;
