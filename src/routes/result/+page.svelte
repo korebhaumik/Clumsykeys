@@ -70,5 +70,5 @@
 		/>
 	</a>
 {:else}
-	<p class={`my-16 text-3xl ${textVar['accent-error']}`}>Protected Route</p>
+	<p class={`my-16 text-3xl ${textVar['accent-error']}`}></p>
 {/if}

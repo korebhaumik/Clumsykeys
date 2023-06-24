@@ -109,8 +109,9 @@
 	// }
 
 	onMount(async () => {
-		await getWords(200, {
+		await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 500, {
 			lang: $newTextConfig.language.value,
+			type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 			isNumber: $newTextConfig.numbers,
 			isPunctuation: $newTextConfig.punctuations
 		});
@@ -246,7 +247,7 @@
 		if ($wordIndex === $wordsArr.length - 1 && letterIndex === $wordsArr[$wordIndex].length - 1) {
 			wordsDataArr[$wordIndex].wpm = 60000 / (Date.now() - wordsDataArr[$wordIndex].startTime);
 			setGameState('finished');
-			// goto('/result');
+			goto('/result');
 			return;
 		}
 		if ($game === 'playing') {
@@ -354,7 +355,49 @@
 			e.preventDefault();
 		}
 
-		if ($game === 'waiting' && e.code != 'Tab') {
+		// array of all keys
+		const keys = [
+			'Backspace',
+			'Enter',
+			'ShiftLeft',
+			'ShiftRight',
+			'ControlLeft',
+			'ControlRight',
+			'AltLeft',
+			'AltRight',
+			'CapsLock',
+			'Tab',
+			'Escape',
+			'ArrowLeft',
+			'ArrowRight',
+			'ArrowUp',
+			'ArrowDown',
+			'PageUp',
+			'PageDown',
+			'Home',
+			'End',
+			'Insert',
+			'Delete',
+			'OSLeft',
+			'OSRight',
+			'ContextMenu',
+			'F1',
+			'F2',
+			'F3',
+			'F4',
+			'F5',
+			'F6',
+			'F7',
+			'F8',
+			'F9',
+			'F10',
+			'F11',
+			'F12',
+			'NumLock',
+			'ScrollLock',
+			'Pause'
+		];
+		if ($game === 'waiting' && !keys.includes(e.code) && e.metaKey === false) {
 			setGameState('playing');
 		}
 
@@ -495,8 +538,9 @@
 		caretEl.style.top = '3px';
 		typedLetter = '';
 		resetTest();
-		await getWords(500, {
+		await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 500, {
 			lang: $newTextConfig.language.value,
+			type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 			isNumber: $newTextConfig.numbers,
 			isPunctuation: $newTextConfig.punctuations
 		});
@@ -523,8 +567,9 @@
 			caretEl.style.top = '3px';
 			typedLetter = '';
 			resetTest();
-			await getWords(500, {
+			await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 500, {
 				lang: $newTextConfig.language.value,
+				type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 				isNumber: $newTextConfig.numbers,
 				isPunctuation: $newTextConfig.punctuations
 			});
