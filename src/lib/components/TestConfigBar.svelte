@@ -7,22 +7,27 @@
 	import TimerSvg from '$lib/assets/TimerSVG.svelte';
 	import WrenchSvg from '$lib/assets/WrenchSVG.svelte';
 
-	import { updateModalContent, updateModalVisibility, updateTestConfigCounter } from './store';
+	import {
+		getWords,
+		updateModalContent,
+		updateModalVisibility,
+		updateTestConfigCounter
+	} from './store';
 	import { newTextConfig, updateTestConfigFormat } from './store';
 	import { theme } from './store';
 
 	const bgVar = {
-		primary: 'bg-cardboard-primary',
-		fade: 'bg-cardboard-fade'
+		primary: 'bg-dark-forest-primary',
+		fade: 'bg-dark-forest-fade'
 	};
 	const borderVar = {
-		primary: 'border-cardboard-primary',
-		fade: 'border-cardboard-fade'
+		primary: 'border-dark-forest-primary',
+		fade: 'border-dark-forest-fade'
 	};
 	const textVar = {
-		unhighlighted: 'text-cardboard-unhighlighted',
-		highlighted: 'text-cardboard-highlighted',
-		'accent-main': 'text-cardboard-accent-main'
+		unhighlighted: 'text-dark-forest-unhighlighted',
+		highlighted: 'text-dark-forest-highlighted',
+		'accent-main': 'text-dark-forest-accent-main'
 	};
 
 	$: {
@@ -116,7 +121,7 @@
 <main
 	class={`flex font-semibold px-4 hd:hidden ${bgVar.fade}  py-3 w-fit ${textVar.unhighlighted} rounded-lg`}
 >
-	<SettingsSvg />
+	<SettingsSvg variant="" />
 	<span class="ml-2">test settings</span>
 </main>
 
@@ -126,7 +131,14 @@
 	<!-- punctuations -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={() => updateTestConfigFormat('punctuations')}
+		on:click={() => {
+			updateTestConfigFormat('punctuations');
+			getWords(200, {
+				lang: $newTextConfig.language.value,
+				isNumber: $newTextConfig.numbers,
+				isPunctuation: $newTextConfig.punctuations
+			});
+		}}
 		class={`flex items-center cursor-pointer ${variantConfig.punctuations}`}
 	>
 		<AtSvg />
@@ -136,7 +148,14 @@
 	<!-- Numbers -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={() => updateTestConfigFormat('numbers')}
+		on:click={() => {
+			updateTestConfigFormat('numbers');
+			getWords(200, {
+				lang: $newTextConfig.language.value,
+				isNumber: $newTextConfig.numbers,
+				isPunctuation: $newTextConfig.punctuations
+			});
+		}}
 		class={`flex items-center cursor-pointer ${variantConfig.numbers}`}
 	>
 		<HashSvg />
@@ -148,7 +167,14 @@
 	<!-- Time -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={() => updateTestConfigCounter('time', $newTextConfig.time.value)}
+		on:click={() => {
+			updateTestConfigCounter('time', $newTextConfig.time.value);
+			getWords(200, {
+				lang: $newTextConfig.language.value,
+				isNumber: $newTextConfig.numbers,
+				isPunctuation: $newTextConfig.punctuations
+			});
+		}}
 		class={`flex items-center cursor-pointer ${variantConfig.time}`}
 	>
 		<TimerSvg />
@@ -158,7 +184,14 @@
 	<!-- Words -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={() => updateTestConfigCounter('words', $newTextConfig.words.value)}
+		on:click={() => {
+			updateTestConfigCounter('words', $newTextConfig.words.value);
+			getWords($newTextConfig.words.value, {
+				lang: $newTextConfig.language.value,
+				isNumber: $newTextConfig.numbers,
+				isPunctuation: $newTextConfig.punctuations
+			});
+		}}
 		class={`flex items-center cursor-pointer ${variantConfig.words} no-underline`}
 	>
 		<span class="text-base font-poppins">Aa</span>
@@ -167,7 +200,13 @@
 	<!-- Quotes -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
-		on:click={() => updateTestConfigCounter('quotes', 'Random Quotes')}
+		on:click={() => {
+			updateTestConfigCounter('quotes', 'Random Quotes');
+			getWords(100, {
+				type: 'quotes',
+				lang: 'english'
+			});
+		}}
 		class={`flex items-center cursor-pointer ${variantConfig.quotes} no-underline`}
 	>
 		<QuotesSvg />
@@ -184,28 +223,56 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 15 ? variantConfig.due.class : null
 				}`}
-				on:click={() => updateTestConfigCounter('time', 15)}>15</span
+				on:click={() => {
+					updateTestConfigCounter('time', 15);
+					getWords(200, {
+						lang: $newTextConfig.language.value,
+						isNumber: $newTextConfig.numbers,
+						isPunctuation: $newTextConfig.punctuations
+					});
+				}}>15</span
 			>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<span
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 30 ? variantConfig.due.class : null
 				}`}
-				on:click={() => updateTestConfigCounter('time', 30)}>30</span
+				on:click={() => {
+					updateTestConfigCounter('time', 30);
+					getWords(200, {
+						lang: $newTextConfig.language.value,
+						isNumber: $newTextConfig.numbers,
+						isPunctuation: $newTextConfig.punctuations
+					});
+				}}>30</span
 			>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<span
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 60 ? variantConfig.due.class : null
 				}`}
-				on:click={() => updateTestConfigCounter('time', 60)}>60</span
+				on:click={() => {
+					updateTestConfigCounter('time', 60);
+					getWords(200, {
+						lang: $newTextConfig.language.value,
+						isNumber: $newTextConfig.numbers,
+						isPunctuation: $newTextConfig.punctuations
+					});
+				}}>60</span
 			>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<span
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 120 ? variantConfig.due.class : null
 				}`}
-				on:click={() => updateTestConfigCounter('time', 120)}>120</span
+				on:click={() => {
+					updateTestConfigCounter('time', 120);
+					getWords(200, {
+						lang: $newTextConfig.language.value,
+						isNumber: $newTextConfig.numbers,
+						isPunctuation: $newTextConfig.punctuations
+					});
+				}}>120</span
 			>
 		{:else if $newTextConfig.words.isHighlighted}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -213,7 +280,14 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 25 ? variantConfig.due.class : null
 				}`}
-				on:click={() => updateTestConfigCounter('words', 25)}>25</span
+				on:click={() => {
+					updateTestConfigCounter('words', 25);
+					getWords($newTextConfig.words.value, {
+						lang: $newTextConfig.language.value,
+						isNumber: $newTextConfig.numbers,
+						isPunctuation: $newTextConfig.punctuations
+					});
+				}}>25</span
 			>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 
@@ -221,24 +295,46 @@
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 50 ? variantConfig.due.class : null
 				}`}
-				on:click={() => updateTestConfigCounter('words', 50)}>50</span
+				on:click={() => {
+					updateTestConfigCounter('words', 50);
+					getWords($newTextConfig.words.value, {
+						lang: $newTextConfig.language.value,
+						isNumber: $newTextConfig.numbers,
+						isPunctuation: $newTextConfig.punctuations
+					});
+				}}>50</span
 			>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<span
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 75 ? variantConfig.due.class : null
 				}`}
-				on:click={() => updateTestConfigCounter('words', 75)}>75</span
+				on:click={() => {
+					updateTestConfigCounter('words', 75);
+					getWords($newTextConfig.words.value, {
+						lang: $newTextConfig.language.value,
+						isNumber: $newTextConfig.numbers,
+						isPunctuation: $newTextConfig.punctuations
+					});
+				}}>75</span
 			>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<span
 				class={`mr-3 text-sm cursor-pointer ${
 					variantConfig.due.val === 100 ? variantConfig.due.class : null
 				}`}
-				on:click={() => updateTestConfigCounter('words', 100)}>100</span
+				on:click={() => {
+					updateTestConfigCounter('words', 100);
+					getWords($newTextConfig.words.value, {
+						lang: $newTextConfig.language.value,
+						isNumber: $newTextConfig.numbers,
+						isPunctuation: $newTextConfig.punctuations
+					});
+				}}>100</span
 			>
 		{:else if $newTextConfig.quotes.isHighlighted}
-			<span class={`mr-3 text-sm cursor-pointer ${textVar['accent-main']} underline underline-offset-1 decoration-2`}
+			<span
+				class={`mr-3 text-sm cursor-pointer ${textVar['accent-main']} underline underline-offset-1 decoration-2`}
 				>{$newTextConfig.quotes.value}</span
 			>
 		{/if}

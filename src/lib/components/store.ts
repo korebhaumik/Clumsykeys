@@ -11,12 +11,12 @@ import type {
 } from './storeTypes';
 
 // export const count = writable(0);
-export const theme = writable('cardboard' as 'cardboard' | 'dark-forest' | 'sapphire');
+export const theme = writable('dark-forest' as 'cardboard' | 'dark-forest' | 'sapphire');
 
 export const newTextConfig = writable({
 	punctuations: false,
 	numbers: false,
-	language: { isHighlighted: true, value: 'english 5k' },
+	language: { isHighlighted: true, value: 'english' },
 	time: { isHighlighted: true, value: 30 },
 	words: { isHighlighted: false, value: 50 },
 	quotes: { isHighlighted: false, value: 'Random Quotes' }
@@ -209,5 +209,19 @@ export function resetTest() {
 	// game.set('waiting');
 }
 
+export const wordsArr = writable([] as string[]);
 
+
+export async function getWords(limit: number, config: getWordsConfig) {
+	const response = await fetch(`/api/words?limit=${limit}&lang=${config.lang ?? 'english'}&type=${config.type ?? 'words'}&isPunctuation=${config.isPunctuation ?? false}&isNumber=${config.isNumber ?? false}`);
+	// const response = await fetch(`/api/words?limit=${limit}&lang=${lang}&type=${type}&isPunctuation=true&isNumber=true`);
+	wordsArr.set(await response.json());
+}
+
+type getWordsConfig = {
+	lang: LangParams,
+	type?: "quotes" | "words",
+	isPunctuation?: boolean,
+	isNumber?: boolean
+}
 

@@ -9,13 +9,13 @@
 	import { theme, game } from '$lib/components/store';
 
 	const bgVar = {
-		command: 'bg-cardboard-command-bg'
+		command: 'bg-dark-forest-command-bg'
 	};
 	const textVar = {
-		unhighlighted: 'text-cardboard-unhighlighted',
-		highlighted: 'text-cardboard-highlighted',
-		'command-text': 'text-cardboard-command-text',
-		credits: `text-cardboard-credits`
+		unhighlighted: 'text-dark-forest-unhighlighted',
+		highlighted: 'text-dark-forest-highlighted',
+		'command-text': 'text-dark-forest-command-text',
+		credits: `text-dark-forest-credits`
 	};
 	let opac = 'opacity-100';
 	$: {

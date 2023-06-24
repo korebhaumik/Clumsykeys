@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { fade, scale, fly } from 'svelte/transition';
 	import {
+		getWords,
 		modalConfig,
+		newTextConfig,
 		theme,
 		updateModalContent,
 		updateModalCounter,
@@ -9,7 +11,7 @@
 		updateTestConfigCounter,
 		updateTestConfigLanguage
 	} from './store';
-	import SearchSvg from './SearchSVG.svelte';
+	// import SearchSvg from './SearchSVG.svelte';
 	import LangSvg from '$lib/assets/LangSVG.svelte';
 	import GlobeSvg from '$lib/assets/GlobeSVG.svelte';
 	import TimerSvg from '$lib/assets/TimerSVG.svelte';
@@ -21,31 +23,28 @@
 	import MoonSvg from '$lib/assets/MoonSVG.svelte';
 	import UserSvg from '$lib/assets/UserSVG.svelte';
 	import RocketSvg from '$lib/assets/RocketSVG.svelte';
-	import InfoSvg from '$lib/assets/InfoSVG.svelte';
 	import { goto } from '$app/navigation';
 
 	let tempTimeCount: number;
 	let tempWordsCount: number;
 
 	const textVar = {
-		primary: 'text-cardboard-primary',
-		unhighlighted: 'text-cardboard-unhighlighted',
-		highlighted: 'text-cardboard-highlighted',
+		primary: 'text-dark-forest-primary',
+		unhighlighted: 'text-dark-forest-unhighlighted',
+		highlighted: 'text-dark-forest-highlighted'
 	};
 	const bgVar = {
-		primary: 'bg-cardboard-primary',
-		fade: 'bg-cardboard-fade'
+		primary: 'bg-dark-forest-primary',
+		fade: 'bg-dark-forest-fade'
 	};
-
 	const borderVar = {
-		fade: 'border-cardboard-fade',
-		unhighlighted: 'border-cardboard-unhighlighted',
+		fade: 'border-dark-forest-fade',
+		unhighlighted: 'border-dark-forest-unhighlighted'
 	};
-
 	const placeholderVar = {
-		fade: 'placeholder-cardboard-fade',
-		unhighlighted: 'placeholder-cardboard-unhighlighted',
-		highlighted: 'placeholder-cardboard-highlighted'
+		fade: 'placeholder-dark-forest-fade',
+		unhighlighted: 'placeholder-dark-forest-unhighlighted',
+		highlighted: 'placeholder-dark-forest-highlighted'
 	};
 
 	$: {
@@ -58,6 +57,7 @@
 			borderVar.fade = 'border-dark-forest-fade';
 			placeholderVar.fade = 'placeholder-dark-forest-fade';
 			bgVar.primary = 'bg-dark-forest-primary';
+			bgVar.fade = 'bg-dark-forest-fade';
 		}
 		if ($theme === 'cardboard') {
 			textVar.highlighted = 'text-cardboard-highlighted';
@@ -68,20 +68,22 @@
 			borderVar.fade = 'border-cardboard-fade';
 			placeholderVar.fade = 'placeholder-cardboard-fade';
 			bgVar.primary = 'bg-cardboard-primary';
+			bgVar.fade = 'bg-dark-forest-fade';
 		}
 	}
 </script>
 
 {#if $modalConfig.isVisible}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- Backdrop -->
 	<div
 		transition:fade={{ duration: 200 }}
 		class="absolute top-0 bottom-0 left-0 right-0 z-10 w-screen h-screen bg-black opacity-40"
-		on:click={()=>{
+		on:click={() => {
 			updateModalVisibility();
 		}}
-		
 	/>
+	<!-- Content -->
 	<div
 		class={`absolute z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${textVar['highlighted']}`}
 	>
@@ -90,19 +92,6 @@
 				class={`${bgVar.primary} rounded w-80 mx-auto sm:w-[30rem] h-fit`}
 				transition:fly={{ duration: 400, y: 4 }}
 			>
-				<!-- <div>
-					<div class="flex px-5 pt-5">
-						<span class="font-medium font-poppins">Aa</span>
-						<h1 class="ml-1 text-base">Words Amount</h1>
-					</div>
-					<input placeholder="Enter no. of words"  class="mx-5 text-sm"/>
-					<p class="px-5 text-sm">
-						You can start an infinite test by inputting 0. Then, to stop the test, use the Bail Out
-						feature (esc or ctrl/cmd + shift + p > Bail Out)
-					</p>
-					<button class="w-full py-3 mt-2 text-sm rounded-b bg-cardboard-300" on:click={() => isVisible.update((v) => !v)}>ok</button>
-				</div> -->
-
 				<!-- lang -->
 				{#if $modalConfig.content === 'language'}
 					<!-- language -->
@@ -116,6 +105,12 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigLanguage('english');
+									getWords(100, {
+										lang: 'english',
+										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+										isNumber: $newTextConfig.numbers,
+										isPunctuation: $newTextConfig.punctuations
+									});
 									updateModalVisibility();
 								}}>english</button
 							>
@@ -123,6 +118,12 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigLanguage('english 1k');
+									getWords(1000, {
+										lang: 'english 1k',
+										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+										isNumber: $newTextConfig.numbers,
+										isPunctuation: $newTextConfig.punctuations
+									});
 									updateModalVisibility();
 								}}>english 1k</button
 							>
@@ -130,6 +131,12 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigLanguage('english 5k');
+									getWords(1000, {
+										lang: 'english 5k',
+										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+										isNumber: $newTextConfig.numbers,
+										isPunctuation: $newTextConfig.punctuations
+									});
 									updateModalVisibility();
 								}}>english 5k</button
 							>
@@ -137,6 +144,12 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigLanguage('code python');
+									getWords(100, {
+										lang: 'code python',
+										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+										isNumber: $newTextConfig.numbers,
+										isPunctuation: $newTextConfig.punctuations
+									});
 									updateModalVisibility();
 								}}>code python</button
 							>
@@ -144,6 +157,12 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigLanguage('code javascript');
+									getWords(100, {
+										lang: 'code javascript',
+										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+										isNumber: $newTextConfig.numbers,
+										isPunctuation: $newTextConfig.punctuations
+									});
 									updateModalVisibility();
 								}}>code javascript</button
 							>
@@ -163,6 +182,12 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigCounter('time', 30);
+									getWords(1000, {
+										lang: $newTextConfig.language.value,
+										isNumber: $newTextConfig.numbers,
+										isPunctuation: $newTextConfig.punctuations
+									});
+									updateModalCounter('time');
 									updateModalVisibility();
 								}}>Timer</button
 							>
@@ -170,6 +195,12 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigCounter('words', 50);
+									updateModalCounter('words');
+									getWords(1000, {
+										lang: $newTextConfig.language.value,
+										isNumber: $newTextConfig.numbers,
+										isPunctuation: $newTextConfig.punctuations
+									});
 									updateModalVisibility();
 								}}>Words</button
 							>
@@ -177,6 +208,11 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigCounter('quotes', 'Random Quotes');
+									updateModalCounter('quotes');
+									getWords(100, {
+										lang: $newTextConfig.language.value,
+										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words'
+									});
 									updateModalVisibility();
 								}}>Quotes</button
 							>
@@ -242,7 +278,7 @@
 						</div>
 						<div class="flex flex-col items-start w-full pt-3 text-sm">
 							<input
-								class={`w-full py-2 pl-5 text-left align-baseline outline-none bg-cardboard-fade bg-inherit border-b border-b-cardboard-300 placeholder-cardboard-500`}
+								class={`w-full py-2 pl-5 text-left align-baseline outline-none bg-inherit border-b ${borderVar.fade} ${placeholderVar.unhighlighted}`}
 								type="number"
 								placeholder="Enter word count"
 								bind:value={tempWordsCount}
@@ -259,7 +295,7 @@
 								menu : (cog icon or ctrl/cmd + k > word count)
 							</p>
 							<button
-								class="w-full py-3 mt-2 align-baseline rounded-b bg-cardboard-300"
+								class={`w-full py-3 mt-2 align-baseline rounded-b ${bgVar.fade}`}
 								on:click={() => {
 									if (!tempWordsCount) return;
 									updateTestConfigCounter('words', tempWordsCount);
@@ -307,8 +343,8 @@
 					</div>
 				{/if}
 
+				<!-- quotes counter-->
 				{#if $modalConfig.content === 'quotesCounter'}
-					<!-- quotes -->
 					<div>
 						<div class="flex px-5 pt-4">
 							<QuotesSvg />
@@ -347,7 +383,7 @@
 					<!-- Settings -->
 					<div>
 						<div class="flex px-5 pt-4">
-							<SettingsSvg />
+							<SettingsSvg variant="" />
 							<h1 class="ml-2 font-medium">Settings Menu</h1>
 						</div>
 						<div class="flex flex-col items-start w-full py-3 text-sm">
@@ -358,7 +394,12 @@
 									goto('/');
 								}}
 							>
-								<ResetSvg variant={{ highlighted: textVar.highlighted, unhighlighted: textVar.unhighlighted,}} />
+								<ResetSvg
+									variant={{
+										highlighted: textVar.highlighted,
+										unhighlighted: textVar.unhighlighted
+									}}
+								/>
 								<span class="ml-2">Reset Test</span>
 							</button>
 							<button
@@ -434,7 +475,7 @@
 									goto('/leaderboards');
 								}}
 							>
-								<RocketSvg />
+								<RocketSvg variant="" />
 								<span class="ml-2">Leaderboards</span></button
 							>
 						</div>

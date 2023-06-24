@@ -137,6 +137,744 @@
 			"source": "What it Takes to Make More Money than Your Parents",
 			"id": 23,
 			"length": 65
+		},
+		{
+			"text": "package main\\nimport \"fmt\"\\n\\nfunc main() {\\n\\tfmt.Println(\"Hello, geeksforgeeks\")\\n}",
+			"source": "GeekForGeeks - Introduction to Golang",
+			"length": 85,
+			"id": 1
+		},
+		{
+			"text": "And I think how hope may be the thing that pulls you forward, may be the thing that keeps you going, but that it's dangerous, too, that it's painful and risky, that it's making a dare to the world and when has the world ever let us win a dare?",
+			"source": "The Knife of Never Letting Go",
+			"id": 257,
+			"length": 243
+		},
+		{
+			"text": "With the money they earn they'll be able to buy more police and political power. Then they come after us. Right now we have the unions and we have the gambling and those are the best things to have.",
+			"source": "The Godfather",
+			"id": 258,
+			"length": 198
+		},
+		{
+			"text": "I learned to write because I am one of those people who somehow cannot manage the common communications of smiles and gestures, but must use words to get across things that other people would never need to say.",
+			"source": "Moneyball",
+			"id": 259,
+			"length": 210
+		},
+		{
+			"text": "The weird thing about houses is that they almost always look like nothing is happening inside of them, even though they contain most of our lives. I wondered if that was sort of the point of architecture.",
+			"source": "The Fault in Our Stars",
+			"id": 260,
+			"length": 204
+		},
+		{
+			"text": "I find myself so furious at all these people that I am in contact with just for controlling me or whatever but you know they are not even aware they are doing it.",
+			"source": "Boyhood",
+			"id": 261,
+			"length": 162
+		},
+		{
+			"text": "I have often wondered how it is that every man loves himself more than all the rest of men, but yet sets less value on his own opinion of himself than on the opinion of others.",
+			"source": "Marcus Aurelius, Meditations",
+			"id": 262,
+			"length": 176
+		},
+		{
+			"text": "You get tough like me and you don't get hurt. You look out for yourself and nothin' can touch you...",
+			"source": "The Outsiders",
+			"id": 263,
+			"length": 100
+		},
+		{
+			"text": "Sometimes I'll start a sentence and I don't even know where it's going. I just hope that I find it along the way.",
+			"source": "The Office",
+			"id": 264,
+			"length": 113
+		},
+		{
+			"text": "Humans need to practice what they are learning a good deal before they master it. Furthermore, they tend to lose a good deal of their learning when they cease to practice the skills associated with this learning in their daily lives.",
+			"source": "What Video Games Have to Teach Us About Learning and Literacy",
+			"id": 265,
+			"length": 233
+		},
+		{
+			"text": "At the root of every large struggle in life is the need to be honest about something that we do not feel we can be honest about. We lie to ourselves or other people because the truth might require action on our part, and action requires courage. We say we don't know what is wrong, when we do know what is wrong; we just wish we didn't.",
+			"source": "The Secret Life of Prince Charming",
+			"id": 266,
+			"length": 336
+		},
+		{
+			"text": "They say that money doesn't bring you happiness, I say neither does being broke, so let me suffer with a new car.",
+			"source": "Funny Quotes: Slightly Twisted Words of Wisdom & Other Funny Sayings",
+			"id": 267,
+			"length": 113
+		},
+		{
+			"text": "I could work at a problem for years, but to wait inactive for twenty-four hours - that is another matter.",
+			"source": "The Time Machine",
+			"id": 268,
+			"length": 105
+		},
+		{
+			"text": "What's the use you learning to do right when it's troublesome to do right and ain't no trouble to do wrong, and the wages is just the same?",
+			"source": "The Adventures of Huckleberry Finn",
+			"id": 269,
+			"length": 139
+		},
+		{
+			"text": "Maybe I will never be all the things that I wanna be. Now is not the time to cry, now's the time to find out why. I think you're the same as me, we see things they'll never see.",
+			"source": "Live Forever",
+			"id": 270,
+			"length": 177
+		},
+		{
+			"text": "You have a class of young strong men and women, and they want to give their lives to something. Advertising has these people chasing cars and clothes they don't need. Generations have been working in jobs they hate, just so they can buy what they don't really need.",
+			"source": "Fight Club",
+			"id": 271,
+			"length": 265
+		},
+		{
+			"text": "You and Marshall belong together. The two of you have something most people search their whole lives for and never find. I know you love him and if you knew what he was going through right now you wouldn't be here for one more second. I bought you a ticket home. Marshall is one of the best people I know and it won't be long until someone else realizes that and you will lose him forever.",
+			"source": "How I Met Your Mother",
+			"id": 272,
+			"length": 389
+		},
+		{
+			"text": "Well, no need to brood on what tomorrow may bring. For one thing, tomorrow will be certain to bring worse than today, for many days to come. And there is nothing more that I can do to help it. The board is set, and the pieces are moving.",
+			"source": "The Lord of The Rings",
+			"id": 273,
+			"length": 237
+		},
+		{
+			"text": "There are those who say that the world is like a calm pond, and that anytime a person does even the smallest thing, it is as if a stone has dropped into the pond, spreading circles of ripples further and further out, until the entire world has been changed by one tiny action.",
+			"source": "A Series of Unfortunate Events: The Penultimate Peril",
+			"id": 274,
+			"length": 276
+		},
+		{
+			"text": "And when he came to, he was flat on his back on the beach in the freezing sand, and it was raining out of a low sky, and the tide was way out.",
+			"source": "Infinite Jest",
+			"id": 275,
+			"length": 142
+		},
+		{
+			"text": "I told him that you were really smart. And they'll figure it out soon enough. In the beginning, I thought you might want to be treated like any other kid.",
+			"source": "The Miscalculations of Lightning Girl",
+			"id": 276,
+			"length": 154
+		},
+		{
+			"text": "There's a piece of Maria in every song that I sing. And the price of a memory is the memory of the sorrow it brings. And there is always one last light to turn out and one last bell to ring. And the last one out of the circus has to lock up everything.",
+			"source": "Mrs. Potter's Lullaby",
+			"id": 277,
+			"length": 252
+		},
+		{
+			"text": "I don't know what it is that makes me love you so. I only know I never want to let you go 'cause you started something. Can't you see that ever since we met you've had a hold on me?",
+			"source": "I Only Want To Be With You",
+			"id": 278,
+			"length": 181
+		},
+		{
+			"text": "This is where I feel safe inside and can let go at the same time. When I'm here, I am open so I can reach the infinite sky. I thought I couldn't want you more, but I was wrong, and when we locked in our stare, then I wanted you more than air.",
+			"source": "Breathe",
+			"id": 279,
+			"length": 242
+		},
+		{
+			"text": "All age brings is space between your words and what they mean and sighs of sympathy. These years are rings with time to grieve alone and in your bed sick of what's in your head. All your worries gone.",
+			"source": "This Is Not a Dance",
+			"id": 280,
+			"length": 200
+		},
+		{
+			"text": "You never know what a day will bring, which is both the good news and the bad news of life.",
+			"source": "A Heart in a Body in the World",
+			"id": 281,
+			"length": 91
+		},
+		{
+			"text": "Sometimes it's the very people who no one imagines anything of who do the things that no one can imagine.",
+			"source": "The Imitation Game",
+			"id": 282,
+			"length": 105
+		},
+		{
+			"text": "Demons run when a good man goes to war. Night will fall and drown the sun when a good man goes to war. Friendship dies and true love lies. Night will fall and the dark will rise when a good man goes to war. Demons run but count the cost; the battle's won but the child is lost.",
+			"source": "When a Good Man Goes to War",
+			"id": 283,
+			"length": 277
+		},
+		{
+			"text": "There was a little boy once upon a time who in spite of his young age and small size knew his mind. For every copper penny and clover he would find, he'd make a wish for better days and the end of hard times.",
+			"source": "Cold Feet",
+			"id": 284,
+			"length": 208
+		},
+		{
+			"text": "We know that there is not one person who, after hearing these words, would deny their truth and say that he wanted something else, but he would believe that he had heard exactly what he had desired for a long time - namely, to be melted in unison with his beloved, and the two of them become one. The reason is that our ancient nature was thus and we were whole. And so love is merely the name for the desire and pursuit of the whole.",
+			"source": "Symposium",
+			"id": 285,
+			"length": 434
+		},
+		{
+			"text": "I want to leave my footprints in the sands of time. Know there was something that meant something that I left behind. The hearts I have touched will be the proof that I leave that I made a difference and this world will see I was here.",
+			"source": "I Was Here",
+			"id": 286,
+			"length": 235
+		},
+		{
+			"text": "Now that I've tried to talk to you and make you understand. All you have to do is close your eyes and just reach out your hands and touch me. Hold me close don't ever let me go.",
+			"source": "More Than Words",
+			"id": 287,
+			"length": 177
+		},
+		{
+			"text": "There is nothing sweeter in this sad world than the sound of someone you love calling your name.",
+			"source": "The Tale of Despereaux",
+			"id": 288,
+			"length": 96
+		},
+		{
+			"text": "What you need to learn, children, is the difference between right and wrong in every area of life. And once you learn the difference, you must always choose the right.",
+			"source": "The City of Ember",
+			"id": 289,
+			"length": 167
+		},
+		{
+			"text": "When has anyone ever told me I had the right to stop it all without my knuckles, or my anger, with just some simple words.",
+			"source": "The Poet X",
+			"id": 290,
+			"length": 122
+		},
+		{
+			"text": "You know no one and no one knows you, and at the same time you don't feel like a stranger. But here you know everyone and everyone knows you, and yet you are a stranger.",
+			"source": "The Stories of Anton Chekhov",
+			"id": 291,
+			"length": 169
+		},
+		{
+			"text": "And it's whispered that soon, if we all call the tune, then the piper will lead us to reason and a new day will dawn for those who stand long and the forests will echo with laughter.",
+			"source": "Stairway to Heaven",
+			"id": 292,
+			"length": 182
+		},
+		{
+			"text": "I think that if I ever have kids, and they are upset, I won't tell them that people are starving in China or anything like that because it wouldn't change the fact that they were upset. And even if somebody else has it much worse, that doesn't really change the fact that you have what you have.",
+			"source": "The Perks of Being a Wallflower",
+			"id": 293,
+			"length": 295
+		},
+		{
+			"text": "One day you're in a funk about things, telling a friend that years of evidence point to the conclusion that you will be single for the rest of your life. That night you meet someone, and a year later you're engaged to be married. That this very scenario happened to me is likely of little comfort to those still wondering about their future.",
+			"source": "Urban Tribes: A Generation Redefines Friendship, Family, and Commitment",
+			"id": 294,
+			"length": 341
+		},
+		{
+			"text": "Now that I look back, I don't know why I was so stressed about it all this time. Funny how sometimes you worry a lot about something and it turns out to be nothing.",
+			"source": "Wonder",
+			"id": 295,
+			"length": 164
+		},
+		{
+			"text": "Sometimes you never feel meaner than the moment you stop being mean. It's like how turning on a light makes you realize how dark the room had gotten. And the way you usually act, the things you would have normally done, are like these ghosts that everyone can see but pretends not to.",
+			"source": "When You Reach Me",
+			"id": 296,
+			"length": 284
+		},
+		{
+			"text": "I've been looking so long at these pictures of you that I almost believe that they're real. I've been living so long with my pictures of you that I almost believe that the pictures are all I can feel.",
+			"source": "Pictures of You",
+			"id": 297,
+			"length": 200
+		},
+		{
+			"text": "Now I see fire inside the mountain, I see fire burning the trees, and I see fire hollowing souls. I see fire, blood in the breeze, and I hope that you remember me.",
+			"source": "I See Fire",
+			"id": 298,
+			"length": 163
+		},
+		{
+			"text": "It's sad to say that kids unaccepted by their peers really never learn how to get along with people in the big grown up world.",
+			"source": "Cheers",
+			"id": 299,
+			"length": 126
+		},
+		{
+			"text": "There were people who lied for gain, people who lied from pain, people who lied simply because the concept of telling the truth was utterly alien to them... and then there were people who lied because they were waiting for it to be time to tell the truth.",
+			"source": "Needful Things",
+			"id": 300,
+			"length": 255
+		},
+		{
+			"text": "Why is it that when you awake to the world of realities you nearly always feel, sometimes very vividly, that the vanished dream has carried with it some enigma which you have failed to solve?",
+			"source": "The Idiot",
+			"id": 301,
+			"length": 191
+		},
+		{
+			"text": "I just watched the man that I love go to prison so that none of you have to, and it hasn't been five minutes and you're already ripping each other apart.",
+			"source": "Suits",
+			"id": 302,
+			"length": 153
+		},
+		{
+			"text": "It is a love based on giving and receiving as well as having and sharing. And the love that they give and have is shared and received. And through this having and giving and sharing and receiving, we too can share and love and have... and receive.",
+			"source": "Friends",
+			"id": 303,
+			"length": 247
+		},
+		{
+			"text": "Every thought and every word works for you or against you, and every thought that you confirm to be true becomes a belief. When you change a belief, you change a mental construction and, therefore, your life.",
+			"source": "Unlimited Memory: How to Use Advanced Learning Strategies to Learn Faster, Remember More and Be More Productive",
+			"id": 304,
+			"length": 208
+		},
+		{
+			"text": "The poor and the middle class work for money. The rich have money work for them.",
+			"source": "Rich Dad Poor Dad",
+			"id": 305,
+			"length": 80
+		},
+		{
+			"text": "If a person can't answer directly to your question, it's either the answer is too painful for you to know or too hard for them to admit.",
+			"source": "Meitantei Conan",
+			"id": 306,
+			"length": 136
+		},
+		{
+			"text": "These memories lose their meaning when I think of love as something new, though I know I'll never lose affection for people and things that went before. I know I'll often stop and think about them.",
+			"source": "In My Life",
+			"id": 307,
+			"length": 197
+		},
+		{
+			"text": "Look, there's only one thing worse than being a loser. It's being one of those guys that sits in a bar, telling the story of how he became a loser, and I never want that to happen to me.",
+			"source": "The Simpsons",
+			"id": 308,
+			"length": 186
+		},
+		{
+			"text": "So you run and you run to catch up with the sun but it's sinking, racing around to come up behind you again. The sun is the same in a relative way but you're older, shorter of breath and one day closer to death.",
+			"source": "Time",
+			"id": 309,
+			"length": 211
+		},
+		{
+			"text": "Even though the bell has rung, some of my classmates are still milling around on the ground. It's the first week of the second semester of senior year, and already they're acting as if they're almost done and out of here.",
+			"source": "All the Bright Places",
+			"id": 310,
+			"length": 221
+		},
+		{
+			"text": "I don't want to live someone else's idea of how to live. Don't ask me to do that. I don't want to find out one day that I'm at the end of someone else's life.",
+			"source": "Out of Africa",
+			"id": 311,
+			"length": 158
+		},
+		{
+			"text": "All I really want is something beautiful to say.",
+			"source": "Words as Weapons",
+			"id": 312,
+			"length": 48
+		},
+		{
+			"text": "But when you lose something you love, faith takes over. You have to pay attention to what you lost. You have to undo the expectation.",
+			"source": "The Joy Luck Club",
+			"id": 313,
+			"length": 133
+		},
+		{
+			"text": "As a young child my mother told me I could be anyone I want to be. Turns out this is called identity theft.",
+			"source": "Funny Quotes: Slightly Twisted Words of Wisdom & Other Funny Sayings",
+			"id": 314,
+			"length": 107
+		},
+		{
+			"text": "What is this place, and who am I? I don't remember my name. All I remember is that I don't know my name and that I can't remember if I do know my name. I have this strange feeling that I've forgotten all of this before.",
+			"source": "Xavier: Renegade Angel",
+			"id": 315,
+			"length": 219
+		},
+		{
+			"text": "And certainly, the mistakes that we male and female mortals make when we have our own way might fairly raise some wonder that we are so fond of it.",
+			"source": "Middlemarch",
+			"id": 316,
+			"length": 147
+		},
+		{
+			"text": "She can lead you to love, she can take you or leave you, she can ask for the truth, but she'll never believe. And she'll take what you give her as long as it's free.",
+			"source": "She's Always A Woman",
+			"id": 317,
+			"length": 165
+		},
+		{
+			"text": "Just because something bears the aspect of the inevitable one should not, therefore, go along willingly with it.",
+			"source": "The Transmigration of Timothy Archer",
+			"id": 318,
+			"length": 112
+		},
+		{
+			"text": "I'm on the top of the world looking down on creation and the only explanation I can find is the love that I've found ever since you've been around. Your love's put me at the top of the world.",
+			"source": "Top of the World",
+			"id": 319,
+			"length": 191
+		},
+		{
+			"text": "We fell in love, we had our fun, you always had enough dreams for both of us. I wonder what would come of us if we could trade these ends for beginnings.",
+			"source": "One Less Star",
+			"id": 320,
+			"length": 153
+		},
+		{
+			"text": "Gonna see the river man, gonna tell him all I can about the ban on feeling free. If he tells me all he knows about the way his river flows, I don't suppose it's meant for me.",
+			"source": "River Man",
+			"id": 321,
+			"length": 174
+		},
+		{
+			"text": "For still there are so many things that I have never seen: in every wood, in every spring there is a different green. I sit beside the fire and think of people long ago, and people who will see a world that I shall never know.",
+			"source": "The Lord of The Rings",
+			"id": 322,
+			"length": 226
+		},
+		{
+			"text": "Your future hasn't been written yet; no one's has. Your future is whatever you make it, so make it a good one.",
+			"source": "Back to the Future Part III",
+			"id": 323,
+			"length": 110
+		},
+		{
+			"text": "Failure is nothing to be ashamed of. If you learned something from it, it's possible to gain that lost ground and then some. And all you have to do is refrain from making that same mistake twice. Above all, you should be ashamed of fearing failure.",
+			"source": ".hack//Sign - Fear Failure",
+			"id": 324,
+			"length": 248
+		},
+		{
+			"text": "You know, when you feel this sting of losing, you have to realize that it all boils down to the fact that it's not about awards. It's not about accolades. It's about a body of work. If you can look at yourself in a mirror and say you've done a good job, that's all that matters. If you can do that, let the awards fall where they may.",
+			"source": "Frasier",
+			"id": 325,
+			"length": 334
+		},
+		{
+			"text": "Educators say that understanding is the key to learning, but how do you understand something if you can't remember it?",
+			"source": "Unlimited Memory: How to Use Advanced Learning Strategies to Learn Faster, Remember More and Be More Productive",
+			"id": 326,
+			"length": 118
+		},
+		{
+			"text": "I've been making a list of the things they don't teach you at school. They don't teach you how to love somebody. They don't teach you how to be famous. They don't teach you how to be rich or how to be poor. They don't teach you how to walk away from someone you don't love any longer. They don't teach you how to know what's going on in someone else's mind. They don't teach you what to say to someone who's dying. They don't teach you anything worth knowing.",
+			"source": "The Kindly Ones",
+			"id": 327,
+			"length": 459
+		},
+		{
+			"text": "If you come soon you'll find breakfast on the table. If you come late you'll get grass and rain-water!",
+			"source": "The Lord of The Rings",
+			"id": 328,
+			"length": 102
+		},
+		{
+			"text": "Years later he would say that when he'd decided to become a professional baseball player, it was the only time he'd done something just for the money, and that he'd never do something just for the money ever again. He would never again let the market dictate the direction of his life.",
+			"source": "Moneyball",
+			"id": 329,
+			"length": 285
+		},
+		{
+			"text": "The night is bitter, the stars have lost their glitter, the winds grow colder, suddenly you're older, and all because of the man that got away. No more his eager call, the writing's on the wall, the dreams you've dreamed have all gone astray.",
+			"source": "A Star Is Born",
+			"id": 330,
+			"length": 242
+		},
+		{
+			"text": "By the pricking of my thumbs, something wicked this way comes. So vague, yet so immense. He did not want to live with it. Yet he knew that, during this night, unless he lived with it very well, he might have to live with it all the rest of his life.",
+			"source": "Something Wicked This Way Comes",
+			"id": 331,
+			"length": 249
+		},
+		{
+			"text": "And brace for the glory as you stare into the sky.",
+			"source": "Tempest",
+			"id": 332,
+			"length": 50
+		},
+		{
+			"text": "You are the true master of death, because the true master does not seek to run away from Death. He accepts that he must die, and understands that there are far, far worse things in the living world than dying.",
+			"source": "Harry Potter and the Deathly Hallows",
+			"id": 333,
+			"length": 209
+		},
+		{
+			"text": "If you have to choose among an infinite number of ways to put it together then the relation of the machine to you, and the relation of the machine and you to the rest of the world, has to be considered, because the selection from among many choices, the art of the work is just as dependent upon your own mind and spirit as it is upon the material of the machine.",
+			"source": "Zen and the Art of Motorcycle Maintenance",
+			"id": 334,
+			"length": 363
+		},
+		{
+			"text": "There's a club if you'd like to go. You could meet somebody who really loves you. So you go and you stand on your own and you leave on your own and you go home and you cry and you want to die.",
+			"source": "How Soon Is Now?",
+			"id": 335,
+			"length": 192
+		},
+		{
+			"text": "Some feeling had started in my stomach and was traveling up to my face, and I knew that when it got there I would turn bright red and hear the ocean, which is what happens when I get put on the spot.",
+			"source": "When You Reach Me",
+			"id": 336,
+			"length": 199
+		},
+		{
+			"text": "And so we meet at last. You are to be commended for avoiding my traps. The work of a man who once had too much time on his hands, and now finds time for nothing but the work of salvation.",
+			"source": "Half-Life 2",
+			"id": 337,
+			"length": 187
+		},
+		{
+			"text": "A choice tells the world what is most important to a human being. When a man has a choice to make he chooses what is most important to him, and that choice tells the world what kind of a man he is.",
+			"source": "The Promise",
+			"id": 338,
+			"length": 197
+		},
+		{
+			"text": "The town has a sense, not of history, but of time, and the telephone poles seem to know this. If you lay your hand against one, you can feel the vibration from the wires deep within the wood, as if souls had been imprisoned in there and were struggling to get out.",
+			"source": "Salem's Lot",
+			"id": 339,
+			"length": 264
+		},
+		{
+			"text": "You can tell from the lines on her face, you can see that she's been there. Probably been moved on from every place 'cause she didn't fit in there.",
+			"source": "Another Day In Paradise",
+			"id": 340,
+			"length": 147
+		},
+		{
+			"text": "With people like us, you should hang out, get to know what they do, how they do it. No one is going to answer questions like that. You need to understand how young people live on the streets.",
+			"source": "Gang Leader for a Day: A Rogue Sociologist Takes to the Streets",
+			"id": 341,
+			"length": 191
+		},
+		{
+			"text": "Love can touch us one time and last for a lifetime and never let go till we're one. Love was when I loved you one true time I hold to in my life we'll always go on.",
+			"source": "My Heart Will Go On",
+			"id": 342,
+			"length": 164
+		},
+		{
+			"text": "I don't care if they like me. I didn't come here to make friends. I don't even care if they respect me. I know who I am. I've got enough respect for myself. I do not want them to beat me.",
+			"source": "42",
+			"id": 343,
+			"length": 187
+		},
+		{
+			"text": "The moon belongs to everyone; the best things in life are free. The stars belong to everyone; they gleam there for you and me. The flowers in spring, the robins that sing, the sunbeams that shine - they're yours, they're mine. And love can come to everyone - the best things in life are free!",
+			"source": "Best Things in life Are Free",
+			"id": 344,
+			"length": 292
+		},
+		{
+			"text": "But I would walk five hundred miles and I would walk five hundred more, just to be the man who walks a thousand miles to fall down at your door.",
+			"source": "I'm Gonna Be (500 Miles)",
+			"id": 345,
+			"length": 144
+		},
+		{
+			"text": "Because you're like a story that hasn't happened yet. Because I want to see what you will do. I want to be part of the unfolding of the tale.",
+			"source": "The Cruel Prince",
+			"id": 346,
+			"length": 141
+		},
+		{
+			"text": "I've been fighting to be who I am all my life. What's the point of being who I am, if I can't have the person who was worth all the fighting for?",
+			"source": "I Don't Remember You",
+			"id": 347,
+			"length": 145
+		},
+		{
+			"text": "There's something moving through the windows and walls, I've seen it before, seen it before. You left me living with a lingering soul, how little you know, how little you know.",
+			"source": "Paint",
+			"id": 348,
+			"length": 176
+		},
+		{
+			"text": "I still remember these old country lanes when we did not know the answers.",
+			"source": "Castle on the Hill",
+			"id": 349,
+			"length": 74
+		},
+		{
+			"text": "Every time that I think I'm alone, and I can't find a word of my own, you take me home and then you change the world again. With only one word, you took a war out of my history. It's funny how one single thing you choose to see could change the world, and give mine back to me so much better.",
+			"source": "One Word",
+			"id": 350,
+			"length": 292
+		},
+		{
+			"text": "A father may have a child who is ugly and lacking in all the graces, and the love he feels for him puts a blindfold over his eyes so that he does not see his defects but considers them signs of charm and intelligence and recounts them to his friends as if they were clever and witty.",
+			"source": "Don Quixote",
+			"id": 351,
+			"length": 283
+		},
+		{
+			"text": "Sometimes at night I let it get to me. And sometimes, I'm sure it gets to all of us. And last night, it had me down I'm feeling numb. I can try, but sometimes that is not enough. No, sometimes that is not enough.",
+			"source": "In Bloom",
+			"id": 352,
+			"length": 212
+		},
+		{
+			"text": "Getting out of your comfort zone means trying to do something that you couldn't do before. Sometimes you may find it relatively easy to accomplish that new thing, and then you keep pushing on. But sometimes you run into something that stops you cold and it seems like you'll never be able to do it. Finding ways around these barriers is one of the hidden keys to purposeful practice.",
+			"source": "Peak: Secrets from the New Science of Expertise",
+			"id": 353,
+			"length": 383
+		},
+		{
+			"text": "You can't look me in the eye and say that you love me and you know it. You know, there's no sense in struggling against a thing when it's got you. It's got you and that's all there is to it - it's got you!",
+			"source": "My Man Godfrey",
+			"id": 354,
+			"length": 205
+		},
+		{
+			"text": "Sometimes I wish I never built this palace, but real love is never a waste of time.",
+			"source": "Palace",
+			"id": 355,
+			"length": 83
+		},
+		{
+			"text": "I wanted you to see what real courage is, instead of getting the idea that courage is a man with a gun in his hand. It's when you know you're licked before you begin but you begin anyway and you see it through no matter what. You rarely win, but sometimes you do.",
+			"source": "To Kill a Mockingbird",
+			"id": 356,
+			"length": 263
+		},
+		{
+			"text": "As long as we don't have magic, they will never treat us with respect. They need to know we can hit them back. If they burn our homes, we burn theirs, too.",
+			"source": "Children of Blood and Bone",
+			"id": 357,
+			"length": 155
+		},
+		{
+			"text": "After others have talked about themselves, a point will be reached when the conversation will get around to you. A little patience here is well invested.",
+			"source": "The Ultimate Secrets of Total Self-Confidence",
+			"id": 358,
+			"length": 153
+		},
+		{
+			"text": "Just one day, if I can be with you. Just one day, if I can hold your hands. Just one day, if I can be with you. Just one day, if only we can be together.",
+			"source": "Just One Day",
+			"id": 359,
+			"length": 153
+		},
+		{
+			"text": "There are two ways of seeing: with the body and with the soul. The body's sight can sometimes forget, but the soul remembers forever.",
+			"source": "The Count of Monte Cristo",
+			"id": 360,
+			"length": 133
+		},
+		{
+			"text": "Sometimes someone says something and their words are like the catch of a gas stove, the click, click while you're waiting for it to light up and flame big and blue...",
+			"source": "The Poet X",
+			"id": 361,
+			"length": 166
+		},
+		{
+			"text": "I was never scared of dying alone until I knew what it was like to have a home. I was never scared of dying alone until I knew what it was like to have a home.",
+			"source": "Breathe You In",
+			"id": 362,
+			"length": 159
+		},
+		{
+			"text": "Tell me how we're not alike, but we work so well and we don't even know why. Funny how the stars crossed right, 'cause we work so well, and we don't even know why. You can call it fire and ice, but we work so well, and we don't even know why.",
+			"source": "Why",
+			"id": 363,
+			"length": 242
+		},
+		{
+			"text": "I hated that having done the right thing was somehow considered wrong. And I hated that there didn't seem to be any other way to survive school.",
+			"source": "Sammy Keyes and the Night of the Skull",
+			"id": 364,
+			"length": 144
+		},
+		{
+			"text": "Stupid, pitiful creature. I am the rage in your heart. I am the fury in your thoughts. I alone empowered you to bring chaos to this world, and by the endless void, you shall!",
+			"source": "Warcraft III",
+			"id": 365,
+			"length": 174
+		},
+		{
+			"text": "Think of all the roads, think of all their crossings. Taking steps is easy, standing still is hard. Remember all their faces, remember all their voices. Everything is different the second time around.",
+			"source": "You've Got Time",
+			"id": 366,
+			"length": 200
+		},
+		{
+			"text": "The man who lies to himself and listens to his own lie comes to a point that he cannot distinguish the truth within him, or around him, and so loses all respect for himself and for others.",
+			"source": "The Brothers Karamazov",
+			"id": 367,
+			"length": 188
+		},
+		{
+			"text": "Apparently, it only appears to those people who are pure of heart and have a strong desire to see it.",
+			"source": "Pokemon Gold Version",
+			"id": 368,
+			"length": 101
+		},
+		{
+			"text": "There was nothing there, and they would find nothing. But all of a sudden they touched her personal diary, which she would not have shown even to her own mother. And these hostile young strangers reading the words she had written was more devastating to her than the whole Lubyanka with its bars and its cellars.",
+			"source": "The Gulag Archipelago",
+			"id": 369,
+			"length": 312
+		},
+		{
+			"text": "So I was sitting in my cubicle today, and I realized, ever since I started working, every single day of my life has been worse than the day before it. So that means that every single day that you see me, that's on the worst day of my life.",
+			"source": "Office Space",
+			"id": 371,
+			"length": 239
+		},
+		{
+			"text": "I think that those two people want to be together. I think that love, at the end of the day, is stronger than some mistake somebody made; something they did that they regret. I think that love allows for forgiveness.",
+			"source": "Scandal",
+			"id": 372,
+			"length": 216
+		},
+		{
+			"text": "That's the thing about girls. Every time they do something pretty, even if they're not much to look at, or even if they're sort of stupid, you fall in love with them, and then you never know where the hell you are. Girls. Jesus Christ. They can drive you crazy. They really can.",
+			"source": "The Catcher in the Rye",
+			"id": 373,
+			"length": 278
+		},
+		{
+			"text": "Home is where I can find some peace of mind to make my own way. I don't know where I will end up but I'll find it someday, keep on searching, engine burning while we're turning it around. But don't get left behind on the road.",
+			"source": "Left Behind",
+			"id": 374,
+			"length": 226
+		},
+		{
+			"text": "Well that is where we are. You say we are on the brink of destruction and you are right. But it is only on the brink that people find the will to change. Only at the precipice do we evolve. This is our moment. Don't take it from us, we are close to an answer.",
+			"source": "The Day The Earth Stood Still",
+			"id": 375,
+			"length": 259
+		},
+		{
+			"text": "While monsters are mostly made of magic, human beings are mostly made of water.",
+			"source": "Undertale",
+			"id": 376,
+			"length": 79
+		},
+		{
+			"text": "There is some love that will not go away. You're here, there's nothing I fear and I know that my heart will go on. We'll stay forever this way, you are safe in my heart.",
+			"source": "My Heart Will Go On",
+			"id": 377,
+			"length": 169
+		},
+		{
+			"text": "We speak of something carried and something carrying, of something led and something leading, of something seen and something seeing, and you understand that these things are all different from one another and how they differ? So there is also something loved and - a different thing - something loving.",
+			"source": "Plato: Five Dialogues",
+			"id": 378,
+			"length": 303
+		},
+		{
+			"text": "I still see your shadows in my room, can't take back the love that I gave you. It's to the point where I love and I hate you, and I cannot change you so I must replace you. Easier said than done, I thought you were the one. Listening to my heart, instead of my head. You found another one, but I am the better one. I won't let you forget me.",
+			"source": "Lucid Dreams",
+			"id": 379,
+			"length": 341
 		}
 	]
 }

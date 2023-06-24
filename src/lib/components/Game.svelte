@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
 	import { blur, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { theme } from './store';
@@ -15,6 +14,12 @@
 		timeDataArr,
 		WordCount
 	} from './store';
+
+	import { newTextConfig } from './store';
+	import { getWords, wordsArr } from './store';
+
+	$: lang = $newTextConfig.language.value;
+	$: type = $newTextConfig.quotes.isHighlighted === true ? 'quotes' : 'words';
 
 	type GameState = 'waiting' | 'playing' | 'finished';
 
@@ -32,7 +37,7 @@
 
 	const bgVar = {
 		// caret: 'bg-cardboard-caret'
-		caret: 'bg-cardboard-caret'
+		caret: 'bg-dark-forest-caret'
 	};
 
 	// const focusVar = {
@@ -63,7 +68,7 @@
 	// const wordsArr: string[] = 'The quick brown fox jumps over the lazy dog.'.split(' ');
 	// const wordsArr: string[] = 'call go seem problem'.split(' ');
 	// let wordsArr: string[] = 'call go seem problem seem as such program any like against may from this over other fact time which problem see feel which.'.split(' ');
-	let wordsArr: string[] = [];
+	// let wordsArr: string[] = [];
 	// const wordsArr: string[] =
 	// 	'call go seem problem seem as such program any like against may from this over other fact time which problem see feel which. call go seem problem seem as such program any like against may from this over other fact time which problem see feel which. call go seem problem seem as such program any like against may from this over other fact time which problem see feel which'.split(
 	// 		' '
@@ -98,15 +103,24 @@
 	let lineH = 0;
 	let lineNum = 0;
 
-	async function getWords(limit: number) {
-		const response = await fetch(`/api/words?limit=${limit}&lang=${"english"}`);
-		wordsArr = await response.json();
-	}
+	// async function getWords(limit: number, lang: string) {
+	// 	const response = await fetch(`/api/words?limit=${limit}&lang=${lang}&type=quotes`);
+	// 	wordsArr = await response.json();
+	// }
 
 	onMount(async () => {
-		await getWords(100);
+		await getWords(200, {
+			lang: $newTextConfig.language.value,
+			isNumber: $newTextConfig.numbers,
+			isPunctuation: $newTextConfig.punctuations
+		});
 		inputEl.focus();
 		isBlur = false;
+		// document.addEventListener('keydown', (e) => {
+		// 	if (e.key === 'Tab') {
+		// 		resetEl.focus();
+		// 	}
+		// });
 	});
 
 	interface timeDataType {
@@ -171,6 +185,7 @@
 	$: {
 		if ($game === 'finished') {
 			// console.log(count);
+			goto('/result');
 			console.log(letterIndex, wordIndex);
 			const tempArr: number[] = [];
 			clearInterval(intervalId as number);
@@ -178,7 +193,14 @@
 				prev.pop();
 				return prev;
 			});
-
+			intervalId = null;
+			lineH = 0;
+			lineNum = 0;
+			count.set(0);
+			letterIndex = 0;
+			caretEl.style.left = '0px';
+			caretEl.style.top = '3px';
+			typedLetter = '';
 			// timeDataArr.update((prev) => {
 			// 	prev.forEach((timeLog, index) => {
 			// 		if (index - 1 >= 0) {
@@ -218,7 +240,7 @@
 	}
 
 	const updateGameState = () => {
-		if ($wordIndex === wordsArr.length - 1 && letterIndex === wordsArr[$wordIndex].length - 1) {
+		if ($wordIndex === $wordsArr.length - 1 && letterIndex === $wordsArr[$wordIndex].length - 1) {
 			wordsDataArr[$wordIndex].wpm = 60000 / (Date.now() - wordsDataArr[$wordIndex].startTime);
 			setGameState('finished');
 			// goto('/result');
@@ -238,10 +260,10 @@
 	// };
 
 	const setLetter = () => {
-		const isWordCompleted = letterIndex > wordsArr[$wordIndex].length - 1;
-		const isLastWord = $wordIndex === wordsArr.length - 1;
+		const isWordCompleted = letterIndex > $wordsArr[$wordIndex].length - 1;
+		const isLastWord = $wordIndex === $wordsArr.length - 1;
 		const isFirstWord = $wordIndex === 0;
-		if (letterIndex + 1 < wordsArr[$wordIndex].length - 1) {
+		if (letterIndex + 1 < $wordsArr[$wordIndex].length - 1) {
 			nextLetterEl = wordsEl.children[$wordIndex].children[letterIndex + 1] as HTMLSpanElement;
 		} else {
 			if (isLastWord) {
@@ -252,7 +274,7 @@
 		}
 		if (letterIndex === 0 && !isFirstWord) {
 			prevLetterEl = wordsEl.children[$wordIndex - 1].children[
-				wordsArr[$wordIndex - 1].length - 1
+				$wordsArr[$wordIndex - 1].length - 1
 			] as HTMLSpanElement;
 		} else {
 			prevLetterEl = wordsEl.children[$wordIndex].children[letterIndex - 1] as HTMLSpanElement;
@@ -290,7 +312,7 @@
 	};
 
 	const nextLetter = () => {
-		if (letterIndex === wordsArr[$wordIndex].length) {
+		if (letterIndex === $wordsArr[$wordIndex].length) {
 			return;
 		}
 		letterIndex += 1;
@@ -298,7 +320,7 @@
 
 	function nextWord() {
 		const isNotFirstLetter = letterIndex !== 0;
-		const isOneLetterWord = wordsArr[$wordIndex].length === 1;
+		const isOneLetterWord = $wordsArr[$wordIndex].length === 1;
 
 		if (isNotFirstLetter || isOneLetterWord) {
 			wordIndex.update((prev) => (prev += 1));
@@ -313,7 +335,7 @@
 			letterEl.className = textVar.unhighlighted;
 		} else {
 			wordIndex.update((prev) => (prev -= 1));
-			const lastLetterIndex = wordsArr[$wordIndex].length - 1;
+			const lastLetterIndex = $wordsArr[$wordIndex].length - 1;
 			letterIndex = lastLetterIndex;
 			setLetter();
 			letterEl.className = textVar.unhighlighted;
@@ -340,7 +362,7 @@
 			}
 			// logDataPerWord();
 			if (e.code === 'Space') {
-				const isLastLetter = $wordIndex + 1 >= wordsArr.length;
+				const isLastLetter = $wordIndex + 1 >= $wordsArr.length;
 				if (letterIndex === 0) return;
 				if (!isLastLetter) {
 					wordsDataArr[$wordIndex].endTime = Date.now();
@@ -400,6 +422,7 @@
 	}
 
 	$: isBlur = false;
+	let resetEl: HTMLElement;
 </script>
 
 <section class="relative">
@@ -430,7 +453,7 @@
 		}}
 	>
 		<div bind:this={wordsEl} class={`overflow-hidden h-28`} transition:fly>
-			{#each wordsArr as word}
+			{#each $wordsArr as word}
 				<span bind:this={letterEl} class="mr-2 text-xl">
 					{#each word as letter}
 						<span class={`${textVar.unhighlighted}`}>{letter}</span>
@@ -459,6 +482,7 @@
 </section>
 
 <span
+	bind:this={resetEl}
 	class="block mx-auto mt-5 w-fit"
 	on:click={() => {
 		//@ts-ignore
@@ -469,10 +493,14 @@
 		typedLetter = '';
 		resetTest();
 		setGameState('waiting');
-		getWords(100);
+		getWords(500, {
+				lang: $newTextConfig.language.value,
+				isNumber: $newTextConfig.numbers,
+				isPunctuation: $newTextConfig.punctuations
+			});
 		inputEl.focus();
-		for (let i = 0; i < wordsArr.length; i++) {
-			for (let j = 0; j < wordsArr[i].length; j++) {
+		for (let i = 0; i < $wordsArr.length; i++) {
+			for (let j = 0; j < $wordsArr[i].length; j++) {
 				wordsEl.children[i].children[j].className = textVar.unhighlighted;
 			}
 		}
@@ -491,11 +519,15 @@
 			caretEl.style.top = '3px';
 			typedLetter = '';
 			resetTest();
-			getWords(100);
+			getWords(500, {
+				lang: $newTextConfig.language.value,
+				isNumber: $newTextConfig.numbers,
+				isPunctuation: $newTextConfig.punctuations
+			});
 			setGameState('waiting');
 
-			for (let i = 0; i < wordsArr.length; i++) {
-				for (let j = 0; j < wordsArr[i].length; j++) {
+			for (let i = 0; i < $wordsArr.length; i++) {
+				for (let j = 0; j < $wordsArr[i].length; j++) {
 					wordsEl.children[i].children[j].className = textVar.unhighlighted;
 				}
 			}

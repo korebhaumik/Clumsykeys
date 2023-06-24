@@ -1,12 +1,5 @@
 <script lang="ts">
-	export let theme: 'cardboard' | 'dark-forest';
-
-	if (theme === 'cardboard') {
-		const variant = 'text-cardboard-accent-red';
-	} else if (theme === 'dark-forest') {
-		const variant = 'text-cardboard-accent-blue';
-	};
-	
+	export let variant: string;
 </script>
 
 <svg
@@ -14,7 +7,7 @@
 	height="24"
 	viewBox="0 0 24 24"
 	fill="none"
-	class="text-cardboard-accent-red"
+	class={`${variant}`}
 	xmlns="http://www.w3.org/2000/svg"
 >
 	<g clip-path="url(#clip0_41_257)">

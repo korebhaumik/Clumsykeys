@@ -1,8 +1,6 @@
 <script lang="ts">
-	import {
-		updateModalContent,
-		updateModalVisibility
-	} from '../components/store';
+	export let variant: string;
+	import { updateModalContent, updateModalVisibility } from '../components/store';
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -10,7 +8,7 @@
 	xmlns="http://www.w3.org/2000/svg"
 	viewBox="0 0 24 24"
 	fill="currentColor"
-	class="w-6 h-6 text-cardboard-accent-green"
+	class={`w-6 h-6 ${variant}`}
 	on:click={() => {
 		updateModalContent('menu');
 		updateModalVisibility();

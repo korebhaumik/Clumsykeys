@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { text } from '@sveltejs/kit';
 	import InfoSvg from '../assets/InfoSVG.svelte';
 	import KeyboardSvg from '../assets/KeyboardSVG.svelte';
 	import LogoSvg from '../assets/LogoSVG.svelte';
@@ -12,17 +13,26 @@
 
 	$: isVisible = false;
 
+	function handleEvent(e: any) {
+		isVisible = !isVisible;
+		// console.log(e);
+	}
+
 	const bgVar = {
 		command: 'bg-cardboard-command-bg'
 	};
 	const textVar = {
-		unhighlighted: 'text-cardboard-unhighlighted',
-		highlighted: 'text-cardboard-highlighted',
-		credits: `text-cardboard-credits`,
-		'logo-text-subheading': 'text-cardboard-logo-text-subheading',
-		'logo-text-heading': 'text-cardboard-logo-text-heading',
-		'logo-icon-fg': 'text-cardboard-logo-icon-fg',
-		'logo-icon-bg': 'text-cardboard-logo-icon-bg'
+		unhighlighted: 'text-dark-forest-unhighlighted',
+		highlighted: 'text-dark-forest-highlighted',
+		credits: `text-dark-forest-credits`,
+		'logo-text-subheading': 'text-dark-forest-logo-text-subheading',
+		'logo-text-heading': 'text-dark-forest-logo-text-heading',
+		'logo-icon-fg': 'text-dark-forest-logo-icon-fg',
+		'logo-icon-bg': 'text-dark-forest-logo-icon-bg',
+		'accent-red': 'text-dark-forest-accent-red',
+		'accent-purple': 'text-dark-forest-accent-purple',
+		'accent-yellow': 'text-dark-forest-accent-yellow',
+		'accent-green': 'text-dark-forest-accent-green'
 	};
 
 	$: {
@@ -34,6 +44,10 @@
 			textVar.credits = `text-dark-forest-credits`;
 			textVar['logo-icon-fg'] = 'text-dark-forest-logo-icon-fg';
 			textVar['logo-icon-bg'] = 'text-dark-forest-logo-icon-bg';
+			textVar['accent-red'] = 'text-dark-forest-accent-red';
+			textVar['accent-purple'] = 'text-dark-forest-accent-purple';
+			textVar['accent-yellow'] = 'text-dark-forest-accent-yellow';
+			textVar['accent-green'] = 'text-dark-forest-accent-green';
 		}
 		if ($theme === 'cardboard') {
 			bgVar.command = 'bg-cardboard-command-bg';
@@ -43,17 +57,31 @@
 			textVar.credits = `text-cardboard-credits`;
 			textVar['logo-icon-fg'] = 'text-cardboard-logo-icon-fg';
 			textVar['logo-icon-bg'] = 'text-cardboard-logo-icon-bg';
+			textVar['accent-red'] = 'text-cardboard-accent-red';
+			textVar['accent-purple'] = 'text-cardboard-accent-purple';
+			textVar['accent-yellow'] = 'text-cardboard-accent-yellow';
+			textVar['accent-green'] = 'text-cardboard-accent-green';
 		}
 	}
-	$:{
+	$: {
 		if ($game === 'playing') {
-				textVar['logo-text-subheading'] = 'text-slate-400';
-				textVar['logo-text-heading'] = 'text-slate-400';
-			}
-			if ($game === 'waiting') {
-				textVar['logo-text-subheading'] = 'text-dark-forest-logo-text-subheading';
-				textVar['logo-text-heading'] = 'text-dark-forest-logo-text-heading';
-			}
+			textVar['logo-text-subheading'] = 'text-dark-forest-unhighlighted transition';
+			textVar['logo-text-heading'] = 'text-dark-forest-unhighlighted transition';
+			textVar['accent-red'] = 'text-dark-forest-unhighlighted transition';
+			textVar['accent-purple'] = 'text-dark-forest-unhighlighted transition';
+			textVar['accent-yellow'] = 'text-dark-forest-unhighlighted transition';
+			textVar['accent-green'] = 'text-dark-forest-unhighlighted transition';
+			textVar['accent-yellow'] = 'text-dark-forest-unhighlighted transition';
+		}
+		if ($game != 'playing') {
+			textVar['logo-text-subheading'] = 'text-dark-forest-logo-text-subheading';
+			textVar['logo-text-heading'] = 'text-dark-forest-logo-text-heading';
+			textVar['accent-red'] = 'text-dark-forest-accent-red';
+			textVar['accent-purple'] = 'text-dark-forest-accent-purple';
+			textVar['accent-yellow'] = 'text-dark-forest-accent-yellow';
+			textVar['accent-green'] = 'text-dark-forest-accent-green';
+			textVar['accent-yellow'] = 'text-dark-forest-accent-yellow';
+		}
 	}
 </script>
 
@@ -76,13 +104,13 @@
 		<!-- Menu -->
 		<div class="justify-between hidden ml-7 mb-1 sm:flex w-40">
 			<a href="/">
-				<KeyboardSvg theme={'cardboard'} />
+				<KeyboardSvg variant={textVar['accent-red']} />
 			</a>
 			<a href="/leaderboards">
-				<RocketSvg />
+				<RocketSvg variant={textVar['accent-purple']} />
 			</a>
-			<InfoSvg />
-			<SettingsSvg />
+			<InfoSvg variant={textVar['accent-yellow']} />
+			<SettingsSvg variant={textVar['accent-green']} />
 		</div>
 	</div>
 
@@ -102,6 +130,6 @@
 		</div>
 	{/if}
 	{#if isVisible}
-		<Sidebar {isVisible} />
+		<Sidebar on:CustomClickEvent={handleEvent} />
 	{/if}
 </header>
