@@ -19,6 +19,10 @@
 			message: 'Warning: Unwanted unchecked listners due to chrome extensions.'
 		},
 		{
+			type: 'warning',
+			message: 'Warning: Make results wala route protected.'
+		},
+		{
 			type: 'error',
 			message: 'Bug #4 space and backspace glitch on mobile'
 		},

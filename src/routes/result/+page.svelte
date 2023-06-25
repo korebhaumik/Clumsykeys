@@ -42,12 +42,12 @@
 			console.log('tab');
 			resetButton.focus();
 			// resetTest();
-			setGameState('waiting');
+			// setGameState('waiting');
 		}
 	}
 	onMount(() => {
 		document.addEventListener('keydown', myfunction);
-		// setGameState('waiting');
+		setGameState('waiting');
 
 		return () => document.removeEventListener('keydown', myfunction);
 	});
@@ -76,7 +76,7 @@
 	// $: raw = $timeDataArr.at(-1)!.raw;
 </script>
 
-{#if $game === 'finished'}
+<!-- {#if $game === 'finished'} -->
 	<div class={`mt-10 ${textVar.unhighlighted} justify-between flex w-full`}>
 		<div class="flex flex-col">
 			<div class="w-fit">
@@ -198,6 +198,6 @@
 		{/each}
 	</div>
 	<!-- <p class="text-white">{$wordsArr}</p> -->
-{:else}
-	<p class={`my-16 text-3xl ${textVar['accent-error']}`}>Protected route fuck off</p>
-{/if}
+<!-- {:else} -->
+	<!-- <p class={`my-16 text-3xl ${textVar['accent-error']}`}>Protected route fuck off</p> -->
+<!-- {/if} -->
