@@ -39,7 +39,7 @@
 	function myfunction(e: any) {
 		if (e.key === 'Tab') {
 			e.preventDefault();
-			console.log('tab');
+			// console.log('tab');
 			resetButton.focus();
 			// resetTest();
 			// setGameState('waiting');
@@ -72,7 +72,7 @@
 		wpmArr.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0) / (wpmArr.length - 1);
 	const standardDeviation = Math.sqrt(variance).toFixed(2);
 
-	console.log(standardDeviation); // Output: 1.5811388300841898
+	// console.log(standardDeviation); // Output: 1.5811388300841898
 	// $: raw = $timeDataArr.at(-1)!.raw;
 </script>
 

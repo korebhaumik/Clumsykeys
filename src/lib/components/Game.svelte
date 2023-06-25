@@ -172,7 +172,7 @@
 	$: {
 		if (letterIndex && intervalId === null) {
 			intervalId = createTimer();
-			console.log('intervalId: ', intervalId);
+			// console.log('intervalId: ', intervalId);
 		}
 	}
 

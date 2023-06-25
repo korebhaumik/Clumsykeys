@@ -17,7 +17,7 @@ export const GET: RequestHandler = ({ url }) => {
   const isNumber = String(url.searchParams.get('isNumber'));
 
   let words: string[] = [];
-  console.log(lang)
+  // console.log(lang)
   if (type === 'quotes') {
     const quoteId = Math.floor(Math.random() * english_quotes.quotes.length);
     const words = english_quotes.quotes[quoteId].text.split(' ')

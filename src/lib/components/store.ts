@@ -155,7 +155,7 @@ export function createTimer() {
 				tempArr.push(temp);
 				const sum = tempArr.reduce((total, num) => total + num, 0);
 				timeLog!.wpm = Math.floor(sum / tempArr.length);
-				console.log(timeLog!.wpm);
+				// console.log(timeLog!.wpm);
 
 				temp = (timeLog!.rawChars / 5) * 60;
 				timeLog!.raw = Math.floor((temp + prev.at(- 2)!.raw) / 2);
