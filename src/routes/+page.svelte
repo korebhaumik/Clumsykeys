@@ -67,7 +67,7 @@
 		if ($timeDataArr.length > 1) speed = $timeDataArr.at(-2)?.wpm;
 		remaining = $TimerCount;
 		remaining -= $count;
-		console.log($isTimer);
+		// console.log($isTimer);
 	}
 </script>
 

@@ -13,6 +13,9 @@
 				updateModalContent('menu');
 				updateModalVisibility();
 			}
+			if (e.key === 'Escape') {
+				updateModalVisibility(false);
+			}
 		});
 		// document.body.style.backgroundColor = '#EDEBE3';
 	});

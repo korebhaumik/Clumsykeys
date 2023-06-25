@@ -70,7 +70,13 @@ export const modalConfig = writable({
 	counter: 'time'
 } as ModalConfig);
 
-export function updateModalVisibility() {
+export function updateModalVisibility(bool?: boolean) {
+	if (bool === false) {
+		modalConfig.update((config) => {
+			return { ...config, isVisible: false };
+		});
+		return;
+	}
 	modalConfig.update((config) => {
 		return { ...config, isVisible: !config.isVisible };
 	});
@@ -116,7 +122,8 @@ export function setGameState(state: GameState) {
 	game.set(state);
 }
 
-export const wordsDataArr = writable([] as wordsDataType[]);
+// export const GlobalWordsDataArr = writable([] as wordsDataType[]);
+export const GlobalWordsDataArr = writable([] as number[]);
 
 export const timeDataArr = writable([
 	{
@@ -156,7 +163,7 @@ export function createTimer() {
 				let temp = (timeLog!.correctChars / 5) * 60;
 				tempArr.push(temp);
 				timeLog!.wpm = Math.floor(temp);
-				console.log(timeLog!.wpm);
+				// console.log(timeLog!.wpm);
 
 				temp = (timeLog!.rawChars / 5) * 60;
 				timeLog!.raw = temp;
@@ -193,7 +200,7 @@ export function resetTest() {
 	wordIndex.set(0);
 	tempCount = 0;
 	tempArr = [];
-	wordsDataArr.set([]);
+	GlobalWordsDataArr.set([]);
 	// timeDataArr.update(prev => [
 	// 	{
 	// 		time: 1,
@@ -216,7 +223,16 @@ export function resetTest() {
 	]);
 	// game.set('waiting');
 }
-
+interface wordsDataType {
+	correctChars: number;
+	wpm: number;
+	incorrectChars: number;
+	missedChars: number;
+	rawChars: number;
+	extraChars: number;
+	startTime: number;
+	endTime: number;
+}
 export const wordsArr = writable([] as string[]);
 
 

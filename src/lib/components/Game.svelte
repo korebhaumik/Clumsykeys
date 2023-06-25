@@ -12,7 +12,8 @@
 		TimerCount,
 		wordIndex,
 		timeDataArr,
-		WordCount
+		WordCount,
+		GlobalWordsDataArr
 	} from './store';
 
 	import { newTextConfig } from './store';
@@ -109,6 +110,7 @@
 	// }
 
 	onMount(async () => {
+		resetTest();
 		await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 500, {
 			lang: $newTextConfig.language.value,
 			type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
@@ -177,6 +179,7 @@
 	$: {
 		if ($count === $TimerCount) {
 			// goto('/')
+			if (wordsDataArr.at(-1)!.rawChars < $wordsArr[$wordIndex].length) wordsDataArr.pop();
 			setGameState('finished');
 		}
 		if ($wordIndex === $WordCount) {
@@ -193,6 +196,11 @@
 				prev.pop();
 				return prev;
 			});
+			GlobalWordsDataArr.set(
+				wordsDataArr.map((wordData) => {
+					return wordData.wpm;
+				})
+			);
 			intervalId = null;
 			lineH = 0;
 			lineNum = 0;
@@ -221,12 +229,13 @@
 			// 	prev.pop();
 			// 	return prev;
 			// });
-			console.log(wordsDataArr);
-			console.log($timeDataArr);
+			// console.log($GlobalWordsDataArr);
+			// console.log($timeDataArr);
 			// window.location.href = '/result';
-			(async () => {
-				await goto('/result');
-			})();
+			// (async () => {
+			// 	await goto('/result');
+			// })();
+			goto('/result');
 		}
 	}
 
