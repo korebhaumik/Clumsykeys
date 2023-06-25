@@ -117,7 +117,7 @@
 		<div>
 			<h1>characters</h1>
 			<div class={`${textVar['accent-main']} mt-2  text-sm`}>
-				<p class="text-3xl">{$wordsArr.length * 4}/0/0</p>
+				<p class="text-3xl">{inputHistory.length * 4}/0/0</p>
 			</div>
 		</div>
 		<div>
