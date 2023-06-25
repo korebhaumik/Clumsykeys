@@ -8,7 +8,11 @@
 	const notifs = [
 		{
 			type: 'info',
-			message: 'Engine version: 1.0 '
+			message: 'Engine version: 1.0, Node-version: 20.2.0,'
+		},
+		{
+			type: 'warning',
+			message: 'Warning: Accuracy is static 100%, todo new formula.'
 		},
 		{
 			type: 'warning',
@@ -20,11 +24,15 @@
 		},
 		{
 			type: 'error',
-			message: 'Bug #12 api for punctuation and numbers'
+			message: 'Bug #12 Result not rendering'
 		},
 		{
 			type: 'info',
 			message: 'New feature: Frost theme'
+		},
+		{
+			type: 'info',
+			message: 'New feature: Mobile support'
 		},
 		{
 			type: 'error',
@@ -53,7 +61,7 @@
 		{
 			type: 'warning',
 			message: 'Warinig: reduce memory footprint.'
-		},
+		}
 	];
 </script>
 

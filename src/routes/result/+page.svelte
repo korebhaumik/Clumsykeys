@@ -199,5 +199,5 @@
 	</div>
 	<!-- <p class="text-white">{$wordsArr}</p> -->
 {:else}
-	<p class={`my-16 text-3xl ${textVar['accent-error']}`} />
+	<p class={`my-16 text-3xl ${textVar['accent-error']}`}>Protected route fuck off</p>
 {/if}
