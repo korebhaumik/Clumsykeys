@@ -178,7 +178,6 @@
 
 	$: {
 		if ($count === $TimerCount) {
-			// goto('/')
 			if (wordsDataArr.at(-1)!.rawChars < $wordsArr[$wordIndex].length) wordsDataArr.pop();
 			setGameState('finished');
 		}
@@ -190,52 +189,52 @@
 	$: {
 		if ($game === 'finished') {
 			// console.log(count);
-			console.log(letterIndex, wordIndex);
-			clearInterval(intervalId as number);
-			timeDataArr.update((prev) => {
-				prev.pop();
-				return prev;
-			});
-			GlobalWordsDataArr.set(
-				wordsDataArr.map((wordData) => {
-					return wordData.wpm;
-				})
-			);
-			intervalId = null;
-			lineH = 0;
-			lineNum = 0;
-			count.set(0);
-			letterIndex = 0;
-			caretEl.style.left = '0px';
-			caretEl.style.top = '3px';
-			typedLetter = '';
-			// timeDataArr.update((prev) => {
-			// 	prev.forEach((timeLog, index) => {
-			// 		if (index - 1 >= 0) {
-			// 			let temp = (timeLog.correctChars / 5) * 60;
-			// 			tempArr.push(temp);
-			// 			const sum = tempArr.reduce((total, num) => total + num, 0);
-			// 			timeLog.wpm = Math.floor(sum / tempArr.length);
-			// 			temp = (timeLog.rawChars / 5) * 60;
-			// 			timeLog.raw = Math.floor((temp + prev[index - 1].raw) / 2);
-			// 		} else {
-			// 			let temp = (timeLog.correctChars / 5) * 60;
-			// 			tempArr.push(temp);
-			// 			timeLog.wpm = Math.floor(temp);
-			// 			temp = (timeLog.rawChars / 5) * 60;
-			// 			timeLog.raw = temp;
-			// 		}
-			// 	});
-			// 	prev.pop();
-			// 	return prev;
-			// });
-			// console.log($GlobalWordsDataArr);
-			// console.log($timeDataArr);
-			// window.location.href = '/result';
-			// (async () => {
-			// 	await goto('/result');
-			// })();
-			goto('/result');
+			(async () => {
+				console.log(letterIndex, wordIndex);
+				clearInterval(intervalId as number);
+				timeDataArr.update((prev) => {
+					prev.pop();
+					return prev;
+				});
+				GlobalWordsDataArr.set(
+					wordsDataArr.map((wordData) => {
+						return wordData.wpm;
+					})
+				);
+				intervalId = null;
+				lineH = 0;
+				lineNum = 0;
+				count.set(0);
+				letterIndex = 0;
+				caretEl.style.left = '0px';
+				caretEl.style.top = '3px';
+				typedLetter = '';
+				// timeDataArr.update((prev) => {
+				// 	prev.forEach((timeLog, index) => {
+				// 		if (index - 1 >= 0) {
+				// 			let temp = (timeLog.correctChars / 5) * 60;
+				// 			tempArr.push(temp);
+				// 			const sum = tempArr.reduce((total, num) => total + num, 0);
+				// 			timeLog.wpm = Math.floor(sum / tempArr.length);
+				// 			temp = (timeLog.rawChars / 5) * 60;
+				// 			timeLog.raw = Math.floor((temp + prev[index - 1].raw) / 2);
+				// 		} else {
+				// 			let temp = (timeLog.correctChars / 5) * 60;
+				// 			tempArr.push(temp);
+				// 			timeLog.wpm = Math.floor(temp);
+				// 			temp = (timeLog.rawChars / 5) * 60;
+				// 			timeLog.raw = temp;
+				// 		}
+				// 	});
+				// 	prev.pop();
+				// 	return prev;
+				// });
+				// console.log($GlobalWordsDataArr);
+				// console.log($timeDataArr);
+				// window.location.href = '/result';
+				await goto('/result');
+			})();
+			// goto('/result');
 		}
 	}
 

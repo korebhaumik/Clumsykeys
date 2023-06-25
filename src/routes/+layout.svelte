@@ -42,7 +42,7 @@
 				sessionStorage.setItem('theme', 'dark-forest');
 			}
 		}
-		console.log(k);
+		// console.log(k);
 	}
 </script>
 
