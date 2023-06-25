@@ -408,7 +408,7 @@
 				populateWords();
 			}
 			// logDataPerWord();
-			tempSpace = e.code;
+			tempSpace = e.key;
 			if (e.code === 'Space') {
 				const isLastLetter = $wordIndex + 1 >= $wordsArr.length;
 				if (letterIndex === 0) return;
