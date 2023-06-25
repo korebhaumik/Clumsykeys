@@ -350,7 +350,7 @@
 		typedLetter = '';
 	};
 
-	let tempSpace = 0;
+	let tempSpace: string | undefined;
 	const handleKeydown = (e: KeyboardEvent) => {
 		if (e.code === 'Space') {
 			e.preventDefault();
@@ -408,8 +408,8 @@
 				populateWords();
 			}
 			// logDataPerWord();
+			tempSpace = e.code;
 			if (e.code === 'Space') {
-				tempSpace += 1;
 				const isLastLetter = $wordIndex + 1 >= $wordsArr.length;
 				if (letterIndex === 0) return;
 				if (!isLastLetter) {
