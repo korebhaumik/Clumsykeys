@@ -230,11 +230,8 @@
 						<div class="flex flex-col items-start w-full py-3 text-sm">
 							<button
 								class="w-full py-2 px-5 flex justify-between text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => {
-									theme.set('cardboard');
-								}}
 							>
-								<span>cardboard</span>
+								<span>cardboard (disabled temporarily)</span>
 								<div class="ml-3">
 									<span class="h-4 w-4 inline-block bg-cardboard-fade" />
 									<span class="h-4 w-4 inline-block bg-cardboard-unhighlighted" />
@@ -258,7 +255,7 @@
 								class="w-full py-2 px-5 flex justify-between text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {}}
 							>
-								<span>Frost (soon)</span>
+								<span>Frost (disabled temporarily)</span>
 								<div class="ml-3">
 									<span class="h-4 w-4 inline-block bg-gray-800" />
 									<span class="h-4 w-4 inline-block bg-sky-900" />

@@ -42,12 +42,12 @@
 			console.log('tab');
 			resetButton.focus();
 			// resetTest();
-			// setGameState('waiting');
+			setGameState('waiting');
 		}
 	}
 	onMount(() => {
 		document.addEventListener('keydown', myfunction);
-		setGameState('waiting');
+		// setGameState('waiting');
 
 		return () => document.removeEventListener('keydown', myfunction);
 	});
@@ -76,126 +76,128 @@
 	// $: raw = $timeDataArr.at(-1)!.raw;
 </script>
 
-<div class={`mt-10 ${textVar.unhighlighted} justify-between flex w-full`}>
-	<div class="flex flex-col">
-		<div class="w-fit">
-			<p class="text-2xl">wpm</p>
-			<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>{wpm}</h1>
+{#if $game === 'finished'}
+	<div class={`mt-10 ${textVar.unhighlighted} justify-between flex w-full`}>
+		<div class="flex flex-col">
+			<div class="w-fit">
+				<p class="text-2xl">wpm</p>
+				<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>{wpm}</h1>
+			</div>
+			<div class="mt-2 mr-10">
+				<p class="text-2xl">acc</p>
+				<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>100%</h1>
+			</div>
 		</div>
-		<div class="mt-2 mr-10">
-			<p class="text-2xl">acc</p>
-			<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>100%</h1>
-		</div>
-	</div>
-	<div class="w-full">
-		<Graph />
-	</div>
-</div>
-<div class={`mt-10 justify-between flex w-full ${textVar.unhighlighted}`}>
-	<div>
-		<h1>test type</h1>
-		<div class={`${textVar['accent-main']} mt-2  text-base font-semibold`}>
-			{#if $newTextConfig.time.isHighlighted}
-				<p>time {$newTextConfig.time.value}</p>
-			{:else if $newTextConfig.words.isHighlighted}
-				<p>words {$newTextConfig.words.value}</p>
-			{:else}
-				<p>random quotes</p>
-			{/if}
-			<p>{$newTextConfig.language.value}</p>
-			<p>no punctuations</p>
-			<p>no numbers</p>
+		<div class="w-full">
+			<Graph />
 		</div>
 	</div>
-	<div>
-		<h1>raw</h1>
-		<div class={`${textVar['accent-main']} mt-2  text-sm`}>
-			<p class="text-3xl">{avgRaw}</p>
+	<div class={`mt-10 justify-between flex w-full ${textVar.unhighlighted}`}>
+		<div>
+			<h1>test type</h1>
+			<div class={`${textVar['accent-main']} mt-2  text-base font-semibold`}>
+				{#if $newTextConfig.time.isHighlighted}
+					<p>time {$newTextConfig.time.value}</p>
+				{:else if $newTextConfig.words.isHighlighted}
+					<p>words {$newTextConfig.words.value}</p>
+				{:else}
+					<p>random quotes</p>
+				{/if}
+				<p>{$newTextConfig.language.value}</p>
+				<p>no punctuations</p>
+				<p>no numbers</p>
+			</div>
+		</div>
+		<div>
+			<h1>raw</h1>
+			<div class={`${textVar['accent-main']} mt-2  text-sm`}>
+				<p class="text-3xl">{avgRaw}</p>
+			</div>
+		</div>
+		<div>
+			<h1>characters</h1>
+			<div class={`${textVar['accent-main']} mt-2  text-sm`}>
+				<p class="text-3xl">{$wordsArr.length * 4}/0/0</p>
+			</div>
+		</div>
+		<div>
+			<h1>wpm standard deviation</h1>
+			<div class={`${textVar['accent-main']} mt-2 text-sm`}>
+				<p class="text-3xl">{standardDeviation}</p>
+			</div>
+		</div>
+		<div>
+			<h1>session</h1>
+			<div class={`${textVar['accent-main']} mt-2  text-sm`}>
+				<p class="text-3xl">{$timeDataArr.at(-1)?.time} s</p>
+			</div>
 		</div>
 	</div>
-	<div>
-		<h1>characters</h1>
-		<div class={`${textVar['accent-main']} mt-2  text-sm`}>
-			<p class="text-3xl">200/0/1</p>
-		</div>
-	</div>
-	<div>
-		<h1>wpm standard deviation</h1>
-		<div class={`${textVar['accent-main']} mt-2 text-sm`}>
-			<p class="text-3xl">{standardDeviation}</p>
-		</div>
-	</div>
-	<div>
-		<h1>session</h1>
-		<div class={`${textVar['accent-main']} mt-2  text-sm`}>
-			<p class="text-3xl">{$timeDataArr.at(-1)?.time} s</p>
-		</div>
-	</div>
-</div>
-<!-- {#if $game === 'finished'} -->
-<!-- <p class="my-16 text-2xl text-dark-forest-accent-main" in:fade={{}}>
+
+	<!-- <p class="my-16 text-2xl text-dark-forest-accent-main" in:fade={{}}>
 		wpm: {wpm}
 		<br />
 		raw: {raw}
 	</p> -->
 
-<!-- svelte-ignore a11y-positive-tabindex -->
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<a
-	class="z-50 block mx-auto my-5 w-fit"
-	type="button"
-	href="/"
-	bind:this={resetButton}
-	on:click={async (e) => {
-		// console.log('click')
-		e.preventDefault();
-		resetTest();
-		document.removeEventListener('keydown', myfunction);
-		await goto('/');
-	}}
->
-	<ResetSvg
-		variant={{
-			highlighted: `focus:${textVar.highlighted}`,
-			unhighlighted: textVar.unhighlighted
-		}}
-	/>
-</a>
-
-<div class="flex items-center text-dark-forest-unhighlighted">
-	<h1 class="text-white">input history</h1>
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<button
-		on:click={() => {
-			navigator.clipboard.writeText($wordsArr.join(' '));
+	<!-- svelte-ignore a11y-positive-tabindex -->
+	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+	<a
+		class="z-50 block mx-auto my-5 w-fit"
+		type="button"
+		href="/"
+		bind:this={resetButton}
+		on:click={async (e) => {
+			// console.log('click')
+			e.preventDefault();
+			resetTest();
+			document.removeEventListener('keydown', myfunction);
+			setGameState('waiting');
+			await goto('/');
 		}}
 	>
-		<ClipboardSvg variant="w-5 h-5 ml-2" />
-	</button>
-	<FireSvg variant="w-5 h-5 ml-2" />
-	<div class="flex text-xs leading-none text-black font-semibold rounded-lg ml-2">
-		<span class="px-2 py-1 pt-1.5 rounded-l bg-dark-forest-accent-error">0-30</span>
-		<span class={`px-2 py-1 pt-1.5 bg-[#DBA9A1]`}>30-60</span>
-		<span class="px-2 py-1 pt-1.5 bg-white">60-90</span>
-		<span class="px-2 py-1 pt-1.5 bg-[#CFE4C6]">90-120</span>
-		<span class="px-2 py-1 pt-1.5 rounded-r bg-dark-forest-accent-main">120+</span>
+		<ResetSvg
+			variant={{
+				highlighted: `focus:${textVar.highlighted}`,
+				unhighlighted: textVar.unhighlighted
+			}}
+		/>
+	</a>
+
+	<div class="flex items-center text-dark-forest-unhighlighted">
+		<h1 class="text-white">input history</h1>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<button
+			on:click={() => {
+				navigator.clipboard.writeText($wordsArr.join(' '));
+			}}
+		>
+			<ClipboardSvg variant="w-5 h-5 ml-2" />
+		</button>
+		<FireSvg variant="w-5 h-5 ml-2" />
+		<div class="flex text-xs leading-none text-black font-semibold rounded-lg ml-2">
+			<span class="px-2 py-1 pt-1.5 rounded-l bg-dark-forest-accent-error">0-30</span>
+			<span class={`px-2 py-1 pt-1.5 bg-[#DBA9A1]`}>30-60</span>
+			<span class="px-2 py-1 pt-1.5 bg-white">60-90</span>
+			<span class="px-2 py-1 pt-1.5 bg-[#CFE4C6]">90-120</span>
+			<span class="px-2 py-1 pt-1.5 rounded-r bg-dark-forest-accent-main">120+</span>
+		</div>
 	</div>
-</div>
-<!-- <div class={`text-white mt-2`}>
+	<!-- <div class={`text-white mt-2`}>
 		{#each $wordsArr.slice(0, $GlobalWordsDataArr.length) as word}
 			<span class={`mr-2`}>
 				{word}
 			</span>
 		{/each}
 	</div> -->
-<div class={`text-white mt-2`}>
-	{#each inputHistory.slice(0, inputHistory.length) as ele}
-		<span class={`mr-2 ${ele.style}`} title={`wpm: ${ele.wpm}`}>
-			{ele.word}
-		</span>
-	{/each}
-</div>
-<!-- <p class="text-white">{$wordsArr}</p> -->
-<!-- {:else} -->
-<!-- <p class={`my-16 text-3xl ${textVar['accent-error']}`}></p> -->
-<!-- {/if} -->
+	<div class={`text-white mt-2`}>
+		{#each inputHistory.slice(0, inputHistory.length) as ele}
+			<span class={`mr-2 ${ele.style}`} title={`wpm: ${ele.wpm}`}>
+				{ele.word}
+			</span>
+		{/each}
+	</div>
+	<!-- <p class="text-white">{$wordsArr}</p> -->
+{:else}
+	<p class={`my-16 text-3xl ${textVar['accent-error']}`} />
+{/if}

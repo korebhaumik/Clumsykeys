@@ -482,7 +482,7 @@
 </script>
 
 <!-- <p class={'text-white'}>{tempSpace}</p> -->
-<section class="relative">
+<section class="hidden sm:block relative">
 	<!-- svelte-ignore a11y-positive-tabindex -->
 	<!-- svelte-ignore a11y-autofocus -->
 	<input
@@ -537,7 +537,9 @@
 		/>
 	{/if}
 </section>
-
+<section class="text-xl text-dark-forest-highlighted sm:hidden">
+	Support for mobile devices is coming soon!
+</section>
 <span
 	bind:this={resetEl}
 	class="block mx-auto mt-5 w-fit"
