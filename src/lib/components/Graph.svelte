@@ -12,8 +12,10 @@
 	const colorVar = {
 		unhighlighted: '#848887',
 		['accent-error']: '#A95406',
-		['accent-main']: '#9BCD86'
+		['accent-main']: '#9BCD86',
+		// ['accent-main']: '#000000'
 	};
+
 	$: {
 		if ($theme === 'dark-forest') {
 			colorVar.unhighlighted = '#848887';
@@ -24,7 +26,7 @@
 		if ($theme === 'cardboard') {
 			colorVar.unhighlighted = '#989481';
 			colorVar['accent-error'] = '#A95406';
-			colorVar['accent-main'] = '#000';
+			colorVar['accent-main'] = '#000000';
 		}
 	}
 	const data: ChartData = {

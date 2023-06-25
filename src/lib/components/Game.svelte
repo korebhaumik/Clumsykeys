@@ -408,7 +408,6 @@
 				populateWords();
 			}
 			// logDataPerWord();
-			tempSpace = e.key;
 			if (e.code === 'Space') {
 				const isLastLetter = $wordIndex + 1 >= $wordsArr.length;
 				if (letterIndex === 0) return;
@@ -473,7 +472,7 @@
 	let resetEl: HTMLElement;
 </script>
 
-<p class={'text-white'}>{tempSpace}</p>
+<!-- <p class={'text-white'}>{tempSpace}</p> -->
 <section class="relative">
 	<!-- svelte-ignore a11y-positive-tabindex -->
 	<!-- svelte-ignore a11y-autofocus -->

@@ -103,7 +103,7 @@
 
 		<!-- Menu -->
 		<div class="justify-between hidden ml-7 mb-1 sm:flex w-40">
-			<a href="/">
+			<a href="/" data-sveltekit-preload-code>
 				<KeyboardSvg variant={textVar['accent-red']} />
 			</a>
 			<a href="/leaderboards">

@@ -4,42 +4,63 @@
 	import { browser } from '$app/environment';
 	import { theme } from '$lib/components/store';
 	import { goto } from '$app/navigation';
-	let k = '';
-	// $: {
-	// 	if ($theme === 'cardboard') {
-	// 		k = 'bg-cardboard-primary';
-	// 		if (browser) document.body.style.backgroundColor = '#EDEBE3';
-	// 	}
 
-	// 	if ($theme === 'dark-forest') {
-	// 		k = 'bg-dark-forest-primary';
-	// 		if (browser) document.body.style.backgroundColor = 'black';
-	// 	}
-	// 	console.log(k);
-	// }
+	const textVar = {
+		highlighted: 'text-dark-forest-highlighted',
+		['accent-main']: 'text-dark-forest-accent-main',
+		unhighlighted: 'text-dark-forest-unhighlighted',
+		['accent-error']: 'text-dark-forest-accent-error'
+	};
 
+	const bgVar = {
+		['accent-error']: 'bg-dark-forest-accent-error'
+	};
+
+	$: {
+		if ($theme === 'cardboard') {
+			textVar['accent-error'] = 'text-cardboard-accent-error';
+			textVar.highlighted = 'text-cardboard-highlighted';
+			textVar.unhighlighted = 'text-cardboard-unhighlighted';
+			textVar['accent-main'] = 'text-cardboard-accent-main';
+			bgVar['accent-error'] = 'bg-cardboard-accent-error';
+
+			// if (browser) document.body.style.backgroundColor = '#EDEBE3';
+		}
+
+		if ($theme === 'dark-forest') {
+			textVar['accent-error'] = 'text-dark-forest-accent-error';
+			textVar.highlighted = 'text-dark-forest-highlighted';
+			textVar.unhighlighted = 'text-dark-forest-unhighlighted';
+			textVar['accent-main'] = 'text-dark-forest-accent-main';
+			bgVar['accent-error'] = 'bg-dark-forest-accent-error';
+			// if (browser) document.body.style.backgroundColor = 'black';
+		}
+		// console.log(k);
+	}
 </script>
 
-<div class="flex" in:fade={{ duration: 100 }}>
+<div class={`flex ${textVar.highlighted}`} in:fade={{ duration: 100 }}>
 	<img src={img} alt="monkey-sad" class="h-72" />
 	<!-- {#if img} -->
-		<section>
-			<p class="font-bold">404</p>
-			<h1 class="mt-2 text-2xl text-cardboard-accent-error">Page not found</h1>
-			<p class="mt-2 text-cardboard-500">Sorry, we couldn't find the page you were looking for.</p>
-			<div class="flex">
-				<button
-					on:click={() => goto('/')}
-					class="block px-4 py-3 mt-2 font-medium text-sm rounded w-fit text-cardboard-100 bg-cardboard-900"
-					>Go back home</button
-				>
-				<a
-					href="/"
-					class="block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border border-cardboard-900 text-cardboard-900"
-					>Contact support</a
-				>
-			</div>
-		</section>
+	<section>
+		<p class="font-bold">404</p>
+		<h1 class={`${textVar['accent-error']} mt-2 text-2xl`}>Page not found</h1>
+		<p class={`mt-2 ${textVar.highlighted}`}>
+			Sorry, we couldn't find the page you were looking for.
+		</p>
+		<div class="flex">
+			<button
+				on:click={() => goto('/')}
+				class={`block px-4 py-3 mt-2 font-medium text-sm rounded w-fit ${bgVar['accent-error']} ${textVar.highlighted}`}
+				>Go back home</button
+			>
+			<a
+				href="/"
+				class="block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border"
+				>Contact support</a
+			>
+		</div>
+	</section>
 	<!-- {/if} -->
 </div>
 
