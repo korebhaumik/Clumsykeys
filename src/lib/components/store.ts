@@ -125,7 +125,7 @@ export const timeDataArr = writable([
 		rawChars: 0,
 		incorrectChars: 0,
 		wpm: 0,
-		raw: -1
+		raw: 0,
 	}
 ] as timeDataType[]);
 
@@ -149,14 +149,22 @@ export function createTimer() {
 				const sum = tempArr.reduce((total, num) => total + num, 0);
 				timeLog!.wpm = Math.floor(sum / tempArr.length);
 				console.log(timeLog!.wpm);
+
+				temp = (timeLog!.rawChars / 5) * 60;
+				timeLog!.raw = Math.floor((temp + prev.at(- 2)!.raw) / 2);
 			} else {
 				let temp = (timeLog!.correctChars / 5) * 60;
 				tempArr.push(temp);
 				timeLog!.wpm = Math.floor(temp);
 				console.log(timeLog!.wpm);
+
+				temp = (timeLog!.rawChars / 5) * 60;
+				timeLog!.raw = temp;
 			}
 			// prev.pop();
 			prev.at(-1)!.wpm = timeLog!.wpm;
+
+			prev.at(-1)!.raw = timeLog!.raw;
 			return [...prev];
 		});
 

@@ -176,6 +176,7 @@
 
 	$: {
 		if ($count === $TimerCount) {
+			// goto('/')
 			setGameState('finished');
 		}
 		if ($wordIndex === $WordCount) {
@@ -186,9 +187,7 @@
 	$: {
 		if ($game === 'finished') {
 			// console.log(count);
-
 			console.log(letterIndex, wordIndex);
-			const tempArr: number[] = [];
 			clearInterval(intervalId as number);
 			timeDataArr.update((prev) => {
 				prev.pop();
@@ -224,6 +223,7 @@
 			// });
 			console.log(wordsDataArr);
 			console.log($timeDataArr);
+			// window.location.href = '/result';
 			(async () => {
 				await goto('/result');
 			})();
@@ -247,7 +247,7 @@
 		if ($wordIndex === $wordsArr.length - 1 && letterIndex === $wordsArr[$wordIndex].length - 1) {
 			wordsDataArr[$wordIndex].wpm = 60000 / (Date.now() - wordsDataArr[$wordIndex].startTime);
 			setGameState('finished');
-			goto('/result');
+			// goto('/result');
 			return;
 		}
 		if ($game === 'playing') {
@@ -350,6 +350,7 @@
 		typedLetter = '';
 	};
 
+	let tempSpace = 0;
 	const handleKeydown = (e: KeyboardEvent) => {
 		if (e.code === 'Space') {
 			e.preventDefault();
@@ -408,6 +409,7 @@
 			}
 			// logDataPerWord();
 			if (e.code === 'Space') {
+				tempSpace += 1;
 				const isLastLetter = $wordIndex + 1 >= $wordsArr.length;
 				if (letterIndex === 0) return;
 				if (!isLastLetter) {
@@ -471,6 +473,7 @@
 	let resetEl: HTMLElement;
 </script>
 
+<p class={'text-white'}>{tempSpace}</p>
 <section class="relative">
 	<!-- svelte-ignore a11y-positive-tabindex -->
 	<!-- svelte-ignore a11y-autofocus -->

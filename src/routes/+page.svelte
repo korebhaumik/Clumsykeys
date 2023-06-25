@@ -19,6 +19,7 @@
 	};
 	let k = 'opacity-100';
 	let opac = 'opacity-0';
+	let gameOpac = 'opacity-100';
 	$: {
 		if ($theme === 'dark-forest') {
 			textVar.highlighted = 'text-dark-forest-highlighted';
@@ -32,6 +33,7 @@
 		}
 		if ($game === 'waiting') {
 			k = 'opacity-100';
+			gameOpac = 'opacity-100';
 		}
 		if ($game === 'playing') {
 			k = 'opacity-0';
@@ -40,6 +42,9 @@
 		if ($game != 'playing') {
 			k = 'opacity-100';
 			opac = 'opacity-0';
+		}
+		if ($game === 'finished') {
+			gameOpac = 'opacity-0';
 		}
 	}
 	let remaining = -1;
@@ -67,9 +72,9 @@
 </script>
 
 <!-- <h1>Hello World</h1> -->
-{#if $game != 'finished'}
+<!-- {#if $game != 'finished'} -->
 	<section
-		class="absolute -translate-y-1/2 big:max-w-6xl right-5 left-5 sm:right-10 sm:left-10 big:mx-auto top-[calc(50%-3%)]"
+		class={`absolute -translate-y-1/2 big:max-w-6xl right-5 left-5 sm:right-10 sm:left-10 big:mx-auto top-[calc(50%-3%)] ${gameOpac} transition`}
 	>
 		<!-- Test Details Configuration Bar -->
 		<div class={`${k} transition`}>
@@ -94,4 +99,4 @@
 			<Game />
 		</div>
 	</section>
-{/if}
+<!-- {/if} -->
