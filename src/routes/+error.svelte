@@ -40,7 +40,7 @@
 </script>
 
 <div class={`flex ${textVar.highlighted}`} in:fade={{ duration: 100 }}>
-	<img src={img} alt="monkey-sad" class="h-72" />
+	<img src={img} alt="monkey-sad" class="h-72 aspect-[9/10]" />
 	<!-- {#if img} -->
 	<section>
 		<p class="font-bold">404</p>
