@@ -40,7 +40,7 @@
 </script>
 
 <div class={`absolute flex  w-full items-center -translate-y-1/2 big:max-w-6xl right-5 left-5 sm:right-10 sm:left-10 big:mx-auto top-[calc(50%-3%)]`} in:fade={{ duration: 100, delay: 400 }}>
-	<img src={img} alt="monkey-sad" class="h-72 w-fit block" />
+	<img src={img} alt="monkey-sad" class="h-72 aspect-[9/10] w-fit block" />
 	<!-- {#if img} -->
 	<div class="text-dark-forest-highlighted ml-10">
 		<p class="font-bold">404</p>
