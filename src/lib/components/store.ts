@@ -194,7 +194,7 @@ export function createTimer() {
 
 export const incorrectCharCount = writable(0 as number);
 export const charCount = writable(0 as number);
-export const testStatus = writable(false as boolean);
+export const testStatus = writable("protected" as "protected" | "valid" | "invalid");
 
 export function resetTest() {
 	// TimerCount.set(-1);
@@ -204,6 +204,8 @@ export function resetTest() {
 	tempCount = 0;
 	tempArr = [];
 	GlobalWordsDataArr.set([]);
+	charCount.set(0);
+	incorrectCharCount.set(0);
 	// timeDataArr.update(prev => [
 	// 	{
 	// 		time: 1,

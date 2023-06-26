@@ -143,7 +143,12 @@
 
 	$: {
 		if ($game === 'finished') {
-			testStatus.set(true);
+			const accuracy = Math.floor((($charCount - $incorrectCharCount) * 100) / $charCount);
+			if (accuracy < 30) {
+				testStatus.set('invalid');
+			} else {
+				testStatus.set('valid');
+			}
 			console.log($count);
 			(async () => {
 				// console.log(letterIndex, wordIndex);
@@ -402,7 +407,6 @@
 
 	$: isBlur = false;
 	let resetEl: HTMLElement;
-	
 </script>
 
 <!-- <p class={'text-white'}>{tempSpace}</p> -->

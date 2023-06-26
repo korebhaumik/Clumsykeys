@@ -26,6 +26,9 @@
 		['accent-main']: 'text-dark-forest-accent-main',
 		['accent-error']: 'text-dark-forest-accent-error'
 	};
+	const bgVar = {
+		'accent-error': 'bg-dark-forest-accent-error'
+	};
 	$: {
 		if ($theme === 'dark-forest') {
 			textVar.unhighlighted = 'text-dark-forest-unhighlighted';
@@ -83,7 +86,7 @@
 	const accuracy = Math.floor((($charCount - $incorrectCharCount) * 100) / $charCount);
 </script>
 
-{#if $testStatus}
+{#if $testStatus === 'valid'}
 	<div class={`mt-10 ${textVar.unhighlighted} justify-between flex w-full`}>
 		<div class="flex flex-col">
 			<div class="w-fit">
@@ -159,7 +162,7 @@
 		bind:this={resetButton}
 		on:click={async (e) => {
 			// console.log('click')
-			testStatus.set(false);
+			testStatus.set('protected');
 			e.preventDefault();
 			resetTest();
 			document.removeEventListener('keydown', myfunction);
@@ -209,6 +212,52 @@
 		{/each}
 	</div>
 	<!-- <p class="text-white">{$wordsArr}</p> -->
-	{:else}
-	<p class={`my-16 text-3xl ${textVar['accent-error']}`}>Protected route fuck off</p>
+{:else if $testStatus === 'invalid'}
+	<div class="text-dark-forest-highlighted my-10">
+		<p class="font-bold">: (</p>
+		<h1 class={`${textVar['accent-error']} mt-2 text-2xl`}>Invalid Test</h1>
+		<p class={`mt-2 ${textVar.highlighted}`}>Reason: Your accuracy is beyond the threshold of 30%</p>
+		<div class="flex">
+			<button
+				on:click={async (e) => {
+					// console.log('click')
+					testStatus.set('protected');
+					e.preventDefault();
+					resetTest();
+					document.removeEventListener('keydown', myfunction);
+					setGameState('waiting');
+					await goto('/');
+				}}
+				class={`block px-4 py-3 mt-2 font-medium text-sm rounded w-fit ${bgVar['accent-error']} ${textVar.highlighted}`}
+				>Restart Test</button
+			>
+			<a href="/" class="block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border"
+				>Contact support</a
+			>
+		</div>
+	</div>
+{:else}
+<div class="text-dark-forest-highlighted my-10">
+	<p class="font-bold">: (</p>
+	<h1 class={`${textVar['accent-error']} mt-2 text-2xl`}>Protected Route</h1>
+	<p class={`mt-2 ${textVar.highlighted}`}> You cannot access this route without attempting the test!</p>
+	<div class="flex">
+		<button
+			on:click={async (e) => {
+				// console.log('click')
+				testStatus.set('protected');
+				e.preventDefault();
+				resetTest();
+				document.removeEventListener('keydown', myfunction);
+				setGameState('waiting');
+				await goto('/');
+			}}
+			class={`block px-4 py-3 mt-2 font-medium text-sm rounded w-fit ${bgVar['accent-error']} ${textVar.highlighted}`}
+			>Restart Test</button
+		>
+		<a href="/" class="block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border"
+			>Contact support</a
+		>
+	</div>
+</div>
 {/if}
