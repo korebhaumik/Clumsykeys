@@ -188,9 +188,9 @@
 
 	$: {
 		if ($game === 'finished') {
-			// console.log(count);
+			console.log($count);
 			(async () => {
-				console.log(letterIndex, wordIndex);
+				// console.log(letterIndex, wordIndex);
 				clearInterval(intervalId as number);
 				timeDataArr.update((prev) => {
 					prev.pop();
