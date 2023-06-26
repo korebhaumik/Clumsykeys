@@ -221,7 +221,7 @@
 			<button
 				on:click={async (e) => {
 					// console.log('click')
-					testStatus.set('protected');
+					// testStatus.set('protected');
 					e.preventDefault();
 					resetTest();
 					document.removeEventListener('keydown', myfunction);
@@ -245,7 +245,7 @@
 		<button
 			on:click={async (e) => {
 				// console.log('click')
-				testStatus.set('protected');
+				// testStatus.set('protected');
 				e.preventDefault();
 				resetTest();
 				document.removeEventListener('keydown', myfunction);

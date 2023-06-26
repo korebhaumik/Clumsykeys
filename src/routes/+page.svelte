@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Game from '$lib/components/Game.svelte';
 	import TestConfigBar from '$lib/components/TestConfigBar.svelte';
-	import {page} from '$app/stores';
+	import { page } from '$app/stores';
 	import {
 		theme,
 		game,
@@ -12,7 +12,7 @@
 		timeDataArr,
 		isTimer
 	} from '$lib/components/store';
-	import {charCount, incorrectCharCount} from '$lib/components/store';
+	import { charCount, incorrectCharCount } from '$lib/components/store';
 
 	const textVar = {
 		unhighlighted: 'text-dark-forest-unhighlighted',
@@ -71,7 +71,7 @@
 		remaining -= $count;
 		// console.log($isTimer);
 	}
-	$: accuracy = Math.floor((($charCount - $incorrectCharCount) * 100) / $charCount) ?? 0;
+	$: accuracy = $charCount === 0 ? 100 : Math.floor((($charCount - $incorrectCharCount) * 100) / $charCount);
 </script>
 
 <!-- <h1>Hello World</h1> -->
