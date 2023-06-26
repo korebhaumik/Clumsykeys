@@ -2,13 +2,17 @@
 	import { resetTest, setGameState } from '$lib/components/store';
 	import { fade } from 'svelte/transition';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
+	import { page } from '$app/stores';
 	import {
 		theme,
 		timeDataArr,
 		game,
 		newTextConfig,
 		wordsArr,
-		GlobalWordsDataArr
+		GlobalWordsDataArr,
+		incorrectCharCount,
+		charCount,
+		testStatus
 	} from '$lib/components/store';
 	import { onMount } from 'svelte';
 	import Graph from '$lib/components/Graph.svelte';
@@ -46,6 +50,7 @@
 		}
 	}
 	onMount(() => {
+		console.log($page.data.status);
 		document.addEventListener('keydown', myfunction);
 		setGameState('waiting');
 
@@ -60,6 +65,7 @@
 			return { word: $wordsArr[index], wpm: ele, style: 'text-dark-forest-accent-error' };
 		if (ele < 60) return { word: $wordsArr[index], wpm: ele, style: 'text-[#DBA9A1]' };
 		if (ele < 90) return { word: $wordsArr[index], wpm: ele, style: 'text-white' };
+		if (ele < 120) return { word: $wordsArr[index], wpm: ele, style: 'text-[#CFE4C6]' };
 		return { word: $wordsArr[index], wpm: ele, style: 'text-dark-forest-accent-main' };
 	});
 
@@ -74,9 +80,10 @@
 
 	// console.log(standardDeviation); // Output: 1.5811388300841898
 	// $: raw = $timeDataArr.at(-1)!.raw;
+	const accuracy = Math.floor((($charCount - $incorrectCharCount) * 100) / $charCount);
 </script>
 
-<!-- {#if $game === 'finished'} -->
+{#if $testStatus}
 	<div class={`mt-10 ${textVar.unhighlighted} justify-between flex w-full`}>
 		<div class="flex flex-col">
 			<div class="w-fit">
@@ -85,7 +92,9 @@
 			</div>
 			<div class="mt-2 mr-10">
 				<p class="text-2xl">acc</p>
-				<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>100%</h1>
+				<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>
+					{accuracy}%
+				</h1>
 			</div>
 		</div>
 		<div class="w-full">
@@ -117,7 +126,8 @@
 		<div>
 			<h1>characters</h1>
 			<div class={`${textVar['accent-main']} mt-2  text-sm`}>
-				<p class="text-3xl">{inputHistory.length * 4}/0/0</p>
+				<!-- <p class="text-3xl">{inputHistory.length * 4}/0/0</p> -->
+				<p class="text-3xl">{$charCount}/{$incorrectCharCount}/0</p>
 			</div>
 		</div>
 		<div>
@@ -149,6 +159,7 @@
 		bind:this={resetButton}
 		on:click={async (e) => {
 			// console.log('click')
+			testStatus.set(false);
 			e.preventDefault();
 			resetTest();
 			document.removeEventListener('keydown', myfunction);
@@ -198,6 +209,6 @@
 		{/each}
 	</div>
 	<!-- <p class="text-white">{$wordsArr}</p> -->
-<!-- {:else} -->
-	<!-- <p class={`my-16 text-3xl ${textVar['accent-error']}`}>Protected route fuck off</p> -->
-<!-- {/if} -->
+	{:else}
+	<p class={`my-16 text-3xl ${textVar['accent-error']}`}>Protected route fuck off</p>
+{/if}

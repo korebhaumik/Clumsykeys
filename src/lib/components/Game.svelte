@@ -2,9 +2,10 @@
 	import { goto } from '$app/navigation';
 	import { blur, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	import { theme } from './store';
+	import { charCount, theme } from './store';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
-	import { game, setGameState } from './store';
+	import { game, setGameState, incorrectCharCount, testStatus } from './store';
+	import { page } from '$app/stores';
 	import {
 		createTimer,
 		resetTest,
@@ -71,7 +72,6 @@
 	// 	'call go seem problem seem as such program any like against may from this over other fact time which problem see feel which. call go seem problem seem as such program any like against may from this over other fact time which problem see feel which. call go seem problem seem as such program any like against may from this over other fact time which problem see feel which'.split(
 	// 		' '
 	// 	);
-
 	interface wordsDataType {
 		correctChars: number;
 		wpm: number;
@@ -143,6 +143,7 @@
 
 	$: {
 		if ($game === 'finished') {
+			testStatus.set(true);
 			console.log($count);
 			(async () => {
 				// console.log(letterIndex, wordIndex);
@@ -164,7 +165,7 @@
 				caretEl.style.left = '0px';
 				caretEl.style.top = '3px';
 				typedLetter = '';
-				
+
 				await goto('/result');
 			})();
 		}
@@ -234,6 +235,7 @@
 	const checkLetter = () => {
 		if (letterEl.innerHTML === typedLetter) {
 			// console.log('correct');
+			charCount.update((prev) => prev + 1);
 			$timeDataArr.at(-1)!.correctChars += 1;
 			$timeDataArr.at(-1)!.rawChars += 1;
 
@@ -244,6 +246,8 @@
 
 		if (letterEl.innerHTML !== typedLetter) {
 			// console.log('incorrect');
+			incorrectCharCount.update((prev) => prev + 1);
+			charCount.update((prev) => prev + 1);
 			$timeDataArr.at(-1)!.incorrectChars += 1;
 			$timeDataArr.at(-1)!.rawChars += 1;
 
@@ -372,7 +376,6 @@
 	};
 
 	function moveCaret(type: 'backward' | 'forward' | 'space') {
-		
 		caretEl.style.top = `${letterEl.offsetTop - lineH}px`;
 		const H = wordsEl.scrollHeight;
 
@@ -399,6 +402,7 @@
 
 	$: isBlur = false;
 	let resetEl: HTMLElement;
+	
 </script>
 
 <!-- <p class={'text-white'}>{tempSpace}</p> -->
@@ -521,7 +525,6 @@
 		variant={{ highlighted: `focus:${textVar.highlighted}`, unhighlighted: textVar.unhighlighted }}
 	/>
 </span>
-
 
 <style>
 	@keyframes blink {

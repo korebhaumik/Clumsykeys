@@ -192,6 +192,9 @@ export function createTimer() {
 	return intervalId;
 }
 
+export const incorrectCharCount = writable(0 as number);
+export const charCount = writable(0 as number);
+export const testStatus = writable(false as boolean);
 
 export function resetTest() {
 	// TimerCount.set(-1);

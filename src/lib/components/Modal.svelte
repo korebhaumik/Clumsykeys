@@ -94,7 +94,6 @@
 			>
 				<!-- lang -->
 				{#if $modalConfig.content === 'language'}
-					<!-- language -->
 					<div>
 						<div class="flex px-5 pt-4">
 							<LangSvg />
@@ -103,7 +102,7 @@
 						<div class="flex flex-col items-start w-full py-3 text-sm">
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={async() => {
+								on:click={async () => {
 									updateTestConfigLanguage('english');
 									await getWords(100, {
 										lang: 'english',
@@ -116,7 +115,7 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={async() => {
+								on:click={async () => {
 									updateTestConfigLanguage('english 1k');
 									await getWords(1000, {
 										lang: 'english 1k',
@@ -129,7 +128,7 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={async() => {
+								on:click={async () => {
 									updateTestConfigLanguage('english 5k');
 									await getWords(1000, {
 										lang: 'english 5k',
@@ -142,7 +141,7 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={async() => {
+								on:click={async () => {
 									updateTestConfigLanguage('code python');
 									await getWords(100, {
 										lang: 'code python',
@@ -155,7 +154,7 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={async() => {
+								on:click={async () => {
 									updateTestConfigLanguage('code javascript');
 									await getWords(100, {
 										lang: 'code javascript',
@@ -193,7 +192,7 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={async() => {
+								on:click={async () => {
 									updateTestConfigCounter('words', 50);
 									updateModalCounter('words');
 									await getWords(1000, {
@@ -206,7 +205,7 @@
 							>
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={async() => {
+								on:click={async () => {
 									updateTestConfigCounter('quotes', 'Random Quotes');
 									updateModalCounter('quotes');
 									await getWords(100, {
@@ -281,20 +280,22 @@
 								bind:value={tempWordsCount}
 								on:keydown={(e) => {
 									if (e.key === 'Enter') {
-										if (!tempWordsCount) return;
+										if (tempWordsCount < 5) return;
+										if (tempWordsCount > 500) return;
 										updateTestConfigCounter('words', tempWordsCount);
 										updateModalVisibility();
 									}
 								}}
 							/>
 							<p class="px-5 mt-2 text-sm">
-								You can put atmost 500 words. You can later easily change the amount in the settings
-								menu : (cog icon or ctrl/cmd + k > word count)
+								You can put value between 5 and 500 words. You can later easily change the amount in
+								the settings menu : (cog icon or ctrl/cmd + k > word count)
 							</p>
 							<button
 								class={`w-full py-3 mt-2 align-baseline rounded-b ${bgVar.fade}`}
 								on:click={() => {
-									if (!tempWordsCount) return;
+									if (tempWordsCount < 5) return;
+									if (tempWordsCount > 500) return;
 									updateTestConfigCounter('words', tempWordsCount);
 									updateModalVisibility();
 								}}>Enter</button
@@ -318,20 +319,22 @@
 								placeholder="Enter timer count"
 								on:keydown={(e) => {
 									if (e.key === 'Enter') {
-										if (!tempTimeCount) return;
+										if (tempTimeCount < 5) return;
+										if (tempTimeCount > 1000) return;
 										updateTestConfigCounter('time', tempTimeCount);
 										updateModalVisibility();
 									}
 								}}
 							/>
 							<p class="px-5 mt-2 text-sm">
-								You can put atmost 1000 seconds. You can later easily change the amount in the
-								settings menu : (cog icon or ctrl/cmd + k > timer count)
+								You can put a value between 5 and 1000 seconds. You can later easily change the
+								amount in the settings menu : (cog icon or ctrl/cmd + k > timer count)
 							</p>
 							<button
 								class={`w-full py-3 mt-2 align-baseline rounded-b ${bgVar.fade}`}
 								on:click={() => {
-									if (!tempTimeCount) return;
+									if (tempTimeCount < 5) return;
+									if (tempTimeCount > 1000) return;
 									updateTestConfigCounter('time', tempTimeCount);
 									updateModalVisibility();
 								}}>Enter</button
@@ -352,6 +355,10 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigCounter('quotes', 'Random Quotes');
+									getWords(200, {
+										lang: $newTextConfig.language.value,
+										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words'
+									});
 									updateModalVisibility();
 								}}>Random Quotes</button
 							>
@@ -359,6 +366,10 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigCounter('quotes', 'Movie Quotes');
+									getWords(200, {
+										lang: $newTextConfig.language.value,
+										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words'
+									});
 									updateModalVisibility();
 								}}>Movie Quotes</button
 							>
@@ -366,6 +377,10 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
 									updateTestConfigCounter('quotes', 'Famous Quotes');
+									getWords(200, {
+										lang: $newTextConfig.language.value,
+										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words'
+									});
 									updateModalVisibility();
 								}}>Famous Quotes</button
 							>

@@ -6,7 +6,7 @@
 	import SettingsSvg from '$lib/assets/SettingsSVG.svelte';
 	import TimerSvg from '$lib/assets/TimerSVG.svelte';
 	import WrenchSvg from '$lib/assets/WrenchSVG.svelte';
-	import {page} from '$app/stores';
+	import { page } from '$app/stores';
 
 	import {
 		getWords,
@@ -137,6 +137,7 @@
 			updateTestConfigFormat('punctuations');
 			getWords(200, {
 				lang: $newTextConfig.language.value,
+				type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 				isNumber: $newTextConfig.numbers,
 				isPunctuation: $newTextConfig.punctuations
 			});
@@ -154,6 +155,7 @@
 			updateTestConfigFormat('numbers');
 			getWords(200, {
 				lang: $newTextConfig.language.value,
+				type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 				isNumber: $newTextConfig.numbers,
 				isPunctuation: $newTextConfig.punctuations
 			});

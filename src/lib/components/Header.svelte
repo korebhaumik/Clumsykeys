@@ -112,7 +112,7 @@
 			<a href="/">
 				<InfoSvg variant={textVar['accent-yellow']} />
 			</a>
-			<a href="/">
+			<a href="/" >
 				<SettingsSvg variant={textVar['accent-green']} />
 			</a>
 			<!-- <InfoSvg variant={textVar['accent-yellow']}  /> -->

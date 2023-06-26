@@ -12,6 +12,7 @@
 		timeDataArr,
 		isTimer
 	} from '$lib/components/store';
+	import {charCount, incorrectCharCount} from '$lib/components/store';
 
 	const textVar = {
 		unhighlighted: 'text-dark-forest-unhighlighted',
@@ -70,6 +71,7 @@
 		remaining -= $count;
 		// console.log($isTimer);
 	}
+	$: accuracy = Math.floor((($charCount - $incorrectCharCount) * 100) / $charCount) ?? 0;
 </script>
 
 <!-- <h1>Hello World</h1> -->
@@ -90,9 +92,9 @@
 				<span>{$wordIndex + 1}/{$WordCount}</span>
 			{/if}
 			<span class="mx-5">|</span>
-			<span>{speed} wpm</span>
+			<span class="w-10">{speed} wpm</span>
 			<span class="mx-5">|</span>
-			<span>100%</span>
+			<span class="w-10">{accuracy}%</span>
 		</div>
 
 		<!-- Game -->
