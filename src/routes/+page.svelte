@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Game from '$lib/components/Game.svelte';
 	import TestConfigBar from '$lib/components/TestConfigBar.svelte';
+	import {page} from '$app/stores';
 	import {
 		theme,
 		game,
@@ -72,7 +73,7 @@
 </script>
 
 <!-- <h1>Hello World</h1> -->
-<!-- {#if $game != 'finished'} -->
+{#if $page.url.pathname == '/'}
 	<section
 		class={`absolute -translate-y-1/2 big:max-w-6xl right-5 left-5 sm:right-10 sm:left-10 big:mx-auto top-[calc(50%-3%)] ${gameOpac} transition`}
 	>
@@ -99,4 +100,4 @@
 			<Game />
 		</div>
 	</section>
-<!-- {/if} -->
+{/if}

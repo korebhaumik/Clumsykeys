@@ -6,6 +6,7 @@
 	import SettingsSvg from '$lib/assets/SettingsSVG.svelte';
 	import TimerSvg from '$lib/assets/TimerSVG.svelte';
 	import WrenchSvg from '$lib/assets/WrenchSVG.svelte';
+	import {page} from '$app/stores';
 
 	import {
 		getWords,
@@ -118,6 +119,7 @@
 </script>
 
 <!-- 972 -->
+<!-- {#if $page.url.pathname === '/'} -->
 <main
 	class={`flex font-semibold px-4 hd:hidden ${bgVar.fade}  py-3 w-fit ${textVar.unhighlighted} rounded-lg`}
 >
@@ -356,3 +358,4 @@
 		<span class="ml-1 text-sm">{$newTextConfig.language.value}</span>
 	</div>
 </main>
+<!-- {/if} -->

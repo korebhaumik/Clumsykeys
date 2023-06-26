@@ -59,6 +59,7 @@ export default {
           'accent-yellow': "#B2A45F",
           'accent-error': "#A95406",
           'accent-main': '#9BCD86',
+          // 'accent-main': '#A300A3',
           'command-bg': "#848887",
           'command-text': "#151B1D",
           'credits': "#848887",

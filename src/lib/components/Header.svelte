@@ -106,11 +106,16 @@
 			<a href="/" data-sveltekit-preload-code>
 				<KeyboardSvg variant={textVar['accent-red']} />
 			</a>
-			<a href="/leaderboards">
+			<a href="/leaderboards" data-sveltekit-preload-code >
 				<RocketSvg variant={textVar['accent-purple']} />
 			</a>
-			<InfoSvg variant={textVar['accent-yellow']} />
-			<SettingsSvg variant={textVar['accent-green']} />
+			<a href="/">
+				<InfoSvg variant={textVar['accent-yellow']} />
+			</a>
+			<a href="/">
+				<SettingsSvg variant={textVar['accent-green']} />
+			</a>
+			<!-- <InfoSvg variant={textVar['accent-yellow']}  /> -->
 		</div>
 	</div>
 

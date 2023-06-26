@@ -45,9 +45,6 @@
 	// 	highlighted: 'focus:text-dark-forest-highlighted',
 	// };
 
-	// let k = 'bg-blue-700';
-	let k = 'bg-cardboard-caret';
-
 	$: {
 		if ($theme === 'dark-forest') {
 			textVar.highlighted = 'text-dark-forest-highlighted';
@@ -104,11 +101,6 @@
 	let lineH = 0;
 	let lineNum = 0;
 
-	// async function getWords(limit: number, lang: string) {
-	// 	const response = await fetch(`/api/words?limit=${limit}&lang=${lang}&type=quotes`);
-	// 	wordsArr = await response.json();
-	// }
-
 	onMount(async () => {
 		resetTest();
 		await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 500, {
@@ -119,11 +111,6 @@
 		});
 		inputEl.focus();
 		isBlur = false;
-		// document.addEventListener('keydown', (e) => {
-		// 	if (e.key === 'Tab') {
-		// 		resetEl.focus();
-		// 	}
-		// });
 	});
 
 	interface timeDataType {
@@ -135,39 +122,7 @@
 		raw: number;
 	}
 
-	// let timeDataArr: timeDataType[] = [
-	// 	{
-	// 		time: 1,
-	// 		correctChars: 0,
-	// 		rawChars: 0,
-	// 		incorrectChars: 0,
-	// 		wpm: -1,
-	// 		raw: -1
-	// 	}
-	// ];
-
-	// let TimerCount = -1;
-	// let WordCount = 100;
-	// let count = 0;
 	let intervalId: number | null = null;
-	// $: RemainingTime = TimerCount - count;
-
-	// function createTimer() {
-	// 	const intervalId = setInterval(() => {
-	// 		// console.log(`Count: ${count}`);
-	// 		timeDataArr.push({
-	// 			//Change value of 20
-	// 			time: count === 0 ? 1 : count,
-	// 			correctChars: 0,
-	// 			rawChars: 0,
-	// 			incorrectChars: 0,
-	// 			wpm: -1,
-	// 			raw: -1
-	// 		});
-	// 		count++;
-	// 	}, 1000);
-	// 	return intervalId;
-	// }
 
 	$: {
 		if (letterIndex && intervalId === null) {
@@ -209,32 +164,9 @@
 				caretEl.style.left = '0px';
 				caretEl.style.top = '3px';
 				typedLetter = '';
-				// timeDataArr.update((prev) => {
-				// 	prev.forEach((timeLog, index) => {
-				// 		if (index - 1 >= 0) {
-				// 			let temp = (timeLog.correctChars / 5) * 60;
-				// 			tempArr.push(temp);
-				// 			const sum = tempArr.reduce((total, num) => total + num, 0);
-				// 			timeLog.wpm = Math.floor(sum / tempArr.length);
-				// 			temp = (timeLog.rawChars / 5) * 60;
-				// 			timeLog.raw = Math.floor((temp + prev[index - 1].raw) / 2);
-				// 		} else {
-				// 			let temp = (timeLog.correctChars / 5) * 60;
-				// 			tempArr.push(temp);
-				// 			timeLog.wpm = Math.floor(temp);
-				// 			temp = (timeLog.rawChars / 5) * 60;
-				// 			timeLog.raw = temp;
-				// 		}
-				// 	});
-				// 	prev.pop();
-				// 	return prev;
-				// });
-				// console.log($GlobalWordsDataArr);
-				// console.log($timeDataArr);
-				// window.location.href = '/result';
+				
 				await goto('/result');
 			})();
-			// goto('/result');
 		}
 	}
 
@@ -308,8 +240,6 @@
 			wordsDataArr.at($wordIndex)!.correctChars += 1;
 			wordsDataArr.at($wordIndex)!.rawChars += 1;
 			letterEl.className = textVar.highlighted;
-			// letterEl.style.color = 'white';
-			// letterEl.style.textDecoration = 'underline';
 		}
 
 		if (letterEl.innerHTML !== typedLetter) {
@@ -442,18 +372,9 @@
 	};
 
 	function moveCaret(type: 'backward' | 'forward' | 'space') {
-		// if (wordY > wordsY) {
-		// 	caretEl.style.top = `${wordY + 100}px`;
-		// 	wordEl.scrollIntoView({ block: 'center' });
-		// }
+		
 		caretEl.style.top = `${letterEl.offsetTop - lineH}px`;
-
-		// console.log(lineNum)
-
-		// const H = wordsEl.getBoundingClientRect().height;
 		const H = wordsEl.scrollHeight;
-
-		// console.log(H/28, lineNum)
 
 		if (type === 'forward') {
 			caretEl.style.left = `${letterEl.offsetLeft + letterEl.offsetWidth}px`;
@@ -601,13 +522,6 @@
 	/>
 </span>
 
-<!-- class="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" -->
-<!-- class="absolute w-full text-center -translate-x-1/2 -translate-y-1/2 backdrop-blur-sm top-1/2 left-1/2 h-28" -->
-
-<!-- input on focus -->
-<!-- on:focus={() => {
-	caretEl.className = 'transition-all absolute bg-blue-700 h-5 rounded-full w-0.5 top-[3px]';
-}} -->
 
 <style>
 	@keyframes blink {

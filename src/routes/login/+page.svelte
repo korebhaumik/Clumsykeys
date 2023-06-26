@@ -51,7 +51,7 @@
 <!-- <section class={` ${textVar.highlighted} text-center absolute top-[calc(50%-3%)] -translate-y-1/2 left-1/2 -translate-x-1/2 sm:w-[23rem]`}> -->
 <section
 	class={` ${textVar.highlighted} absolute top-[calc(50%-3%)] -translate-y-1/2 w-[21rem] sm:w-[23rem]`}
-	in:fade={{ delay: 300 }}
+	in:fade={{ delay: 400, duration: 150 }}
 >
 	<h1 class="text-xl">Welcome back</h1>
 	<h2 class={`${textVar.unhighlighted}`}>Enter your email to sign into your account</h2>
