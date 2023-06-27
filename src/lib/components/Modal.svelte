@@ -24,6 +24,7 @@
 	import UserSvg from '$lib/assets/UserSVG.svelte';
 	import RocketSvg from '$lib/assets/RocketSVG.svelte';
 	import { goto } from '$app/navigation';
+	import { text } from '@sveltejs/kit';
 
 	let tempTimeCount: number;
 	let tempWordsCount: number;
@@ -409,7 +410,7 @@
 								<ResetSvg
 									variant={{
 										highlighted: textVar.highlighted,
-										unhighlighted: textVar.unhighlighted
+										unhighlighted: textVar.highlighted
 									}}
 								/>
 								<span class="ml-2">Reset Test</span>
