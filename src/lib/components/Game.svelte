@@ -134,7 +134,8 @@
 
 	$: {
 		if ($count === $TimerCount) {
-			if (wordsDataArr.at(-1)!.rawChars < $wordsArr[$wordIndex].length) wordsDataArr.pop();
+			// if (wordsDataArr.at(-1)!.rawChars < $wordsArr[$wordIndex].length) wordsDataArr.pop();
+			if (wordsDataArr.at(-1)!.endTime === -1) wordsDataArr.pop();
 			setGameState('finished');
 		}
 		if ($wordIndex === $WordCount) {
