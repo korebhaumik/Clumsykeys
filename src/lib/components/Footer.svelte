@@ -6,7 +6,7 @@
 	import LockSvg from '../assets/LockSVG.svelte';
 	import MailSvg from '../assets/MailSVG.svelte';
 	import ShieldSvg from '../assets/ShieldSVG.svelte';
-	import { theme, game } from '$lib/components/store';
+	import { theme, game,testStatus } from '$lib/components/store';
 	import { page } from '$app/stores';
 
 	const bgVar = {
@@ -41,7 +41,7 @@
 
 <div
 	class={`${
-		$page.url.pathname == '/result' ? 'mb-10' : 'absolute'
+		$page.url.pathname == '/result' && $testStatus == 'valid' ? 'mb-10' : 'absolute'
 	} mx-auto mt-10 bottom-10 w-fit big:w-full big:bottom-10 big:max-w-6xl big:mx-auto`}
 >
 	<!-- commands -->

@@ -87,24 +87,24 @@
 </script>
 
 {#if $testStatus === 'valid'}
-	<div class={`mt-10 ${textVar.unhighlighted} justify-between flex w-full`}>
-		<div class="flex flex-col">
+	<div class={`mt-10 ${textVar.unhighlighted} justify-between sm:flex w-full`}>
+		<div class="flex items-center sm:flex-col sm:items-start">
 			<div class="w-fit">
 				<p class="text-2xl">wpm</p>
 				<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>{wpm}</h1>
 			</div>
-			<div class="mt-2 mr-10">
+			<div class="ml-10 sm:ml-0 sm:mt-2 mr-10">
 				<p class="text-2xl">acc</p>
 				<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>
 					{accuracy}%
 				</h1>
 			</div>
 		</div>
-		<div class="w-full">
+		<div class="w-full mt-10 sm:mt-0">
 			<Graph />
 		</div>
 	</div>
-	<div class={`mt-10 justify-between flex w-full ${textVar.unhighlighted}`}>
+	<div class={`mt-10 justify-between flex flex-wrap w-full ${textVar.unhighlighted}`}>
 		<div>
 			<h1>test type</h1>
 			<div class={`${textVar['accent-main']} mt-2  text-base font-semibold`}>
@@ -116,8 +116,8 @@
 					<p>random quotes</p>
 				{/if}
 				<p>{$newTextConfig.language.value}</p>
-				<p>no punctuations</p>
-				<p>no numbers</p>
+				<p>{$newTextConfig.punctuations ? 'punctuations' : 'no punctuations'}</p>
+				<p>{$newTextConfig.numbers ? 'numbers' : 'no numbers'}</p>
 			</div>
 		</div>
 		<div>
@@ -213,10 +213,12 @@
 	</div>
 	<!-- <p class="text-white">{$wordsArr}</p> -->
 {:else if $testStatus === 'invalid'}
-	<div class="text-dark-forest-highlighted my-10">
+	<div class="absolute top-[45%] -translate-y-1/2 text-dark-forest-highlighted">
 		<p class="font-bold">: (</p>
 		<h1 class={`${textVar['accent-error']} mt-2 text-2xl`}>Invalid Test</h1>
-		<p class={`mt-2 ${textVar.highlighted}`}>Reason: Your accuracy is beyond the threshold of 30%</p>
+		<p class={`mt-2 ${textVar.highlighted}`}>
+			Reason: Your accuracy is beyond the threshold of 30%
+		</p>
 		<div class="flex">
 			<button
 				on:click={async (e) => {
@@ -237,27 +239,29 @@
 		</div>
 	</div>
 {:else}
-<div class="text-dark-forest-highlighted my-10">
-	<p class="font-bold">: (</p>
-	<h1 class={`${textVar['accent-error']} mt-2 text-2xl`}>Protected Route</h1>
-	<p class={`mt-2 ${textVar.highlighted}`}> You cannot access this route without attempting the test!</p>
-	<div class="flex">
-		<button
-			on:click={async (e) => {
-				// console.log('click')
-				// testStatus.set('protected');
-				e.preventDefault();
-				resetTest();
-				document.removeEventListener('keydown', myfunction);
-				setGameState('waiting');
-				await goto('/');
-			}}
-			class={`block px-4 py-3 mt-2 font-medium text-sm rounded w-fit ${bgVar['accent-error']} ${textVar.highlighted}`}
-			>Restart Test</button
-		>
-		<a href="/" class="block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border"
-			>Contact support</a
-		>
+	<div class="absolute top-[45%] -translate-y-1/2 text-dark-forest-highlighted">
+		<p class="font-bold">: (</p>
+		<h1 class={`${textVar['accent-error']} mt-2 text-2xl`}>Protected Route</h1>
+		<p class={`mt-2 ${textVar.highlighted}`}>
+			You cannot access this route without attempting the test!
+		</p>
+		<div class="flex">
+			<button
+				on:click={async (e) => {
+					// console.log('click')
+					// testStatus.set('protected');
+					e.preventDefault();
+					resetTest();
+					document.removeEventListener('keydown', myfunction);
+					setGameState('waiting');
+					await goto('/');
+				}}
+				class={`block px-4 py-3 mt-2 font-medium text-sm rounded w-fit ${bgVar['accent-error']} ${textVar.highlighted}`}
+				>Attempt Test</button
+			>
+			<a href="/" class="block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border"
+				>Contact support</a
+			>
+		</div>
 	</div>
-</div>
 {/if}
