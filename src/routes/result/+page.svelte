@@ -19,6 +19,7 @@
 	import { goto } from '$app/navigation';
 	import ClipboardSvg from '$lib/assets/ClipboardSVG.svelte';
 	import FireSvg from '$lib/assets/FireSVG.svelte';
+
 	let resetButton: HTMLAnchorElement;
 	const textVar = {
 		unhighlighted: 'text-dark-forest-unhighlighted',
@@ -156,7 +157,7 @@
 	<!-- svelte-ignore a11y-positive-tabindex -->
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<a
-		class="z-50 block mx-auto my-5 w-fit"
+		class={`z-50 block mx-auto my-5 w-fit text-dark-forest-unhighlighted outline-none border-none `}
 		type="button"
 		href="/"
 		bind:this={resetButton}
@@ -169,11 +170,17 @@
 			setGameState('waiting');
 			await goto('/');
 		}}
+		on:focus={() => {
+			resetButton.style.color = 'white';
+		}}
+		on:blur={() => {
+			resetButton.style.color = 'gray';
+		}}
 	>
 		<ResetSvg
 			variant={{
-				highlighted: `focus:${textVar.highlighted}`,
-				unhighlighted: textVar.unhighlighted
+				highlighted: ``,
+				unhighlighted: ''
 			}}
 		/>
 	</a>
