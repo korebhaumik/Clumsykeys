@@ -104,7 +104,11 @@
 	onMount(async () => {
 		resetTest();
 		testStatus.set('protected');
-		await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 500, {
+		wordsArr.update((prev) => {
+			prev = [];
+			return prev;
+		});
+		await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 200, {
 			lang: $newTextConfig.language.value,
 			type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 			isNumber: $newTextConfig.numbers,
