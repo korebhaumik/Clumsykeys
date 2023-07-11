@@ -8,11 +8,7 @@
 	const notifs = [
 		{
 			type: 'info',
-			message: 'Engine version: 1.0, Node-version: 20.2.0,'
-		},
-		{
-			type: 'warning',
-			message: 'Warning: Accuracy is static 100%, todo new formula.'
+			message: 'Engine version: 1.1, Node-version: 20.2.0,'
 		},
 		{
 			type: 'warning',
@@ -27,10 +23,6 @@
 			message: 'Bug #4 space and backspace glitch on mobile'
 		},
 		{
-			type: 'error',
-			message: 'Bug #12 Result not rendering'
-		},
-		{
 			type: 'info',
 			message: 'New feature: Frost theme'
 		},
@@ -41,10 +33,6 @@
 		{
 			type: 'error',
 			message: 'Bug #13 Accuracy glitch above 130wpm'
-		},
-		{
-			type: 'error',
-			message: 'Bug #14 Wpm glitch by space abuse '
 		},
 		{
 			type: 'warning',
@@ -64,7 +52,7 @@
 		},
 		{
 			type: 'warning',
-			message: 'Warinig: reduce memory footprint.'
+			message: 'Warning: Reduce memory footprint.'
 		}
 	];
 </script>

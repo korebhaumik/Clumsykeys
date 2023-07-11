@@ -38,8 +38,8 @@
 	// };
 
 	const bgVar = {
+		caret: 'bg-dark-forest-caret'
 		// caret: 'bg-cardboard-caret'
-		caret: 'bg-cardboard-caret'
 	};
 
 	// const focusVar = {
@@ -51,9 +51,9 @@
 			textVar.highlighted = 'text-dark-forest-highlighted';
 			textVar['accent-error'] = 'text-dark-forest-accent-error';
 			textVar.unhighlighted = 'text-dark-forest-unhighlighted ';
-			// bgVar.caret = 'bg-dark-forest-caret';
+			bgVar.caret = 'bg-dark-forest-caret';
 			// focusVar.highlighted = 'focus:text-dark-forest-highlighted';
-			bgVar.caret = 'bg-cardboard-caret';
+			// bgVar.caret = 'bg-cardboard-caret';
 		}
 		if ($theme === 'cardboard') {
 			textVar.highlighted = 'text-cardboard-highlighted';
