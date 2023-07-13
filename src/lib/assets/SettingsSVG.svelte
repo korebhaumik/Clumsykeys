@@ -9,10 +9,7 @@
 	viewBox="0 0 24 24"
 	fill="currentColor"
 	class={`w-6 h-6 ${variant}`}
-	on:click={() => {
-		updateModalContent('menu');
-		updateModalVisibility();
-	}}
+	
 >
 	<path
 		fill-rule="evenodd"

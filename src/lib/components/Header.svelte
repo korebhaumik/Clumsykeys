@@ -8,7 +8,7 @@
 	import SettingsSvg from '../assets/SettingsSVG.svelte';
 	import UserSvg from '../assets/UserSVG.svelte';
 	import Sidebar from './Sidebar.svelte';
-	import { theme, game } from './store';
+	import { theme, game, updateModalContent, updateModalVisibility } from './store';
 	// import {textVar, bgVar,} from './store';
 
 	$: isVisible = false;
@@ -106,13 +106,20 @@
 			<a href="/" data-sveltekit-preload-code>
 				<KeyboardSvg variant={textVar['accent-red']} />
 			</a>
-			<a href="/leaderboards" data-sveltekit-preload-code >
+			<a href={$game === 'playing' ? '' : '/leaderboards'} data-sveltekit-preload-code>
 				<RocketSvg variant={textVar['accent-purple']} />
 			</a>
 			<a href="/">
 				<InfoSvg variant={textVar['accent-yellow']} />
 			</a>
-			<a href="/" >
+			<a
+				href="/"
+				on:click={() => {
+					if ($game === 'playing') return;
+					updateModalContent('menu');
+					updateModalVisibility();
+				}}
+			>
 				<SettingsSvg variant={textVar['accent-green']} />
 			</a>
 			<!-- <InfoSvg variant={textVar['accent-yellow']}  /> -->
