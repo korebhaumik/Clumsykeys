@@ -42,12 +42,9 @@
 				sessionStorage.setItem('theme', 'dark-forest');
 			}
 		}
-		// console.log(k);
 	}
 </script>
 
-<!-- <header /> -->
-<!-- <section class="mx-5 sm:mx-10 mt-10 big:max-w-6xl big:mx-auto"> -->
 {#if browser}
 	<section class="px-5 py-0 big:px-0 mt-10 big:max-w-6xl big:mx-auto">
 		<Header />
@@ -57,24 +54,12 @@
 	<Modal />
 {/if}
 
-<!-- <body class={sessionStorage.getItem('theme') ? k : ''} /> -->
 <body class={k} data-content={$theme} />
 
 <style lang="postcss">
-	/* @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap'); */
 	:global(:root) {
-		/* background-color: theme('colors.cardboard.100'); */
 		font-family: 'Comfortaa', sans-serif;
 		font-weight: theme('fontWeight.medium');
 		letter-spacing: 0.2px;
 	}
-	body {
-		/* transition: ease-in-out 0.15s; */
-	}
-	/* [data-content='cardboard'] {
-		background: #963131;
-	} */
-	/* [data-content='dark-forest'] {
-		background-color: #1788ae;
-	} */
 </style>

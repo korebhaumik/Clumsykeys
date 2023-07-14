@@ -44,11 +44,9 @@
 			bgVar['accent-main'] = 'bg-dark-forest-accent-main';
 			// if (browser) document.body.style.backgroundColor = 'black';
 		}
-		// console.log(k);
 	}
 </script>
 
-<!-- <section class={` ${textVar.highlighted} text-center absolute top-[calc(50%-3%)] -translate-y-1/2 left-1/2 -translate-x-1/2 sm:w-[23rem]`}> -->
 <section
 	class={` ${textVar.highlighted} absolute top-[calc(50%-3%)] -translate-y-1/2 w-[21rem] sm:w-[23rem]`}
 	in:fade={{ delay: 400, duration: 150 }}
@@ -81,5 +79,3 @@
 		<span class="ml-1">GitHub</span>
 	</button>
 </section>
-<!-- <hr class=""> -->
-<!-- <img src={img} class="h-96 absolute left-1/2" alt=""> -->

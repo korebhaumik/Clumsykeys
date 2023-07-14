@@ -105,12 +105,16 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
 									updateTestConfigLanguage('english');
-									await getWords(100, {
-										lang: 'english',
-										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
-										isNumber: $newTextConfig.numbers,
-										isPunctuation: $newTextConfig.punctuations
-									});
+
+									await getWords(
+										$newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 100,
+										{
+											lang: 'english',
+											type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+											isNumber: $newTextConfig.numbers,
+											isPunctuation: $newTextConfig.punctuations
+										}
+									);
 									updateModalVisibility();
 								}}>english</button
 							>
@@ -118,12 +122,15 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
 									updateTestConfigLanguage('english 1k');
-									await getWords(1000, {
-										lang: 'english 1k',
-										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
-										isNumber: $newTextConfig.numbers,
-										isPunctuation: $newTextConfig.punctuations
-									});
+									await getWords(
+										$newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 1000,
+										{
+											lang: 'english 1k',
+											type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+											isNumber: $newTextConfig.numbers,
+											isPunctuation: $newTextConfig.punctuations
+										}
+									);
 									updateModalVisibility();
 								}}>english 1k</button
 							>
@@ -131,12 +138,15 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
 									updateTestConfigLanguage('english 5k');
-									await getWords(1000, {
-										lang: 'english 5k',
-										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
-										isNumber: $newTextConfig.numbers,
-										isPunctuation: $newTextConfig.punctuations
-									});
+									await getWords(
+										$newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 2000,
+										{
+											lang: 'english 5k',
+											type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+											isNumber: $newTextConfig.numbers,
+											isPunctuation: $newTextConfig.punctuations
+										}
+									);
 									updateModalVisibility();
 								}}>english 5k</button
 							>
@@ -144,12 +154,15 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
 									updateTestConfigLanguage('code python');
-									await getWords(100, {
-										lang: 'code python',
-										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
-										isNumber: $newTextConfig.numbers,
-										isPunctuation: $newTextConfig.punctuations
-									});
+									await getWords(
+										$newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 100,
+										{
+											lang: 'code python',
+											type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+											isNumber: $newTextConfig.numbers,
+											isPunctuation: $newTextConfig.punctuations
+										}
+									);
 									updateModalVisibility();
 								}}>code python</button
 							>
@@ -157,12 +170,15 @@
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
 									updateTestConfigLanguage('code javascript');
-									await getWords(100, {
-										lang: 'code javascript',
-										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
-										isNumber: $newTextConfig.numbers,
-										isPunctuation: $newTextConfig.punctuations
-									});
+									await getWords(
+										$newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 100,
+										{
+											lang: 'code javascript',
+											type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+											isNumber: $newTextConfig.numbers,
+											isPunctuation: $newTextConfig.punctuations
+										}
+									);
 									updateModalVisibility();
 								}}>code javascript</button
 							>
@@ -305,7 +321,7 @@
 							</p>
 							<button
 								class={`w-full py-3 mt-2 align-baseline rounded-b ${bgVar.fade}`}
-								on:click={async() => {
+								on:click={async () => {
 									if (tempWordsCount < 5) {
 										tempWordsCount = 5;
 										return;
@@ -316,10 +332,10 @@
 									}
 									updateTestConfigCounter('words', tempWordsCount);
 									await getWords(tempWordsCount, {
-											lang: $newTextConfig.language.value,
-											isNumber: $newTextConfig.numbers,
-											isPunctuation: $newTextConfig.punctuations
-										});
+										lang: $newTextConfig.language.value,
+										isNumber: $newTextConfig.numbers,
+										isPunctuation: $newTextConfig.punctuations
+									});
 									updateModalVisibility();
 								}}>Enter</button
 							>
@@ -340,7 +356,7 @@
 								type="number"
 								bind:value={tempTimeCount}
 								placeholder="Enter timer count"
-								on:keydown={async(e) => {
+								on:keydown={async (e) => {
 									if (e.key === 'Enter') {
 										if (tempTimeCount < 5) {
 											tempTimeCount = 5;
@@ -366,7 +382,7 @@
 							</p>
 							<button
 								class={`w-full py-3 mt-2 align-baseline rounded-b ${bgVar.fade}`}
-								on:click={async() => {
+								on:click={async () => {
 									if (tempTimeCount < 5) {
 										tempTimeCount = 5;
 										return;
@@ -377,10 +393,10 @@
 									}
 									updateTestConfigCounter('time', tempTimeCount);
 									await getWords(100, {
-											lang: $newTextConfig.language.value,
-											isNumber: $newTextConfig.numbers,
-											isPunctuation: $newTextConfig.punctuations
-										});
+										lang: $newTextConfig.language.value,
+										isNumber: $newTextConfig.numbers,
+										isPunctuation: $newTextConfig.punctuations
+									});
 									updateModalVisibility();
 								}}>Enter</button
 							>

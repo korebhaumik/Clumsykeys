@@ -35,7 +35,6 @@
 			bgVar['accent-error'] = 'bg-dark-forest-accent-error';
 			// if (browser) document.body.style.backgroundColor = 'black';
 		}
-		// console.log(k);
 	}
 </script>
 

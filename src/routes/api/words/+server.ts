@@ -31,7 +31,7 @@ export const GET: RequestHandler = ({ url }) => {
 	if (lang === 'english') words = english.words.slice(0, limit).sort(() => 0.5 - Math.random());
 	if (lang === 'english 1k')
 		words = english1k.words.slice(0, limit).sort(() => 0.5 - Math.random());
-	if (lang === 'english 5k') words = english5k.words.slice(0, 1000).sort(() => 0.5 - Math.random());
+	if (lang === 'english 5k') words = english5k.words.slice(0, limit).sort(() => 0.5 - Math.random());
 	if (lang === 'code python') words = python.words.slice(0, limit).sort(() => 0.5 - Math.random());
 	if (lang === 'code javascript') words = js.words.slice(0, limit).sort(() => 0.5 - Math.random());
 	if (lang === 'hindi') words = hindi.words.slice(0, limit).sort(() => 0.5 - Math.random());
