@@ -54,7 +54,6 @@
 		}
 	}
 	onMount(() => {
-		console.log($page.data.status);
 		document.addEventListener('keydown', myfunction);
 		setGameState('waiting');
 
@@ -172,9 +171,13 @@
 		}}
 		on:focus={() => {
 			resetButton.style.color = 'white';
+			resetButton.style.backgroundColor = '#242A2D';
+			resetButton.style.borderRadius = '0.375rem';
 		}}
 		on:blur={() => {
 			resetButton.style.color = 'gray';
+			resetButton.style.backgroundColor = 'inherit';
+			resetButton.style.borderRadius = '0';
 		}}
 	>
 		<ResetSvg

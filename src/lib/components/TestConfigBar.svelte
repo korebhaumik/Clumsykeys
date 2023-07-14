@@ -135,7 +135,7 @@
 	<button
 		on:click={async () => {
 			updateTestConfigFormat('punctuations');
-			getWords(200, {
+			getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 200, {
 				lang: $newTextConfig.language.value,
 				type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 				isNumber: $newTextConfig.numbers,
@@ -153,7 +153,7 @@
 	<button
 		on:click={() => {
 			updateTestConfigFormat('numbers');
-			getWords(200, {
+			getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 200, {
 				lang: $newTextConfig.language.value,
 				type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 				isNumber: $newTextConfig.numbers,
