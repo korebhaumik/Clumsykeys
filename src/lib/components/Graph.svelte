@@ -1,19 +1,13 @@
 <script lang="ts">
-	import Chart, { type ChartData, type ChartItem } from 'chart.js/auto';
+	import Chart, { type ChartData } from 'chart.js/auto';
 	import { timeDataArr, theme } from '$lib/components/store';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
-	$: timeArr = $timeDataArr.map((x) => {
-		return x.time;
-	});
-	$: wpmTimeArr = $timeDataArr.map((x) => x.wpm);
-	$: rawTimeArr = $timeDataArr.map((x) => 60);
 
 	const colorVar = {
 		unhighlighted: '#848887',
 		['accent-error']: '#A95406',
 		['accent-main']: '#9BCD86',
-		// ['accent-main']: '#000000'
 	};
 
 	$: {
@@ -50,26 +44,19 @@
 				pointBackgroundColor: colorVar['accent-main'],
 				pointHoverRadius: 7,
 				yAxisID: 'y1'
-
-				// backgroundColor: 'rgb(255, 99, 132)',
 			},
 			{
 				label: 'raw',
-				// label: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-				// data: Array.from({ length: 15 }, () => Math.floor(Math.random() * 10) + 69),
 				data: $timeDataArr.map((x) => {
 					return x.raw;
 				}),
 				fill: true,
-				// fill
-				// borderColor: 'rgb(255, 99, 132)',
 				borderColor: colorVar.unhighlighted,
 				pointBackgroundColor: colorVar.unhighlighted,
 				borderJoinStyle: 'round',
 				tension: 0.375,
 				pointHoverRadius: 7,
 				yAxisID: 'y1'
-				// backgroundColor: 'rgb(255, 99, 132)',
 			},
 			{
 				label: 'error',
@@ -77,12 +64,6 @@
 					if (x.incorrectChars === 0) return null;
 					return x.incorrectChars;
 				}),
-				// data: Array.from({ length: 10 }, () => {
-				// 	const value = Math.floor(Math.random() * 4);
-				// 	return value === 0 ? 0 : value;
-				// }),
-				// fill: true,
-				// borderColor: 'rgb(255, 99, 132)',
 				borderColor: colorVar['accent-error'],
 				borderJoinStyle: 'bevel',
 				tension: 0,
@@ -92,7 +73,6 @@
 				pointRadius: 4,
 				pointBackgroundColor: colorVar['accent-error'],
 				pointStyle: 'rectRot'
-				// backgroundColor: 'rgb(255, 99, 132)',
 			}
 		]
 	};
@@ -102,7 +82,6 @@
 			new Chart(document.getElementById('new') as HTMLCanvasElement, {
 				type: 'line',
 				data: data as ChartData<'line', number[], string>,
-				// borderJoinStyle: 'round',
 				options: {
 					maintainAspectRatio: false,
 					scales: {
@@ -131,8 +110,6 @@
 						},
 						y2: {
 							min: 0,
-							// max: 3,
-							// offset: -5,
 							alignToPixels: true,
 							ticks: {
 								includeBounds: false,
@@ -141,8 +118,6 @@
 								font: {
 									family: 'Comfortaa'
 								}
-								// labelOffset: 10,
-								// source: 'auto'
 							},
 							// max: 60
 							beginAtZero: true,
@@ -191,10 +166,8 @@
 							},
 							boxPadding: 5,
 							position: 'nearest',
-							// boxWidth: 100,
 							boxHeight: 10,
 							boxWidth: 10,
-							// axis: 'x',
 							bodySpacing: 2,
 							callbacks: {
 								label: function (tooltipItem) {

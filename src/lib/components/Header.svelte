@@ -122,7 +122,6 @@
 			>
 				<SettingsSvg variant={textVar['accent-green']} />
 			</a>
-			<!-- <InfoSvg variant={textVar['accent-yellow']}  /> -->
 		</div>
 	</div>
 

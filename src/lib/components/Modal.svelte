@@ -279,11 +279,22 @@
 								type="number"
 								placeholder="Enter word count"
 								bind:value={tempWordsCount}
-								on:keydown={(e) => {
+								on:keydown={async (e) => {
 									if (e.key === 'Enter') {
-										if (tempWordsCount < 5) return;
-										if (tempWordsCount > 500) return;
+										if (tempWordsCount < 5) {
+											tempWordsCount = 5;
+											return;
+										}
+										if (tempWordsCount > 500) {
+											tempWordsCount = 500;
+											return;
+										}
 										updateTestConfigCounter('words', tempWordsCount);
+										await getWords(tempWordsCount, {
+											lang: $newTextConfig.language.value,
+											isNumber: $newTextConfig.numbers,
+											isPunctuation: $newTextConfig.punctuations
+										});
 										updateModalVisibility();
 									}
 								}}
@@ -294,10 +305,21 @@
 							</p>
 							<button
 								class={`w-full py-3 mt-2 align-baseline rounded-b ${bgVar.fade}`}
-								on:click={() => {
-									if (tempWordsCount < 5) return;
-									if (tempWordsCount > 500) return;
+								on:click={async() => {
+									if (tempWordsCount < 5) {
+										tempWordsCount = 5;
+										return;
+									}
+									if (tempWordsCount > 500) {
+										tempWordsCount = 500;
+										return;
+									}
 									updateTestConfigCounter('words', tempWordsCount);
+									await getWords(tempWordsCount, {
+											lang: $newTextConfig.language.value,
+											isNumber: $newTextConfig.numbers,
+											isPunctuation: $newTextConfig.punctuations
+										});
 									updateModalVisibility();
 								}}>Enter</button
 							>
@@ -318,11 +340,22 @@
 								type="number"
 								bind:value={tempTimeCount}
 								placeholder="Enter timer count"
-								on:keydown={(e) => {
+								on:keydown={async(e) => {
 									if (e.key === 'Enter') {
-										if (tempTimeCount < 5) return;
-										if (tempTimeCount > 1000) return;
+										if (tempTimeCount < 5) {
+											tempTimeCount = 5;
+											return;
+										}
+										if (tempTimeCount > 1000) {
+											tempTimeCount = 1000;
+											return;
+										}
 										updateTestConfigCounter('time', tempTimeCount);
+										await getWords(1000, {
+											lang: $newTextConfig.language.value,
+											isNumber: $newTextConfig.numbers,
+											isPunctuation: $newTextConfig.punctuations
+										});
 										updateModalVisibility();
 									}
 								}}
@@ -333,10 +366,21 @@
 							</p>
 							<button
 								class={`w-full py-3 mt-2 align-baseline rounded-b ${bgVar.fade}`}
-								on:click={() => {
-									if (tempTimeCount < 5) return;
-									if (tempTimeCount > 1000) return;
+								on:click={async() => {
+									if (tempTimeCount < 5) {
+										tempTimeCount = 5;
+										return;
+									}
+									if (tempTimeCount > 1000) {
+										tempTimeCount = 1000;
+										return;
+									}
 									updateTestConfigCounter('time', tempTimeCount);
+									await getWords(100, {
+											lang: $newTextConfig.language.value,
+											isNumber: $newTextConfig.numbers,
+											isPunctuation: $newTextConfig.punctuations
+										});
 									updateModalVisibility();
 								}}>Enter</button
 							>

@@ -63,15 +63,6 @@
 			bgVar.caret = 'bg-cardboard-caret';
 		}
 	}
-
-	// const wordsArr: string[] = 'The quick brown fox jumps over the lazy dog.'.split(' ');
-	// const wordsArr: string[] = 'call go seem problem'.split(' ');
-	// let wordsArr: string[] = 'call go seem problem seem as such program any like against may from this over other fact time which problem see feel which.'.split(' ');
-	// let wordsArr: string[] = [];
-	// const wordsArr: string[] =
-	// 	'call go seem problem seem as such program any like against may from this over other fact time which problem see feel which. call go seem problem seem as such program any like against may from this over other fact time which problem see feel which. call go seem problem seem as such program any like against may from this over other fact time which problem see feel which'.split(
-	// 		' '
-	// 	);
 	interface wordsDataType {
 		correctChars: number;
 		wpm: number;
@@ -84,10 +75,7 @@
 	}
 
 	let wordsDataArr: wordsDataType[] = [];
-
-	// let game: GameState = 'waiting';
 	let typedLetter = '';
-	// let wordIndex = 0;
 	let letterIndex = 0;
 
 	let caretEl: HTMLDivElement;
@@ -118,15 +106,6 @@
 		isBlur = false;
 	});
 
-	interface timeDataType {
-		time: number;
-		correctChars: number;
-		rawChars: number;
-		incorrectChars: number;
-		wpm: number;
-		raw: number;
-	}
-
 	let intervalId: number | null = null;
 
 	$: {
@@ -138,7 +117,6 @@
 
 	$: {
 		if ($count === $TimerCount) {
-			// if (wordsDataArr.at(-1)!.rawChars < $wordsArr[$wordIndex].length) wordsDataArr.pop();
 			if (wordsDataArr.at(-1)!.endTime === -1) wordsDataArr.pop();
 			setGameState('finished');
 		}
@@ -199,7 +177,6 @@
 		if ($wordIndex === $wordsArr.length - 1 && letterIndex === $wordsArr[$wordIndex].length - 1) {
 			wordsDataArr[$wordIndex].wpm = 60000 / (Date.now() - wordsDataArr[$wordIndex].startTime);
 			setGameState('finished');
-			// goto('/result');
 			return;
 		}
 		if ($game === 'playing') {
@@ -210,10 +187,6 @@
 			moveCaret('forward');
 		}
 	};
-
-	// const setGameState = (x: GameState) => {
-	// 	game = x;
-	// };
 
 	const setLetter = () => {
 		const isWordCompleted = letterIndex > $wordsArr[$wordIndex].length - 1;
@@ -415,7 +388,6 @@
 	let resetEl: HTMLElement;
 </script>
 
-<!-- <p class={'text-white'}>{tempSpace}</p> -->
 <section class="hidden sm:block relative">
 	<!-- svelte-ignore a11y-positive-tabindex -->
 	<!-- svelte-ignore a11y-autofocus -->
@@ -436,7 +408,6 @@
 		}}
 	/>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- class={`h-32 mt-5 overflow-hidden text-xl font-base leading-relaxed space text-cardboard-500 game ${textVar.unhighlighted}`} -->
 	<div
 		on:click={() => {
 			inputEl.focus();
@@ -551,7 +522,6 @@
 
 	.caret {
 		transition: all 0.2s ease;
-		/* animation: blink 1s infinite; */
 	}
 	.new {
 		animation: blink 1s infinite;
