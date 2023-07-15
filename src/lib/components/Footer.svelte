@@ -82,18 +82,18 @@
 
 	<div class={`flex items-center ${textVar.credits} ${opac} justify-between w-fit big:w-auto`}>
 		<div class={`flex w-80 md:w-[40rem] flex-wrap justify-between font-semibold`}>
-			<button class="flex items-center transition cursor-pointer hover:text-cardboard-900">
+			<a href="mailto:bhaumik.kore31@gmail.com" class="flex items-center transition cursor-pointer hover:text-cardboard-900">
 				<MailSvg />
 				<span class="ml-1.5 text-xs">Contact</span>
-			</button>
-			<div class="flex items-center">
+			</a>
+			<a href="http://github.com/korebhaumik/Clumsykeys" target="_blank" class="flex items-center">
 				<GithubSvg />
 				<span class="ml-1.5 text-xs">Github</span>
-			</div>
-			<div class="items-center hidden md:flex">
+			</a>
+			<a href="http://discord.gg" target="_blank" class="items-center hidden md:flex">
 				<DiscordSvg />
 				<span class="ml-1.5 text-xs">Discord</span>
-			</div>
+			</a>
 			<div class="items-center hidden md:flex">
 				<ShieldSvg />
 				<span class="ml-1.5 text-xs">Security</span>
@@ -114,7 +114,7 @@
 		<p class="hidden text-xs big:block">
 			developed by <a
 				class="text-amber-700 hover:underline"
-				href="https://google.com"
+				href="http://github.com/korebhaumik"
 				target="_blank">@korebhaumik</a
 			>
 		</p>
