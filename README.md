@@ -1,38 +1,96 @@
-# create-svelte
+<a href="https://clumsy-keys.vercel.app/">
+    <h1>Clumsy Keys</h1>
+</a>
+<p >
+  Clumsykeys is a fun and interative typing sim that helps you improve your typing speed and accuracy.
+</p>
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+<p >
+  <a href="#description"><strong>Description</strong></a> ·
+  <a href="#features"><strong>Features</strong></a> ·
+  <a href="#key-functionality"><strong>Key functionality</strong></a> ·
+  <a href="#running-locally"><strong>Running locally</strong></a> ·
+</p>
+<br/>
 
-## Creating a project
+## Description
 
-If you're seeing this, you've probably already done this step. Congrats!
+Clumsykeys is an interactive web interface that helps to improve your typing speed and accuracy. The web-app leverages the high performant capabilities of the [Svelte](https://svelte.dev/) to provide a smooth and responsive experience. The project is implemented in a [TypeScript](https://www.typescriptlang.org/) environment and hosted on [Vercel](https://vercel.com).
 
+
+**Link:** [https://clumsy-keys.vercel.app/](https://clumsy-keys.vercel.app/)
+
+<img alt="clumsy-keys website base image" src="./clumsy-keys-base.png">
+<img alt="clumsy-keys website base image" src="./clumsy-keys-result-3.png">
+
+## Features
+
+- [Sveltekit](https://kit.svelte.dev/) App Router
+- Svelte 3.x and [Typescript](https://vercel.com/ai) for reliable and fast development
+- [Vercel Edge Adapter]() for Edge runtime compatibility
+- User Interface and Experience
+  - Design is built from scratch using [Figma](https://www.figma.com/)
+  - Styling with [Tailwind CSS](https://tailwindcss.com)
+  - Icons from [Heroicons](https://heroicons.com) and [Google Icons](https://fonts.google.com/icons)
+- [ChartsJS](https://github.com/remarkjs/react-markdown) for the visualizations.
+
+(Soon to be added 😊)
+- [Supabase Auth](https://supabase.com/docs/guides/auth), [Github OAuth](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps), [Google OAuth](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) for authentication and authorizing users.
+- [Supabase DB](https://supabase.com/docs/guides/database) as the database solution.
+- [StripeJS](https://stripe.com/docs/js) for payment processing.
+
+## Key Functionality
+
+- Realtime typing speed (wpm) and accuracy calculations.
+- Ability to practice text with punctuations, special characters and numbers.
+- Time and word counter to personalize the typing experience.
+- Input history your tracking typing speed for each word after every test.
+- Chart to visualize your typing speed, accuracy and errors over time.
+
+Support for the following languages are currently available:
+1. English
+2. English_1K
+3. English_5K
+4. Code Javascript
+5. Code Python
+
+Quotes are randomly generated from the `Quotes.json` file.
+
+## Running locally
+
+You will need to have the necessary environment variables setup in your `.env` file.
+This include keys for your Supabase account, and Stripe account, Github Outh Client, Github Outh Secret. 
+    
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+HOST =
+SUPABASE_URL =
+SUPABASE_ANON_KEY =
+STRIPE_PUBLISHABLE_KEY =
+STRIPE_WEBHOOK_KEY =
+STRIPE_SECRET_KEY =
+GITHUB_CLIENT_ID =
+GITHUB_CLIENT_SECRET =
 ```
 
-## Developing
+> Note: You should not commit your `.env` file or it will expose secrets that will allow others to control access to your authentication provider accounts.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
+1. Install run: `pnpm i`
+2. Make a new `.env` file.
+3. Populate the `.env` file with the necessary environment variables.
 
 ```bash
-npm run build
+pnpm run dev
 ```
 
-You can preview the production build with `npm run preview`.
+Your app template should now be running on [localhost:5173](http://localhost:5173/).
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Running locally with docker
+
+```bash
+docker login
+docker pull korebhaumik/clumsy-keys.
+docker run -env-file .env -p 3000:3000 korebhaumik/clumsy-keys
+```
+
+> Note: If the docker image is not available (repo is privated), you can build it locally by running `docker build -t clumsy-keys.` in the root directory of the project.
+
