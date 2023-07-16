@@ -20,8 +20,8 @@ Clumsykeys is an interactive web interface that helps to improve your typing spe
 
 **Link:** [https://clumsy-keys.vercel.app/](https://clumsy-keys.vercel.app/)
 
-<img alt="clumsy-keys website base image" src="./clumsy-keys-base.png">
-<img alt="clumsy-keys website base image" src="./clumsy-keys-result-3.png">
+<img width="1392" alt="clumsy-keys website base image" src="https://github.com/korebhaumik/Clumsykeys/assets/106856064/529757ae-e126-45c7-94de-0d79b854f3e6">
+<img width="1392" alt="clumsy-keys website result image" src="https://github.com/korebhaumik/Clumsykeys/assets/106856064/9b113e55-3ef2-4cb4-a6b0-20d85f78560a">
 
 ## Features
 
