@@ -243,8 +243,18 @@
 				class={`block px-4 py-3 mt-2 font-medium text-sm rounded w-fit ${bgVar['accent-error']} ${textVar.highlighted}`}
 				>Restart Test</button
 			>
-			<a href="/" class="block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border"
-				>Contact support</a
+			<button
+				on:click={async (e) => {
+					// console.log('click')
+					// testStatus.set('protected');
+					e.preventDefault();
+					resetTest();
+					document.removeEventListener('keydown', myfunction);
+					setGameState('waiting');
+					await goto('/');
+				}}
+				class={`block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border`}
+				>Contact Support</button
 			>
 		</div>
 	</div>
@@ -269,8 +279,18 @@
 				class={`block px-4 py-3 mt-2 font-medium text-sm rounded w-fit ${bgVar['accent-error']} ${textVar.highlighted}`}
 				>Attempt Test</button
 			>
-			<a href="/" class="block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border"
-				>Contact support</a
+			<button
+				on:click={async (e) => {
+					// console.log('click')
+					// testStatus.set('protected');
+					e.preventDefault();
+					resetTest();
+					document.removeEventListener('keydown', myfunction);
+					setGameState('waiting');
+					await goto('/');
+				}}
+				class={`block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border`}
+				>Contact Support</button
 			>
 		</div>
 	</div>
