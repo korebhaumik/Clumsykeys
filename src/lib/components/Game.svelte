@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { charCount, theme, inputEl } from './store';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
+	import PlaySvg from '$lib/assets/PlaySVG.svelte';
 	import { game, setGameState, incorrectCharCount, testStatus } from './store';
 	import { page } from '$app/stores';
 	import {
@@ -92,7 +93,11 @@
 		function myfunction(e: any) {
 			if (e.key === 'Tab') {
 				e.preventDefault();
-				resetEl.focus();
+				// if (resetEl == document.activeElement) {
+				if (isBlur) {
+					resetEl.blur();
+					$inputEl.focus();
+				} else resetEl.focus();
 			}
 		}
 		document.addEventListener('keydown', myfunction);
@@ -141,7 +146,7 @@
 			} else {
 				testStatus.set('valid');
 			}
-			console.log($count);
+			// console.log($count);
 			(async () => {
 				// console.log(letterIndex, wordIndex);
 				clearInterval(intervalId as number);
@@ -211,7 +216,7 @@
 		if (letterIndex + 1 < $wordsArr[$wordIndex].length - 1) {
 			nextLetterEl = wordsEl.children[$wordIndex].children[letterIndex + 1] as HTMLSpanElement;
 		} else {
-			console.log('keke');
+			// console.log('keke');
 			if (isLastWord) {
 				nextLetterEl = wordsEl.children[$wordIndex].children[0] as HTMLSpanElement;
 			} else {
@@ -280,7 +285,6 @@
 
 	const nextLetter = () => {
 		if (letterIndex === $wordsArr[$wordIndex].length) {
-			console.log('no lie', letterIndex);
 			return;
 		}
 		letterIndex += 1;
@@ -310,14 +314,12 @@
 			setLetter();
 			letterEl.children[letterEl.children.length - 1].className = textVar.unhighlighted;
 		} else {
-			console.log('prev', letterIndex, $wordIndex);
+			// console.log('prev', letterIndex, $wordIndex);
 			wordIndex.update((prev) => (prev -= 1));
 			const lastLetterIndex = $wordsArr[$wordIndex].length;
 			letterIndex = lastLetterIndex;
 			// setLetter();
 			letterEl = wordsEl.children[$wordIndex].children[letterIndex - 1] as HTMLSpanElement;
-			console.log(letterEl);
-			console.log('prev', letterIndex, $wordIndex);
 			if (letterEl.children.length > 1) {
 				letterEl.removeChild(letterEl.children[letterEl.children.length - 1]);
 				// letterEl.children[letterEl.children.length - 1].className = textVar.unhighlighted;
@@ -409,8 +411,8 @@
 				}
 				// console.log(prevLetterEl.offsetTop, letterEl.offsetTop, nextLetterEl.offsetTop)
 				prevletter();
-				console.log(letterEl);
-				console.log('backspan', letterIndex, $wordIndex);
+				// console.log(letterEl);
+				// console.log('backspace', letterIndex, $wordIndex);
 				moveCaret('backward');
 			}
 		}
@@ -518,7 +520,12 @@
 				$inputEl.focus();
 				isBlur = false;
 			}}
-		/>
+		>
+			<div class="text-white flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+				<PlaySvg />
+				<span>Click here or press tab to focus.</span>
+			</div>
+		</div>
 	{/if}
 </section>
 <section class="text-xl text-dark-forest-highlighted sm:hidden">
