@@ -71,7 +71,8 @@
 		remaining -= $count;
 		// console.log($isTimer);
 	}
-	$: accuracy = $charCount === 0 ? 100 : Math.floor((($charCount - $incorrectCharCount) * 100) / $charCount);
+	$: accuracy =
+		$charCount === 0 ? 100 : Math.floor((($charCount - $incorrectCharCount) * 100) / $charCount);
 </script>
 
 <!-- <h1>Hello World</h1> -->

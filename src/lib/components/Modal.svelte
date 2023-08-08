@@ -9,7 +9,8 @@
 		updateModalCounter,
 		updateModalVisibility,
 		updateTestConfigCounter,
-		updateTestConfigLanguage
+		updateTestConfigLanguage,
+		inputEl
 	} from './store';
 	// import SearchSvg from './SearchSVG.svelte';
 	import LangSvg from '$lib/assets/LangSVG.svelte';
@@ -104,6 +105,7 @@
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
+									$inputEl.focus();
 									updateTestConfigLanguage('english');
 
 									await getWords(
@@ -121,6 +123,7 @@
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
+									$inputEl.focus();
 									updateTestConfigLanguage('english 1k');
 									await getWords(
 										$newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 1000,
@@ -137,6 +140,7 @@
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
+									$inputEl.focus();
 									updateTestConfigLanguage('english 5k');
 									await getWords(
 										$newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 2000,
@@ -153,6 +157,7 @@
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
+									$inputEl.focus();
 									updateTestConfigLanguage('code python');
 									await getWords(
 										$newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 100,
@@ -169,6 +174,7 @@
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
+									$inputEl.focus();
 									updateTestConfigLanguage('code javascript');
 									await getWords(
 										$newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 100,
@@ -197,6 +203,7 @@
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
+									$inputEl.focus();
 									updateTestConfigCounter('time', 30);
 									await getWords(1000, {
 										lang: $newTextConfig.language.value,
@@ -210,6 +217,7 @@
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
+									$inputEl.focus();
 									updateTestConfigCounter('words', 50);
 									updateModalCounter('words');
 									await getWords(1000, {
@@ -223,6 +231,7 @@
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={async () => {
+									$inputEl.focus();
 									updateTestConfigCounter('quotes', 'Random Quotes');
 									updateModalCounter('quotes');
 									await getWords(100, {
@@ -305,6 +314,7 @@
 											tempWordsCount = 500;
 											return;
 										}
+										$inputEl.focus();
 										updateTestConfigCounter('words', tempWordsCount);
 										await getWords(tempWordsCount, {
 											lang: $newTextConfig.language.value,
@@ -330,6 +340,7 @@
 										tempWordsCount = 500;
 										return;
 									}
+									$inputEl.focus();
 									updateTestConfigCounter('words', tempWordsCount);
 									await getWords(tempWordsCount, {
 										lang: $newTextConfig.language.value,
@@ -366,6 +377,7 @@
 											tempTimeCount = 1000;
 											return;
 										}
+										$inputEl.focus();
 										updateTestConfigCounter('time', tempTimeCount);
 										await getWords(1000, {
 											lang: $newTextConfig.language.value,
@@ -391,6 +403,7 @@
 										tempTimeCount = 1000;
 										return;
 									}
+									$inputEl.focus();
 									updateTestConfigCounter('time', tempTimeCount);
 									await getWords(100, {
 										lang: $newTextConfig.language.value,
@@ -415,6 +428,7 @@
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
+									$inputEl.focus();
 									updateTestConfigCounter('quotes', 'Random Quotes');
 									getWords(200, {
 										lang: $newTextConfig.language.value,
@@ -437,6 +451,7 @@
 							<button
 								class="w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => {
+									$inputEl.focus();
 									updateTestConfigCounter('quotes', 'Famous Quotes');
 									getWords(200, {
 										lang: $newTextConfig.language.value,

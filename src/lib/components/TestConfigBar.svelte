@@ -7,6 +7,7 @@
 	import TimerSvg from '$lib/assets/TimerSVG.svelte';
 	import WrenchSvg from '$lib/assets/WrenchSVG.svelte';
 	import { page } from '$app/stores';
+	import { inputEl } from './store';
 
 	import {
 		getWords,
@@ -134,6 +135,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
 		on:click={async () => {
+			$inputEl.focus();
 			updateTestConfigFormat('punctuations');
 			getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 200, {
 				lang: $newTextConfig.language.value,
@@ -152,6 +154,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
 		on:click={() => {
+			$inputEl.focus();
 			updateTestConfigFormat('numbers');
 			getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 200, {
 				lang: $newTextConfig.language.value,
@@ -172,6 +175,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
 		on:click={async () => {
+			$inputEl.focus();
 			updateTestConfigCounter('time', $newTextConfig.time.value);
 			await getWords(200, {
 				lang: $newTextConfig.language.value,
@@ -189,6 +193,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
 		on:click={async () => {
+			$inputEl.focus();
 			updateTestConfigCounter('words', $newTextConfig.words.value);
 			await getWords($newTextConfig.words.value, {
 				lang: $newTextConfig.language.value,
@@ -205,6 +210,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
 		on:click={async () => {
+			$inputEl.focus();
 			updateTestConfigCounter('quotes', 'Random Quotes');
 			await getWords(100, {
 				type: 'quotes',
@@ -228,6 +234,7 @@
 					variantConfig.due.val === 15 ? variantConfig.due.class : null
 				}`}
 				on:click={() => {
+					$inputEl.focus();
 					updateTestConfigCounter('time', 15);
 					getWords(200, {
 						lang: $newTextConfig.language.value,
@@ -242,6 +249,7 @@
 					variantConfig.due.val === 30 ? variantConfig.due.class : null
 				}`}
 				on:click={() => {
+					$inputEl.focus();
 					updateTestConfigCounter('time', 30);
 					getWords(200, {
 						lang: $newTextConfig.language.value,
@@ -256,6 +264,7 @@
 					variantConfig.due.val === 60 ? variantConfig.due.class : null
 				}`}
 				on:click={() => {
+					$inputEl.focus();
 					updateTestConfigCounter('time', 60);
 					getWords(200, {
 						lang: $newTextConfig.language.value,
@@ -270,6 +279,7 @@
 					variantConfig.due.val === 120 ? variantConfig.due.class : null
 				}`}
 				on:click={() => {
+					$inputEl.focus();
 					updateTestConfigCounter('time', 120);
 					getWords(200, {
 						lang: $newTextConfig.language.value,
@@ -285,6 +295,7 @@
 					variantConfig.due.val === 25 ? variantConfig.due.class : null
 				}`}
 				on:click={() => {
+					$inputEl.focus();
 					updateTestConfigCounter('words', 25);
 					getWords(25, {
 						lang: $newTextConfig.language.value,
@@ -300,6 +311,7 @@
 					variantConfig.due.val === 50 ? variantConfig.due.class : null
 				}`}
 				on:click={() => {
+					$inputEl.focus();
 					updateTestConfigCounter('words', 50);
 					getWords(50, {
 						lang: $newTextConfig.language.value,
@@ -314,6 +326,7 @@
 					variantConfig.due.val === 75 ? variantConfig.due.class : null
 				}`}
 				on:click={() => {
+					$inputEl.focus();
 					updateTestConfigCounter('words', 75);
 					getWords(75, {
 						lang: $newTextConfig.language.value,
@@ -328,6 +341,7 @@
 					variantConfig.due.val === 100 ? variantConfig.due.class : null
 				}`}
 				on:click={() => {
+					$inputEl.focus();
 					updateTestConfigCounter('words', 100);
 					getWords(100, {
 						lang: $newTextConfig.language.value,
@@ -352,6 +366,7 @@
 	<div
 		class={`flex items-center cursor-pointer ${textVar['accent-main']}  underline underline-offset-1 decoration-2`}
 		on:click={() => {
+			$inputEl.focus();
 			updateModalContent('language');
 			updateModalVisibility();
 		}}

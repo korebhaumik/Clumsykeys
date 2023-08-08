@@ -10,6 +10,11 @@ import type {
 	ModalCounterParams
 } from './storeTypes';
 
+
+// let inputEl: HTMLInputElement;
+
+export let inputEl = writable({} as HTMLInputElement);
+
 // export const count = writable(0);
 export const theme = writable('dark-forest' as 'cardboard' | 'dark-forest' | 'sapphire');
 
@@ -239,12 +244,25 @@ interface wordsDataType {
 	endTime: number;
 }
 export const wordsArr = writable([] as string[]);
+export const wordsCache = writable([] as string[]);
 
 
 export async function getWords(limit: number, config: getWordsConfig) {
 	const response = await fetch(`/api/words?limit=${limit}&lang=${config.lang ?? 'english'}&type=${config.type ?? 'words'}&isPunctuation=${config.isPunctuation ?? false}&isNumber=${config.isNumber ?? false}`);
 	// const response = await fetch(`/api/words?limit=${limit}&lang=${lang}&type=${type}&isPunctuation=true&isNumber=true`);
 	wordsArr.set(await response.json());
+	
+	// wordsCache.subscribe(async(words) => {
+	// 	if(words.length === 0) {
+
+	// 		wordsCache.set(await response.json());
+	// 		return;
+	// 	}
+	// 	return words;
+
+	// 	// console.log(words);
+	// });
+
 }
 
 type getWordsConfig = {

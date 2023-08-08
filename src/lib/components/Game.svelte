@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { blur, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	import { charCount, theme } from './store';
+	import { charCount, theme, inputEl } from './store';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
 	import { game, setGameState, incorrectCharCount, testStatus } from './store';
 	import { page } from '$app/stores';
@@ -84,12 +84,18 @@
 	let nextwordEl: HTMLSpanElement;
 	let prevLetterEl: HTMLSpanElement;
 	let nextLetterEl: HTMLSpanElement;
-	let inputEl: HTMLInputElement;
 
 	let lineH = 0;
 	let lineNum = 0;
 
 	onMount(async () => {
+		function myfunction(e: any) {
+			if (e.key === 'Tab') {
+				e.preventDefault();
+				resetEl.focus();
+			}
+		}
+		document.addEventListener('keydown', myfunction);
 		resetTest();
 		testStatus.set('protected');
 		wordsArr.update((prev) => {
@@ -102,8 +108,10 @@
 			isNumber: $newTextConfig.numbers,
 			isPunctuation: $newTextConfig.punctuations
 		});
-		inputEl.focus();
+		$inputEl.focus();
 		isBlur = false;
+
+		return () => document.removeEventListener('keydown', myfunction);
 	});
 
 	let intervalId: number | null = null;
@@ -189,12 +197,21 @@
 	};
 
 	const setLetter = () => {
+		// console.log(letterIndex, $wordIndex, $wordsArr[$wordIndex].length);
+		if (letterIndex === $wordsArr[$wordIndex].length) {
+			if (letterEl.children.length > 10) return;
+			const extraLetter = document.createElement('span');
+			extraLetter.className = `${textVar['accent-error']} underline`;
+			extraLetter.textContent = typedLetter;
+			letterEl.appendChild(extraLetter);
+		}
 		const isWordCompleted = letterIndex > $wordsArr[$wordIndex].length - 1;
 		const isLastWord = $wordIndex === $wordsArr.length - 1;
 		const isFirstWord = $wordIndex === 0;
 		if (letterIndex + 1 < $wordsArr[$wordIndex].length - 1) {
 			nextLetterEl = wordsEl.children[$wordIndex].children[letterIndex + 1] as HTMLSpanElement;
 		} else {
+			console.log('keke');
 			if (isLastWord) {
 				nextLetterEl = wordsEl.children[$wordIndex].children[0] as HTMLSpanElement;
 			} else {
@@ -211,25 +228,20 @@
 		if (!isWordCompleted) {
 			letterEl = wordsEl.children[$wordIndex].children[letterIndex] as HTMLSpanElement;
 		}
+		// if (isWordCompleted) {
+		// 	letterEl = wordsEl.children[$wordIndex].children[letterIndex] as HTMLSpanElement;
+		// }
 		if (!isLastWord) {
 			nextwordEl = wordsEl.children[$wordIndex + 1].children[0] as HTMLSpanElement;
 		}
+		// console.log(letterEl);
 	};
 
 	const checkLetter = () => {
-		if (letterEl.innerHTML === typedLetter) {
-			// console.log('correct');
-			charCount.update((prev) => prev + 1);
-			$timeDataArr.at(-1)!.correctChars += 1;
-			$timeDataArr.at(-1)!.rawChars += 1;
-
-			wordsDataArr.at($wordIndex)!.correctChars += 1;
-			wordsDataArr.at($wordIndex)!.rawChars += 1;
-			letterEl.className = textVar.highlighted;
-		}
-
-		if (letterEl.innerHTML !== typedLetter) {
-			// console.log('incorrect');
+		if (letterEl.children.length > 1) {
+			letterEl.children[
+				letterEl.children.length - 1
+			].className = `${textVar['accent-error']} underline`;
 			incorrectCharCount.update((prev) => prev + 1);
 			charCount.update((prev) => prev + 1);
 			$timeDataArr.at(-1)!.incorrectChars += 1;
@@ -237,12 +249,38 @@
 
 			wordsDataArr.at($wordIndex)!.incorrectChars += 1;
 			wordsDataArr.at($wordIndex)!.rawChars += 1;
-			letterEl.className = `${textVar['accent-error']} underline`;
+		} else {
+			if (letterEl.textContent?.charAt(0) === typedLetter) {
+				// console.log('correct');
+				charCount.update((prev) => prev + 1);
+				$timeDataArr.at(-1)!.correctChars += 1;
+				$timeDataArr.at(-1)!.rawChars += 1;
+
+				wordsDataArr.at($wordIndex)!.correctChars += 1;
+				wordsDataArr.at($wordIndex)!.rawChars += 1;
+				letterEl.children[letterEl.children.length - 1].className = textVar.highlighted;
+				// letterEl.className = textVar.highlighted;
+			}
+
+			if (letterEl.children[letterEl.children.length - 1].textContent !== typedLetter) {
+				// console.log('incorrect');
+				incorrectCharCount.update((prev) => prev + 1);
+				charCount.update((prev) => prev + 1);
+				$timeDataArr.at(-1)!.incorrectChars += 1;
+				$timeDataArr.at(-1)!.rawChars += 1;
+
+				wordsDataArr.at($wordIndex)!.incorrectChars += 1;
+				wordsDataArr.at($wordIndex)!.rawChars += 1;
+				letterEl.children[
+					letterEl.children.length - 1
+				].className = `${textVar['accent-error']} underline`;
+			}
 		}
 	};
 
 	const nextLetter = () => {
 		if (letterIndex === $wordsArr[$wordIndex].length) {
+			console.log('no lie', letterIndex);
 			return;
 		}
 		letterIndex += 1;
@@ -259,16 +297,33 @@
 	}
 
 	function prevletter() {
+		// console.log(letterEl);
+		// console.log("finale",letterIndex, $wordIndex);
+		if (letterIndex === $wordsArr[$wordIndex].length) {
+			if (letterEl.children.length > 1) {
+				letterEl.removeChild(letterEl.children[letterEl.children.length - 1]);
+				return;
+			}
+		}
 		if (letterIndex !== 0) {
 			letterIndex -= 1;
 			setLetter();
-			letterEl.className = textVar.unhighlighted;
+			letterEl.children[letterEl.children.length - 1].className = textVar.unhighlighted;
 		} else {
+			console.log('prev', letterIndex, $wordIndex);
 			wordIndex.update((prev) => (prev -= 1));
-			const lastLetterIndex = $wordsArr[$wordIndex].length - 1;
+			const lastLetterIndex = $wordsArr[$wordIndex].length;
 			letterIndex = lastLetterIndex;
-			setLetter();
-			letterEl.className = textVar.unhighlighted;
+			// setLetter();
+			letterEl = wordsEl.children[$wordIndex].children[letterIndex - 1] as HTMLSpanElement;
+			console.log(letterEl);
+			console.log('prev', letterIndex, $wordIndex);
+			if (letterEl.children.length > 1) {
+				letterEl.removeChild(letterEl.children[letterEl.children.length - 1]);
+				// letterEl.children[letterEl.children.length - 1].className = textVar.unhighlighted;
+			} else {
+				// letterEl.children[letterEl.children.length - 1].className = textVar.unhighlighted;
+			}
 		}
 	}
 
@@ -335,9 +390,9 @@
 			}
 			// logDataPerWord();
 			if (e.code === 'Space') {
-				const isLastLetter = $wordIndex + 1 >= $wordsArr.length;
+				const isLastWord = $wordIndex + 1 >= $wordsArr.length;
 				if (letterIndex === 0) return;
-				if (!isLastLetter) {
+				if (!isLastWord) {
 					wordsDataArr[$wordIndex].endTime = Date.now();
 					wordsDataArr[$wordIndex].wpm = 60000 / (Date.now() - wordsDataArr[$wordIndex].startTime);
 					$timeDataArr.at(-1)!.correctChars += 1;
@@ -354,6 +409,8 @@
 				}
 				// console.log(prevLetterEl.offsetTop, letterEl.offsetTop, nextLetterEl.offsetTop)
 				prevletter();
+				console.log(letterEl);
+				console.log('backspan', letterIndex, $wordIndex);
 				moveCaret('backward');
 			}
 		}
@@ -364,10 +421,31 @@
 		const H = wordsEl.scrollHeight;
 
 		if (type === 'forward') {
+			// console.log(letterEl)
 			caretEl.style.left = `${letterEl.offsetLeft + letterEl.offsetWidth}px`;
 		}
 		if (type === 'backward') {
-			caretEl.style.left = `${letterEl.offsetLeft}px`;
+			if (letterEl.children.length > 1) {
+				caretEl.style.left = `${
+					(letterEl.children[letterEl.children.length - 1] as HTMLSpanElement).offsetLeft +
+					(letterEl.children[letterEl.children.length - 1] as HTMLSpanElement).offsetWidth
+				}px`;
+			}
+			// if(letterEl.children.length === 1){
+			// 	console.log("no width");
+			// 	caretEl.style.left = `${letterEl.offsetLeft + letterEl.offsetWidth}px`;
+			// }
+			if (letterIndex === $wordsArr[$wordIndex].length) {
+				// console.log("no width");
+				// console.log(letterEl)
+				// console.log(letterIndex, $wordIndex);
+				caretEl.style.left = `${letterEl.offsetLeft + letterEl.offsetWidth}px`;
+			} else {
+				caretEl.style.left = `${letterEl.offsetLeft}px`;
+			}
+			// if (letterIndex == 0) {
+			// 	caretEl.style.left = `${letterEl.offsetLeft + letterEl.offsetWidth}px`;
+			// }
 		}
 		if (type === 'space') {
 			if (nextwordEl.offsetTop !== letterEl.offsetTop) {
@@ -385,7 +463,7 @@
 	}
 
 	$: isBlur = false;
-	let resetEl: HTMLElement;
+	let resetEl: HTMLAnchorElement;
 </script>
 
 <section class="hidden sm:block relative">
@@ -395,11 +473,10 @@
 		class="sr-only"
 		id="boss"
 		type="text"
-		bind:this={inputEl}
+		bind:this={$inputEl}
 		bind:value={typedLetter}
 		on:input={updateGameState}
 		on:keydown={handleKeydown}
-		tabindex="1"
 		on:blur={() => {
 			isBlur = true;
 		}}
@@ -410,15 +487,17 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
 		on:click={() => {
-			inputEl.focus();
+			$inputEl.focus();
 			isBlur = false;
 		}}
 	>
 		<div bind:this={wordsEl} class={`overflow-hidden h-28`} transition:fly>
 			{#each $wordsArr as word}
-				<span bind:this={letterEl} class="mr-2 text-xl">
+				<span class="mr-2 text-xl">
 					{#each word as letter}
-						<span class={`${textVar.unhighlighted}`}>{letter}</span>
+						<span bind:this={letterEl} class={`${textVar.unhighlighted}`}
+							><span class={`${textVar.unhighlighted}`}>{letter}</span></span
+						>
 					{/each}
 				</span>
 			{/each}
@@ -436,7 +515,7 @@
 			class="w-screen h-36 absolute backdrop-blur-sm -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
 			transition:blur={{ duration: 350 }}
 			on:click={() => {
-				inputEl.focus();
+				$inputEl.focus();
 				isBlur = false;
 			}}
 		/>
@@ -445,9 +524,23 @@
 <section class="text-xl text-dark-forest-highlighted sm:hidden">
 	Support for mobile devices is coming soon!
 </section>
-<span
+<!-- svelte-ignore a11y-missing-attribute -->
+<a
 	bind:this={resetEl}
-	class="block mx-auto mt-5 w-fit"
+	class="block text-dark-forest-unhighlighted outline-none border-none mx-auto mt-5 w-fit"
+	type="button"
+	href="/"
+	on:focus={() => {
+		resetEl.style.color = 'white';
+		resetEl.style.backgroundColor = '#242A2D';
+		resetEl.style.borderRadius = '0.375rem';
+		resetEl.style.outline = 'none';
+	}}
+	on:blur={() => {
+		resetEl.style.color = 'gray';
+		resetEl.style.backgroundColor = 'inherit';
+		resetEl.style.borderRadius = '0';
+	}}
 	on:click={async () => {
 		//@ts-ignore
 		clearInterval(intervalId);
@@ -464,10 +557,11 @@
 		});
 		setGameState('waiting');
 
-		inputEl.focus();
+		$inputEl.focus();
 		for (let i = 0; i < $wordsArr.length; i++) {
 			for (let j = 0; j < $wordsArr[i].length; j++) {
-				wordsEl.children[i].children[j].className = textVar.unhighlighted;
+				// console.log(wordsEl.children[i].children[j].children[0]);
+				wordsEl.children[i].children[j].children[0].className = textVar.unhighlighted;
 			}
 		}
 	}}
@@ -495,17 +589,23 @@
 
 			for (let i = 0; i < $wordsArr.length; i++) {
 				for (let j = 0; j < $wordsArr[i].length; j++) {
-					wordsEl.children[i].children[j].className = textVar.unhighlighted;
+					wordsEl.children[i].children[j].replaceChildren(
+						wordsEl.children[i].children[j].children[0]
+					);
+					wordsEl.children[i].children[j].children[0].className = textVar.unhighlighted;
 				}
 			}
-			inputEl.focus();
+			$inputEl.focus();
 		}
 	}}
 >
 	<ResetSvg
-		variant={{ highlighted: `focus:${textVar.highlighted}`, unhighlighted: textVar.unhighlighted }}
+		variant={{
+			highlighted: ``,
+			unhighlighted: ''
+		}}
 	/>
-</span>
+</a>
 
 <style>
 	@keyframes blink {
