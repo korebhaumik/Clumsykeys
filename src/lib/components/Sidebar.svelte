@@ -8,27 +8,15 @@
 	const notifs = [
 		{
 			type: 'info',
-			message: 'Engine version: 1.1, Node-version: 20.2.0,'
+			message: 'Engine version: 1.3, Node-version: 20.2.0,'
 		},
 		{
 			type: 'warning',
 			message: 'Warning: Unwanted unchecked listners due to chrome extensions.'
 		},
 		{
-			type: 'warning',
-			message: 'Warning: Make results wala route protected.'
-		},
-		{
-			type: 'error',
-			message: 'Bug #4 space and backspace glitch on mobile'
-		},
-		{
 			type: 'info',
 			message: 'New feature: Frost theme'
-		},
-		{
-			type: 'info',
-			message: 'New feature: Mobile support'
 		},
 		{
 			type: 'error',
@@ -36,7 +24,7 @@
 		},
 		{
 			type: 'warning',
-			message: 'Warning: Customevents interface is not yet implemented.'
+			message: 'Warning: Make separate stores'
 		},
 		{
 			type: 'warning',
@@ -45,6 +33,10 @@
 		{
 			type: 'error',
 			message: 'Bug #21 Caret animation lag on safari.'
+		},
+		{
+			type: 'info',
+			message: 'New feature: Implement caching for different languages.'
 		},
 		{
 			type: 'info',
@@ -59,7 +51,7 @@
 
 <!-- {#if isVisible} -->
 <div
-	class="w-80 bg-dark-forest-primary text-dark-forest-highlighted absolute h-screen right-0 top-0 px-5 z-20"
+	class="w-80 bg-dark-forest-highlighted text-dark-forest-primary absolute h-screen right-0 top-0 px-5 z-20"
 	transition:fly={{ duration: 400, x: 200 }}
 >
 	<div class="flex mt-10">
