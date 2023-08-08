@@ -10,7 +10,6 @@ import type {
 	ModalCounterParams
 } from './storeTypes';
 
-
 // let inputEl: HTMLInputElement;
 
 export let inputEl = writable({} as HTMLInputElement);
@@ -119,8 +118,6 @@ interface timeDataType {
 	raw: number;
 }
 
-
-
 export const game = writable('waiting' as GameState);
 
 export function setGameState(state: GameState) {
@@ -137,7 +134,7 @@ export const timeDataArr = writable([
 		rawChars: 0,
 		incorrectChars: 0,
 		wpm: 0,
-		raw: 0,
+		raw: 0
 	}
 ] as timeDataType[]);
 
@@ -163,7 +160,7 @@ export function createTimer() {
 				// console.log(timeLog!.wpm);
 
 				temp = (timeLog!.rawChars / 5) * 60;
-				timeLog!.raw = Math.floor((temp + prev.at(- 2)!.raw) / 2);
+				timeLog!.raw = Math.floor((temp + prev.at(-2)!.raw) / 2);
 			} else {
 				let temp = (timeLog!.correctChars / 5) * 60;
 				tempArr.push(temp);
@@ -180,16 +177,19 @@ export function createTimer() {
 			return [...prev];
 		});
 
-		timeDataArr.update(prev => {
-			return [...prev, {
-				//Change value of 20
-				time: tempCount + 2,
-				correctChars: 0,
-				rawChars: 0,
-				incorrectChars: 0,
-				wpm: -1,
-				raw: -1
-			}]
+		timeDataArr.update((prev) => {
+			return [
+				...prev,
+				{
+					//Change value of 20
+					time: tempCount + 2,
+					correctChars: 0,
+					rawChars: 0,
+					incorrectChars: 0,
+					wpm: -1,
+					raw: -1
+				}
+			];
 		});
 		tempCount++;
 		count.set(tempCount);
@@ -199,7 +199,7 @@ export function createTimer() {
 
 export const incorrectCharCount = writable(0 as number);
 export const charCount = writable(0 as number);
-export const testStatus = writable("protected" as "protected" | "valid" | "invalid");
+export const testStatus = writable('protected' as 'protected' | 'valid' | 'invalid');
 
 export function resetTest() {
 	// TimerCount.set(-1);
@@ -244,31 +244,107 @@ interface wordsDataType {
 	endTime: number;
 }
 export const wordsArr = writable([] as string[]);
-export const wordsCache = writable([] as string[]);
+export const WordsCache = writable({
+	english: [] as string[],
+	'english 1k': [] as string[],
+	'english 5k': [] as string[],
+	'code python': [] as string[],
+	'code javascript': [] as string[],
+	hindi: [] as string[],
+	quotes: [] as string[]
+});
 
+// export async function getWords(limit: number, config: getWordsConfig) {
+// 	const response = await fetch(`/api/words?limit=${limit}&lang=${config.lang ?? 'english'}&type=${config.type ?? 'words'}&isPunctuation=${config.isPunctuation ?? false}&isNumber=${config.isNumber ?? false}`);
+// 	// const response = await fetch(`/api/words?limit=${limit}&lang=${lang}&type=${type}&isPunctuation=true&isNumber=true`);
+// 	wordsArr.set(await response.json());
+
+// 	// wordsCache.subscribe(async(words) => {
+// 	// 	if(words.length === 0) {
+
+// 	// 		wordsCache.set(await response.json());
+// 	// 		return;
+// 	// 	}
+// 	// 	return words;
+
+// 	// 	// console.log(words);
+// 	// });
+// }
 
 export async function getWords(limit: number, config: getWordsConfig) {
-	const response = await fetch(`/api/words?limit=${limit}&lang=${config.lang ?? 'english'}&type=${config.type ?? 'words'}&isPunctuation=${config.isPunctuation ?? false}&isNumber=${config.isNumber ?? false}`);
-	// const response = await fetch(`/api/words?limit=${limit}&lang=${lang}&type=${type}&isPunctuation=true&isNumber=true`);
-	wordsArr.set(await response.json());
-	
-	// wordsCache.subscribe(async(words) => {
-	// 	if(words.length === 0) {
+	WordsCache.subscribe(async (lang) => {
+		if (config.type === 'quotes') {
+			console.log('api request');
+			const response = await fetch(
+				`/api/words?limit=${limit}&lang=${config.lang ?? 'english'}&type=quotes`
+			);
+			const words = await response.json();
+			// WordsCache.update((prev) => {
+			// 	return { ...prev, quotes: words };
+			// });
+			wordsArr.set(words);
+			return;
+		}
+		if (lang[config.lang].length === 0) {
+			console.log('api request');
+			const response = await fetch(`/api/words?limit=${limit}&lang=${config.lang ?? 'english'}`);
+			const words = await response.json();
+			WordsCache.update((prev) => {
+				return { ...prev, [config.lang]: words };
+			});
+			return;
+		}
+		if (config.isPunctuation === true) {
+			let k = 0;
+			const super_common_punctuations = ['.', ',', ';', ':', '?', '!'];
+			let words = lang[config.lang];
+			for (let i = 0; i < words.length / 4; i++) {
+				let temp = k + Math.floor(Math.random() * 4);
+				words[temp] =
+					lang[config.lang][temp] + super_common_punctuations[Math.floor(Math.random() * 6)];
+				k += 4;
+			}
+			wordsArr.set(words.slice(0, limit ?? 200).sort(() => 0.5 - Math.random()));
+			return;
+		}
+		if (config.isNumber === true) {
+			let t = 0;
+			let words = lang[config.lang];
+			for (let i = 0; i < words.length / 5; i++) {
+				let tempNum = getRandomNum();
+				let tempIndex = t + Math.floor(Math.random() * 5);
+				words.splice(tempIndex, 0, tempNum.toString());
+				t += 5;
+			}
+			wordsArr.set(words.slice(0, limit ?? 200).sort(() => 0.5 - Math.random()));
+			return;
+		}
+		wordsArr.set(lang[config.lang].slice(0, limit ?? 200).sort(() => 0.5 - Math.random()));
+		return;
+		// console.log(words);
+	});
+}
 
-	// 		wordsCache.set(await response.json());
-	// 		return;
-	// 	}
-	// 	return words;
-
-	// 	// console.log(words);
-	// });
-
+function getRandomNum() {
+	const RandomType = Math.floor(Math.random() * 4 + 1);
+	if (RandomType === 1) {
+		return Math.floor(Math.random() * 10 + 1);
+	}
+	if (RandomType === 2) {
+		return Math.floor(Math.random() * 100 + 1);
+	}
+	if (RandomType === 3) {
+		return Math.floor(Math.random() * 1000 + 1);
+	}
+	if (RandomType === 4) {
+		return Math.floor(Math.random() * 10000 + 1);
+	}
+	return 77;
 }
 
 type getWordsConfig = {
-	lang: LangParams,
-	type?: "quotes" | "words",
-	isPunctuation?: boolean,
-	isNumber?: boolean
-}
-
+	lang: LangParams;
+	type?: 'quotes' | 'words';
+	isPunctuation?: boolean;
+	isNumber?: boolean;
+};
