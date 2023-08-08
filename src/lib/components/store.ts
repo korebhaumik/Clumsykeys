@@ -297,11 +297,10 @@ export async function getWords(limit: number, config: getWordsConfig) {
 		if (config.isPunctuation === true) {
 			let k = 0;
 			const super_common_punctuations = ['.', ',', ';', ':', '?', '!'];
-			let words = lang[config.lang];
+			let words = [...lang[config.lang]];
 			for (let i = 0; i < words.length / 4; i++) {
 				let temp = k + Math.floor(Math.random() * 4);
-				words[temp] =
-					lang[config.lang][temp] + super_common_punctuations[Math.floor(Math.random() * 6)];
+				words[temp] = words[temp] + super_common_punctuations[Math.floor(Math.random() * 6)];
 				k += 4;
 			}
 			wordsArr.set(words.slice(0, limit ?? 200).sort(() => 0.5 - Math.random()));
@@ -309,7 +308,7 @@ export async function getWords(limit: number, config: getWordsConfig) {
 		}
 		if (config.isNumber === true) {
 			let t = 0;
-			let words = lang[config.lang];
+			let words = [...lang[config.lang]];
 			for (let i = 0; i < words.length / 5; i++) {
 				let tempNum = getRandomNum();
 				let tempIndex = t + Math.floor(Math.random() * 5);
