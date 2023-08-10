@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { contentHeight, footerEl, resetTest, setGameState } from '$lib/components/store';
-	import { fade } from 'svelte/transition';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
-	import { page } from '$app/stores';
 	import {
 		theme,
 		timeDataArr,

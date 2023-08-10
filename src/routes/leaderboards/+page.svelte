@@ -2,18 +2,21 @@
 	import img from '$lib/assets/404_monkey.webp';
 	import { fade } from 'svelte/transition';
 	import { browser } from '$app/environment';
-	import { contentHeight, theme } from '$lib/components/store';
+	import { contentHeight, footerEl, theme } from '$lib/components/store';
 	import { goto } from '$app/navigation';
 	import LeaderboardTable from '$lib/components/LeaderboardTable.svelte';
 
 	import { onMount } from 'svelte';
 
 	onMount(() => {
-		contentHeight.set(100);
+		$footerEl.style.position = 'absolute';
 	});
 </script>
 
-<div class={`mt-5 text-dark-forest-highlighted`} in:fade={{ duration: 100, delay: 400 }}>
+<div
+	class={`mt-5 text-dark-forest-highlighted`}
+	in:fade={{ duration: 100, delay: 400 }}
+>
 	<div class="flex justify-between items-center">
 		<div>
 			<h1 class="text-lg">All Time English Leaderboards</h1>
