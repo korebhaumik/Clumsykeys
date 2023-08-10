@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import DiscordSvg from '../assets/DiscordSVG.svelte';
 	import DocumentSvg from '../assets/DocumentSVG.svelte';
 	import DollarSvg from '../assets/DollarSVG.svelte';
@@ -6,8 +6,9 @@
 	import LockSvg from '../assets/LockSVG.svelte';
 	import MailSvg from '../assets/MailSVG.svelte';
 	import ShieldSvg from '../assets/ShieldSVG.svelte';
-	import { theme, game,testStatus } from '$lib/components/store';
+	import { theme, game, testStatus } from '$lib/components/store';
 	import { page } from '$app/stores';
+	import { contentHeight } from '$lib/components/store';
 
 	const bgVar = {
 		command: 'bg-dark-forest-command-bg'
@@ -37,12 +38,46 @@
 		if ($game === 'playing') opac = 'opacity-0';
 		if ($game != 'playing') opac = 'opacity-100';
 	}
+	// const arr
+	import { footerEl, footerTop } from '$lib/components/store';
+	import { onMount } from 'svelte';
+	// let footerEl: HTMLElement;
+	$: {
+		if ($footerEl.offsetTop) {
+			// console.log($footerEl.offsetTop);
+			footerTop.set($footerEl.offsetTop);
+		}
+		// console.log(height)
+	}
+
+	let footerHeight = 0;
+	let innerWidth = 0;
+	let innerHeight = 0;
+	let outerHeight = 0;
+	// const contentHeight = 0;
+	let bodyHeight;
+
+	// onMount(() => {
+	// 	console.log($contentHeight);
+	// 	!($contentHeight > innerHeight - footerHeight - 100)
+	// 		? ($footerEl.style.position = 'absolute')
+	// 		: ($footerEl.style.position = 'relative');
+	// });
+	$: bool = $contentHeight > innerHeight - footerHeight;
+	// $: contentHeight > innerHeight - footerHeight? $footerEl.className = 'absolute': $footerEl.className = 'relative';
+	// console.log(bool);
 </script>
 
+<!-- $page.url.pathname == '/result' && $testStatus == 'valid' -->
+<svelte:window bind:innerWidth bind:innerHeight />
+<svelte:body bind:offsetHeight={bodyHeight} />
+<!-- <h1>{innerHeight}</h1>
+<h1>{bool}</h1>
+<h1>{footerHeight}</h1> -->
 <div
-	class={`${
-		$page.url.pathname == '/result' && $testStatus == 'valid' ? 'mb-10' : 'absolute'
-	} mx-auto mt-10 bottom-10 w-fit big:w-full big:bottom-10 big:max-w-6xl big:mx-auto`}
+	class={`${''} mx-auto mt-10 bottom-10 w-fit big:w-full big:bottom-10 big:max-w-6xl big:mx-auto`}
+	bind:this={$footerEl}
+	bind:offsetHeight={footerHeight}
 >
 	<!-- commands -->
 	<div class="mb-5 text-sm sm:text-base">
@@ -82,7 +117,10 @@
 
 	<div class={`flex items-center ${textVar.credits} ${opac} justify-between w-fit big:w-auto`}>
 		<div class={`flex w-80 md:w-[40rem] flex-wrap justify-between font-semibold`}>
-			<a href="mailto:bhaumik.kore31@gmail.com" class="flex items-center transition cursor-pointer hover:text-cardboard-900">
+			<a
+				href="mailto:bhaumik.kore31@gmail.com"
+				class="flex items-center transition cursor-pointer hover:text-cardboard-900"
+			>
 				<MailSvg />
 				<span class="ml-1.5 text-xs">Contact</span>
 			</a>

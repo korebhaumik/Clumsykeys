@@ -13,6 +13,16 @@ import type {
 // let inputEl: HTMLInputElement;
 
 export let inputEl = writable({} as HTMLInputElement);
+export let footerEl = writable({} as HTMLElement);
+export let footerTop = writable(350 as number);
+export let contentEl = writable({} as HTMLElement);
+export let contentHeight = writable(0 as number);
+
+// footerEl.subscribe((el) => {
+// 	if (el.offsetTop) {
+// 		footerTop.set(el.offsetTop);
+// 	}
+// });
 
 // export const count = writable(0);
 export const theme = writable('dark-forest' as 'cardboard' | 'dark-forest' | 'sapphire');

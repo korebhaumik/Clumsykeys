@@ -2,11 +2,10 @@
 	import { goto } from '$app/navigation';
 	import { blur, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	import { charCount, theme, inputEl } from './store';
+	import { charCount, theme, inputEl, contentHeight, footerEl } from './store';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
 	import PlaySvg from '$lib/assets/PlaySVG.svelte';
 	import { game, setGameState, incorrectCharCount, testStatus } from './store';
-	import { page } from '$app/stores';
 	import {
 		createTimer,
 		resetTest,
@@ -20,6 +19,14 @@
 
 	import { newTextConfig } from './store';
 	import { getWords, wordsArr } from './store';
+
+	onMount(() => {
+		contentHeight.set(0);
+		console.log($contentHeight);
+		!($contentHeight > innerHeight - 60 - 100)
+			? ($footerEl.style.position = 'absolute')
+			: ($footerEl.style.position = 'relative');
+	});
 
 	$: lang = $newTextConfig.language.value;
 	$: type = $newTextConfig.quotes.isHighlighted === true ? 'quotes' : 'words';
@@ -146,7 +153,7 @@
 			} else {
 				testStatus.set('valid');
 			}
-			// console.log($count);
+			console.log($count);
 			(async () => {
 				// console.log(letterIndex, wordIndex);
 				clearInterval(intervalId as number);
@@ -521,7 +528,9 @@
 				isBlur = false;
 			}}
 		>
-			<div class="text-white flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+			<div
+				class="text-white flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+			>
 				<PlaySvg />
 				<span>Click here or press tab to focus.</span>
 			</div>

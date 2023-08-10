@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { resetTest, setGameState } from '$lib/components/store';
+	import { contentHeight, footerEl, resetTest, setGameState } from '$lib/components/store';
 	import { fade } from 'svelte/transition';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
 	import { page } from '$app/stores';
@@ -59,6 +59,20 @@
 
 		return () => document.removeEventListener('keydown', myfunction);
 	});
+	let offsetHeight = 0;
+	let innerHeight = 0;
+
+	onMount(() => {
+		contentHeight.set(offsetHeight);
+		console.log($contentHeight);
+		console.log(innerHeight);
+		const bool = !($contentHeight > innerHeight - 60 - 60);
+		// console.log();
+		!($contentHeight > innerHeight - 60 - 200)
+			? ($footerEl.style.position = 'absolute')
+			: ($footerEl.style.position = 'relative');
+	});
+
 	$: wpm = $timeDataArr.at(-1)!.wpm;
 	const sum = $timeDataArr.reduce((total, ele) => total + ele.raw, 0);
 	$: avgRaw = Math.ceil(sum / $timeDataArr.length);
@@ -86,140 +100,143 @@
 	const accuracy = Math.floor((($charCount - $incorrectCharCount) * 100) / $charCount);
 </script>
 
+<svelte:window bind:innerHeight />
 {#if $testStatus === 'valid'}
-	<div class={`mt-10 ${textVar.unhighlighted} justify-between sm:flex w-full`}>
-		<div class="flex items-center sm:flex-col sm:items-start">
-			<div class="w-fit">
-				<p class="text-2xl">wpm</p>
-				<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>{wpm}</h1>
+	<div bind:offsetHeight>
+		<div class={`mt-10 ${textVar.unhighlighted} justify-between sm:flex w-full`}>
+			<div class="flex items-center sm:flex-col sm:items-start">
+				<div class="w-fit">
+					<p class="text-2xl">wpm</p>
+					<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>{wpm}</h1>
+				</div>
+				<div class="ml-10 sm:ml-0 sm:mt-2 mr-10">
+					<p class="text-2xl">acc</p>
+					<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>
+						{accuracy}%
+					</h1>
+				</div>
 			</div>
-			<div class="ml-10 sm:ml-0 sm:mt-2 mr-10">
-				<p class="text-2xl">acc</p>
-				<h1 class={`text-5xl mt-1 ${textVar['accent-main']}`}>
-					{accuracy}%
-				</h1>
-			</div>
-		</div>
-		<div class="w-full mt-10 sm:mt-0">
-			<Graph />
-		</div>
-	</div>
-	<div class={`mt-10 justify-between flex flex-wrap w-full ${textVar.unhighlighted}`}>
-		<div>
-			<h1>test type</h1>
-			<div class={`${textVar['accent-main']} mt-2  text-base font-semibold`}>
-				{#if $newTextConfig.time.isHighlighted}
-					<p>time {$newTextConfig.time.value}</p>
-				{:else if $newTextConfig.words.isHighlighted}
-					<p>words {$newTextConfig.words.value}</p>
-				{:else}
-					<p>random quotes</p>
-				{/if}
-				<p>{$newTextConfig.language.value}</p>
-				<p>{$newTextConfig.punctuations ? 'punctuations' : 'no punctuations'}</p>
-				<p>{$newTextConfig.numbers ? 'numbers' : 'no numbers'}</p>
+			<div class="w-full mt-10 sm:mt-0">
+				<Graph />
 			</div>
 		</div>
-		<div>
-			<h1>raw</h1>
-			<div class={`${textVar['accent-main']} mt-2  text-sm`}>
-				<p class="text-3xl">{avgRaw}</p>
+		<div class={`mt-10 justify-between flex flex-wrap w-full ${textVar.unhighlighted}`}>
+			<div>
+				<h1>test type</h1>
+				<div class={`${textVar['accent-main']} mt-2  text-base font-semibold`}>
+					{#if $newTextConfig.time.isHighlighted}
+						<p>time {$newTextConfig.time.value}</p>
+					{:else if $newTextConfig.words.isHighlighted}
+						<p>words {$newTextConfig.words.value}</p>
+					{:else}
+						<p>random quotes</p>
+					{/if}
+					<p>{$newTextConfig.language.value}</p>
+					<p>{$newTextConfig.punctuations ? 'punctuations' : 'no punctuations'}</p>
+					<p>{$newTextConfig.numbers ? 'numbers' : 'no numbers'}</p>
+				</div>
+			</div>
+			<div>
+				<h1>raw</h1>
+				<div class={`${textVar['accent-main']} mt-2  text-sm`}>
+					<p class="text-3xl">{avgRaw}</p>
+				</div>
+			</div>
+			<div>
+				<h1>characters</h1>
+				<div class={`${textVar['accent-main']} mt-2  text-sm`}>
+					<!-- <p class="text-3xl">{inputHistory.length * 4}/0/0</p> -->
+					<p class="text-3xl">{$charCount}/{$incorrectCharCount}/0</p>
+				</div>
+			</div>
+			<div>
+				<h1>wpm standard deviation</h1>
+				<div class={`${textVar['accent-main']} mt-2 text-sm`}>
+					<p class="text-3xl">{standardDeviation}</p>
+				</div>
+			</div>
+			<div>
+				<h1>session</h1>
+				<div class={`${textVar['accent-main']} mt-2  text-sm`}>
+					<p class="text-3xl">{$timeDataArr.at(-1)?.time} s</p>
+				</div>
 			</div>
 		</div>
-		<div>
-			<h1>characters</h1>
-			<div class={`${textVar['accent-main']} mt-2  text-sm`}>
-				<!-- <p class="text-3xl">{inputHistory.length * 4}/0/0</p> -->
-				<p class="text-3xl">{$charCount}/{$incorrectCharCount}/0</p>
-			</div>
-		</div>
-		<div>
-			<h1>wpm standard deviation</h1>
-			<div class={`${textVar['accent-main']} mt-2 text-sm`}>
-				<p class="text-3xl">{standardDeviation}</p>
-			</div>
-		</div>
-		<div>
-			<h1>session</h1>
-			<div class={`${textVar['accent-main']} mt-2  text-sm`}>
-				<p class="text-3xl">{$timeDataArr.at(-1)?.time} s</p>
-			</div>
-		</div>
-	</div>
 
-	<!-- <p class="my-16 text-2xl text-dark-forest-accent-main" in:fade={{}}>
+		<!-- <p class="my-16 text-2xl text-dark-forest-accent-main" in:fade={{}}>
 		wpm: {wpm}
 		<br />
 		raw: {raw}
 	</p> -->
 
-	<!-- svelte-ignore a11y-positive-tabindex -->
-	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-	<a
-		class={`z-50 block mx-auto my-5 w-fit text-dark-forest-unhighlighted outline-none border-none `}
-		type="button"
-		href="/"
-		bind:this={resetButton}
-		on:click={async (e) => {
-			// console.log('click')
-			// testStatus.set('protected');
-			e.preventDefault();
-			resetTest();
-			document.removeEventListener('keydown', myfunction);
-			setGameState('waiting');
-			await goto('/');
-		}}
-		on:focus={() => {
-			resetButton.style.color = 'white';
-			resetButton.style.backgroundColor = '#242A2D';
-			resetButton.style.borderRadius = '0.375rem';
-		}}
-		on:blur={() => {
-			resetButton.style.color = 'gray';
-			resetButton.style.backgroundColor = 'inherit';
-			resetButton.style.borderRadius = '0';
-		}}
-	>
-		<ResetSvg
-			variant={{
-				highlighted: ``,
-				unhighlighted: ''
+		<!-- svelte-ignore a11y-positive-tabindex -->
+		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+		<a
+			class={`z-50 block mx-auto my-5 w-fit text-dark-forest-unhighlighted outline-none border-none `}
+			type="button"
+			href="/"
+			bind:this={resetButton}
+			on:click={async (e) => {
+				// console.log('click')
+				// testStatus.set('protected');
+				e.preventDefault();
+				resetTest();
+				document.removeEventListener('keydown', myfunction);
+				setGameState('waiting');
+				await goto('/');
 			}}
-		/>
-	</a>
-
-	<div class="flex items-center text-dark-forest-unhighlighted">
-		<h1 class="text-white">input history</h1>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<button
-			on:click={() => {
-				navigator.clipboard.writeText($wordsArr.join(' '));
+			on:focus={() => {
+				resetButton.style.color = 'white';
+				resetButton.style.backgroundColor = '#242A2D';
+				resetButton.style.borderRadius = '0.375rem';
+			}}
+			on:blur={() => {
+				resetButton.style.color = 'gray';
+				resetButton.style.backgroundColor = 'inherit';
+				resetButton.style.borderRadius = '0';
 			}}
 		>
-			<ClipboardSvg variant="w-5 h-5 ml-2" />
-		</button>
-		<FireSvg variant="w-5 h-5 ml-2" />
-		<div class="flex text-xs leading-none text-black font-semibold rounded-lg ml-2">
-			<span class="px-2 py-1 pt-1.5 rounded-l bg-dark-forest-accent-error">0-30</span>
-			<span class={`px-2 py-1 pt-1.5 bg-[#DBA9A1]`}>30-60</span>
-			<span class="px-2 py-1 pt-1.5 bg-white">60-90</span>
-			<span class="px-2 py-1 pt-1.5 bg-[#CFE4C6]">90-120</span>
-			<span class="px-2 py-1 pt-1.5 rounded-r bg-dark-forest-accent-main">120+</span>
+			<ResetSvg
+				variant={{
+					highlighted: ``,
+					unhighlighted: ''
+				}}
+			/>
+		</a>
+
+		<div class="flex items-center text-dark-forest-unhighlighted">
+			<h1 class="text-white">input history</h1>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<button
+				on:click={() => {
+					navigator.clipboard.writeText($wordsArr.join(' '));
+				}}
+			>
+				<ClipboardSvg variant="w-5 h-5 ml-2" />
+			</button>
+			<FireSvg variant="w-5 h-5 ml-2" />
+			<div class="flex text-xs leading-none text-black font-semibold rounded-lg ml-2">
+				<span class="px-2 py-1 pt-1.5 rounded-l bg-dark-forest-accent-error">0-30</span>
+				<span class={`px-2 py-1 pt-1.5 bg-[#DBA9A1]`}>30-60</span>
+				<span class="px-2 py-1 pt-1.5 bg-white">60-90</span>
+				<span class="px-2 py-1 pt-1.5 bg-[#CFE4C6]">90-120</span>
+				<span class="px-2 py-1 pt-1.5 rounded-r bg-dark-forest-accent-main">120+</span>
+			</div>
 		</div>
-	</div>
-	<!-- <div class={`text-white mt-2`}>
+		<!-- <div class={`text-white mt-2`}>
 		{#each $wordsArr.slice(0, $GlobalWordsDataArr.length) as word}
 			<span class={`mr-2`}>
 				{word}
 			</span>
 		{/each}
 	</div> -->
-	<div class={`text-white mt-2`}>
-		{#each inputHistory.slice(0, inputHistory.length) as ele}
-			<span class={`mr-2 ${ele.style}`} title={`wpm: ${ele.wpm}`}>
-				{ele.word}
-			</span>
-		{/each}
+		<div class={`text-white mt-2 mb-20`}>
+			{#each inputHistory.slice(0, inputHistory.length) as ele}
+				<span class={`mr-2 ${ele.style}`} title={`wpm: ${ele.wpm}`}>
+					{ele.word}
+				</span>
+			{/each}
+		</div>
 	</div>
 	<!-- <p class="text-white">{$wordsArr}</p> -->
 {:else if $testStatus === 'invalid'}

@@ -17,6 +17,7 @@
 				updateModalVisibility(false);
 			}
 		});
+		
 		// document.body.style.backgroundColor = '#EDEBE3';
 	});
 	let k = '';
