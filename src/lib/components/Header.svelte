@@ -28,18 +28,24 @@
 
 			<div class="flex flex-col items-start ml-3 font-normal font-poppins">
 				<span
-					class={cn(`text-xs sm:text-sm leading-none ml-0.5 sm:-mb-1.5 transition text-dark-forest-logo-text-subheading`, {
-						'text-dark-forest-logo-text-subheading': $theme === 'dark-forest',
-						'text-cardboard-logo-text-subheading': $theme === 'cardboard',
-						'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
-					})}>cleverly clumsy</span
+					class={cn(
+						`text-xs sm:text-sm leading-none ml-0.5 sm:-mb-1.5 transition text-dark-forest-logo-text-subheading`,
+						{
+							'text-dark-forest-logo-text-subheading': $theme === 'dark-forest',
+							'text-cardboard-logo-text-subheading': $theme === 'cardboard',
+							'text-dark-forest-unhighlighted': $game === 'playing'
+						}
+					)}>cleverly clumsy</span
 				>
 				<span
-					class={cn(`leading-none text-2xl sm:text-3xl transition text-dark-forest-logo-text-heading `, {
-						'text-dark-forest-logo-text-heading': $theme === 'dark-forest',
-						'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest',
-						'text-cardboard-logo-text-heading': $theme === 'cardboard'
-					})}>clumsykeys</span
+					class={cn(
+						`leading-none text-2xl sm:text-3xl transition text-dark-forest-logo-text-heading `,
+						{
+							'text-dark-forest-logo-text-heading': $theme === 'dark-forest',
+							'text-dark-forest-unhighlighted': $game === 'playing',
+							'text-cardboard-logo-text-heading': $theme === 'cardboard'
+						}
+					)}>clumsykeys</span
 				>
 			</div>
 		</div>
@@ -50,7 +56,7 @@
 				href="/"
 				class={cn('transition text-dark-forest-accent-red', {
 					'text-dark-forest-accent-red': $theme === 'dark-forest',
-					'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
+					'text-dark-forest-unhighlighted': $game === 'playing'
 				})}
 				data-sveltekit-preload-code
 			>
@@ -60,7 +66,7 @@
 				href={$game === 'playing' ? '' : '/leaderboards'}
 				class={cn('transition text-dark-forest-accent-purple', {
 					'text-dark-forest-accent-purple': $theme === 'dark-forest',
-					'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
+					'text-dark-forest-unhighlighted': $game === 'playing'
 				})}
 				data-sveltekit-preload-code
 			>
@@ -70,7 +76,7 @@
 				href="/"
 				class={cn('transition text-dark-forest-accent-yellow', {
 					'text-dark-forest-accent-yellow': $theme === 'dark-forest',
-					'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
+					'text-dark-forest-unhighlighted': $game === 'playing'
 				})}
 			>
 				<InfoSvg />
@@ -80,7 +86,7 @@
 				href=""
 				class={cn('transition text-dark-forest-accent-green', {
 					'text-dark-forest-accent-green': $theme === 'dark-forest',
-					'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
+					'text-dark-forest-unhighlighted': $game === 'playing'
 				})}
 				on:click={() => {
 					if ($game === 'playing') return;
