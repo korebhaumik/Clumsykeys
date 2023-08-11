@@ -22,7 +22,6 @@
 
 	onMount(() => {
 		contentHeight.set(0);
-		console.log($contentHeight);
 		!($contentHeight > innerHeight - 60 - 100)
 			? ($footerEl.style.position = 'absolute')
 			: ($footerEl.style.position = 'relative');

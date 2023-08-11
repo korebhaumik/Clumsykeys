@@ -1,9 +1,6 @@
 <script lang="ts">
-	import img from '$lib/assets/404_monkey.webp';
 	import { fade } from 'svelte/transition';
-	import { browser } from '$app/environment';
-	import { contentHeight, footerEl, theme } from '$lib/components/store';
-	import { goto } from '$app/navigation';
+	import { footerEl} from '$lib/components/store';
 	import LeaderboardTable from '$lib/components/LeaderboardTable.svelte';
 
 	import { onMount } from 'svelte';

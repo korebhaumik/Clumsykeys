@@ -60,15 +60,17 @@
 	let offsetHeight = 0;
 	let innerHeight = 0;
 
-	onMount(() => {
-		contentHeight.set(offsetHeight);
-		console.log($contentHeight);
-		console.log(innerHeight);
-		const bool = !($contentHeight > innerHeight - 60 - 60);
-		// console.log();
+	const handleDynamicFooter = () => {
 		!($contentHeight > innerHeight - 60 - 200)
 			? ($footerEl.style.position = 'absolute')
 			: ($footerEl.style.position = 'relative');
+	};
+
+	onMount(() => {
+		contentHeight.set(offsetHeight);
+		handleDynamicFooter();
+		window.addEventListener('resize', handleDynamicFooter, true);
+		() => window.removeEventListener('resize', handleDynamicFooter, true);
 	});
 
 	$: wpm = $timeDataArr.at(-1)!.wpm;
@@ -160,12 +162,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- <p class="my-16 text-2xl text-dark-forest-accent-main" in:fade={{}}>
-		wpm: {wpm}
-		<br />
-		raw: {raw}
-	</p> -->
 
 		<!-- svelte-ignore a11y-positive-tabindex -->
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
