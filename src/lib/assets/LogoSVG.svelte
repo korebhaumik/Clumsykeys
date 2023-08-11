@@ -8,7 +8,7 @@
 	height="33"
 	viewBox="0 0 51 33"
 	fill="currentColor"
-	class={cn('', {
+	class={cn('text-dark-forest-logo-icon-fg', {
 		'text-dark-forest-logo-icon-fg': $theme === 'dark-forest',
 		'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
 	})}
@@ -22,7 +22,7 @@
 			width="44.2308"
 			height="27.6442"
 			rx="2"
-			class={cn('', {
+			class={cn('fill-dark-forest-logo-icon-bg', {
 				'fill-dark-forest-logo-icon-bg': $theme === 'dark-forest',
 				'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
 			})}
