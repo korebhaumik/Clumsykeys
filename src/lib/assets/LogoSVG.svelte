@@ -10,7 +10,7 @@
 	fill="currentColor"
 	class={cn('text-dark-forest-logo-icon-fg', {
 		'text-dark-forest-logo-icon-fg': $theme === 'dark-forest',
-		'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
+		'text-dark-forest-unhighlighted': $game === 'playing' 
 	})}
 	xmlns="http://www.w3.org/2000/svg"
 >
@@ -24,7 +24,7 @@
 			rx="2"
 			class={cn('fill-dark-forest-logo-icon-bg', {
 				'fill-dark-forest-logo-icon-bg': $theme === 'dark-forest',
-				'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
+				'text-dark-forest-unhighlighted': $game === 'playing' 
 			})}
 			fill="currentColor"
 		/>
