@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let fg:string = 'text-cardboard-logo-icon-fg';
-	export let bg:string = 'text-cardboard-logo-icon-bg';
+	import { theme, game } from '$lib/components/store';
+	import cn from '$lib/utils';
 </script>
 
 <svg
@@ -8,7 +8,10 @@
 	height="33"
 	viewBox="0 0 51 33"
 	fill="currentColor"
-	class={fg}
+	class={cn('', {
+		'text-dark-forest-logo-icon-fg': $theme === 'dark-forest',
+		'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
+	})}
 	xmlns="http://www.w3.org/2000/svg"
 >
 	<g id="Logo">
@@ -19,7 +22,10 @@
 			width="44.2308"
 			height="27.6442"
 			rx="2"
-            class={bg}
+			class={cn('', {
+				'fill-dark-forest-logo-icon-bg': $theme === 'dark-forest',
+				'text-dark-forest-unhighlighted': $game === 'playing' && $theme === 'dark-forest'
+			})}
 			fill="currentColor"
 		/>
 		<g id="keyboard">

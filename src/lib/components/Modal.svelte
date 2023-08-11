@@ -254,6 +254,9 @@
 						</div>
 						<div class="flex flex-col items-start w-full py-3 text-sm">
 							<button
+								on:click={() => {
+									// theme.set('cardboard');
+								}}
 								class="w-full py-2 px-5 flex justify-between text-left align-baseline hover:bg-cardboard-300"
 							>
 								<span>cardboard (disabled temporarily)</span>
@@ -471,7 +474,7 @@
 					<!-- Settings -->
 					<div>
 						<div class="flex px-5 pt-4">
-							<SettingsSvg variant="" />
+							<SettingsSvg />
 							<h1 class="ml-2 font-medium">Settings Menu</h1>
 						</div>
 						<div class="flex flex-col items-start w-full py-3 text-sm">
@@ -563,7 +566,7 @@
 									goto('/leaderboards');
 								}}
 							>
-								<RocketSvg variant="" />
+								<RocketSvg />
 								<span class="ml-2">Leaderboards</span></button
 							>
 						</div>

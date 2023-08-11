@@ -6,76 +6,27 @@
 	import LockSvg from '../assets/LockSVG.svelte';
 	import MailSvg from '../assets/MailSVG.svelte';
 	import ShieldSvg from '../assets/ShieldSVG.svelte';
-	import { theme, game, testStatus } from '$lib/components/store';
+	import { theme, game } from '$lib/components/store';
 	import { page } from '$app/stores';
-	import { contentHeight } from '$lib/components/store';
-
-	const bgVar = {
-		command: 'bg-dark-forest-command-bg'
-	};
-	const textVar = {
-		unhighlighted: 'text-dark-forest-unhighlighted',
-		highlighted: 'text-dark-forest-highlighted',
-		'command-text': 'text-dark-forest-command-text',
-		credits: `text-dark-forest-credits`
-	};
-	let opac = 'opacity-100';
-	$: {
-		if ($theme === 'dark-forest') {
-			bgVar.command = 'bg-dark-forest-command-bg';
-			textVar['command-text'] = 'text-dark-forest-command-text';
-			textVar.credits = `text-dark-forest-credits`;
-			textVar.highlighted = 'text-dark-forest-highlighted';
-		}
-		if ($theme === 'cardboard') {
-			bgVar.command = 'bg-cardboard-command-bg';
-			textVar['command-text'] = 'text-cardboard-command-text';
-			textVar.credits = `text-dark-forest-credits`;
-			textVar.highlighted = 'text-cardboard-highlighted';
-		}
-	}
-	$: {
-		if ($game === 'playing') opac = 'opacity-0';
-		if ($game != 'playing') opac = 'opacity-100';
-	}
-	// const arr
 	import { footerEl, footerTop } from '$lib/components/store';
 	import { onMount } from 'svelte';
-	// let footerEl: HTMLElement;
+	import cn from '$lib/utils';
 	$: {
 		if ($footerEl.offsetTop) {
-			// console.log($footerEl.offsetTop);
 			footerTop.set($footerEl.offsetTop);
 		}
-		// console.log(height)
 	}
 
 	let footerHeight = 0;
 	let innerWidth = 0;
 	let innerHeight = 0;
 	let outerHeight = 0;
-	// const contentHeight = 0;
-	let bodyHeight;
 
-	// onMount(() => {
-	// 	console.log($contentHeight);
-	// 	!($contentHeight > innerHeight - footerHeight - 100)
-	// 		? ($footerEl.style.position = 'absolute')
-	// 		: ($footerEl.style.position = 'relative');
-	// });
-	$: bool = $contentHeight > innerHeight - footerHeight;
-	// $: contentHeight > innerHeight - footerHeight? $footerEl.className = 'absolute': $footerEl.className = 'relative';
-	// console.log(bool);
 </script>
 
-<!-- $page.url.pathname == '/result' && $testStatus == 'valid' -->
 <svelte:window bind:innerWidth bind:innerHeight />
-<svelte:body bind:offsetHeight={bodyHeight} />
-<!-- <h1>{innerHeight}</h1>
-<h1>{bool}</h1>
-<h1>{footerHeight}</h1> -->
 <div
-	class={`${''} mx-auto mt-10 bottom-10 w-fit big:w-full big:bottom-10 big:max-w-6xl big:mx-auto`}
+	class="mx-auto mt-10 bottom-10 w-fit big:w-full big:bottom-10 big:max-w-6xl big:mx-auto"
 	bind:this={$footerEl}
 	bind:offsetHeight={footerHeight}
 >
@@ -86,36 +37,90 @@
 			<div class="items-center hidden sm:flex">
 				<p class="font-medium">
 					<span
-						class={`inline-block px-3 py-1 rounded ${bgVar.command} ${textVar['command-text']} w-fit`}
-						>tab</span
+						class={cn(
+							`inline-block px-3 py-1 rounded bg-dark-forest-command-bg text-dark-forest-command-text w-fit`,
+							{
+								'bg-dark-forest-command-bg': $theme === 'dark-forest',
+								'bg-cardboard-command-bg': $theme === 'cardboard',
+								'text-dark-forest-command-text': $theme === 'dark-forest',
+								'text-cardboard-command-text': $theme === 'cardboard'
+							}
+						)}>tab</span
 					>
 					+
 					<span
-						class={`inline-block px-3 py-1 rounded ${bgVar.command} ${textVar['command-text']} w-fit`}
-						>enter</span
+						class={cn(
+							`inline-block px-3 py-1 rounded bg-dark-forest-command-bg text-dark-forest-command-text w-fit`,
+							{
+								'bg-dark-forest-command-bg': $theme === 'dark-forest',
+								'bg-cardboard-command-bg': $theme === 'cardboard',
+								'text-dark-forest-command-text': $theme === 'dark-forest',
+								'text-cardboard-command-text': $theme === 'cardboard'
+							}
+						)}>enter</span
 					>
 				</p>
-				<li class={`ml-3 ${textVar.credits}`}>Restart Test</li>
+				<li
+					class={cn(`ml-3 text-dark-forest-credits `, {
+						'text-dark-forest-credits': $theme === 'dark-forest',
+						'text-cardboard-credits': $theme === 'cardboard'
+					})}
+				>
+					Restart Test
+				</li>
 			</div>
-			<div class={`flex items-center sm:ml-10 ${opac}`}>
+			<div
+				class={cn(`flex items-center sm:ml-10 opacity-100`, {
+					'opacity-0': $game === 'playing'
+				})}
+			>
 				<p class="font-medium">
 					<span
-						class={`inline-block px-3 py-1 rounded ${bgVar.command} ${textVar['command-text']} w-fit`}
-						>cmd</span
+						class={cn(
+							`inline-block px-3 py-1 bg-dark-forest-command-bg text-dark-forest-command-text rounded w-fit`,
+							{
+								'bg-dark-forest-command-bg': $theme === 'dark-forest',
+								'bg-cardboard-command-bg': $theme === 'cardboard',
+								'text-dark-forest-command-text': $theme === 'dark-forest',
+								'text-cardboard-command-text': $theme === 'cardboard'
+							}
+						)}>cmd</span
 					>
 					+
 					<span
-						class={`px-3 py-1 ${bgVar.command} ${textVar['command-text']} w-fit inline-block rounded`}
-						>k</span
+						class={cn(
+							`px-3 py-1 bg-dark-forest-command-bg text-dark-forest-command-text w-fit inline-block rounded`,
+							{
+								'bg-dark-forest-command-bg': $theme === 'dark-forest',
+								'bg-cardboard-command-bg': $theme === 'cardboard',
+								'text-dark-forest-command-text': $theme === 'dark-forest',
+								'text-cardboard-command-text': $theme === 'cardboard'
+							}
+						)}>k</span
 					>
 				</p>
-				<li class={`ml-3 ${textVar.credits}`}>Settings Menu</li>
+				<li
+					class={cn(`ml-3 text-dark-forest-credits `, {
+						'text-dark-forest-credits': $theme === 'dark-forest',
+						'text-cardboard-credits': $theme === 'cardboard'
+					})}
+				>
+					Settings Menu
+				</li>
 			</div>
 		</div>
 	</div>
 	<!-- credits -->
-
-	<div class={`flex items-center ${textVar.credits} ${opac} justify-between w-fit big:w-auto`}>
+	<div
+		class={cn(
+			`flex items-center opacity-100 justify-between w-fit big:w-auto text-dark-forest-credits`,
+			{
+				'text-dark-forest-credits': $theme === 'dark-forest',
+				'text-cardboard-credits': $theme === 'cardboard',
+				'opacity-0': $game === 'playing'
+			}
+		)}
+	>
 		<div class={`flex w-80 md:w-[40rem] flex-wrap justify-between font-semibold`}>
 			<a
 				href="mailto:bhaumik.kore31@gmail.com"

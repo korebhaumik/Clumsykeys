@@ -33,6 +33,8 @@
 	"type": "module",
 	"dependencies": {
 		"@sveltejs/adapter-vercel": "^3.0.2",
-		"chart.js": "^4.3.0"
+		"chart.js": "^4.3.0",
+		"clsx": "^2.0.0",
+		"tailwind-merge": "^1.14.0"
 	}
 }
