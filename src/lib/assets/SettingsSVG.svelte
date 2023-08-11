@@ -1,5 +1,4 @@
 <script lang="ts">
-	// export let variant: string;
 	import { updateModalContent, updateModalVisibility } from '../components/store';
 </script>
 
