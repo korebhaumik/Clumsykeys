@@ -21,7 +21,6 @@
 	let innerWidth = 0;
 	let innerHeight = 0;
 	let outerHeight = 0;
-
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight />
@@ -123,17 +122,28 @@
 	>
 		<div class={`flex w-80 md:w-[40rem] flex-wrap justify-between font-semibold`}>
 			<a
+				aria-label="Contact"
 				href="mailto:bhaumik.kore31@gmail.com"
 				class="flex items-center transition cursor-pointer hover:text-cardboard-900"
 			>
 				<MailSvg />
 				<span class="ml-1.5 text-xs">Contact</span>
 			</a>
-			<a href="http://github.com/korebhaumik/Clumsykeys" target="_blank" class="flex items-center">
+			<a
+				aria-label={`Github`}
+				href="http://github.com/korebhaumik/Clumsykeys"
+				target="_blank"
+				class="flex items-center"
+			>
 				<GithubSvg />
 				<span class="ml-1.5 text-xs">Github</span>
 			</a>
-			<a href="http://discord.gg" target="_blank" class="items-center hidden md:flex">
+			<a
+				aria-label={`Discord`}
+				href="http://discord.gg"
+				target="_blank"
+				class="items-center hidden md:flex"
+			>
 				<DiscordSvg />
 				<span class="ml-1.5 text-xs">Discord</span>
 			</a>
@@ -156,6 +166,7 @@
 		</div>
 		<p class="hidden text-xs big:block">
 			developed by <a
+				aria-label={`Kore Bhaumik`}
 				class="text-amber-700 hover:underline"
 				href="http://github.com/korebhaumik"
 				target="_blank">@korebhaumik</a

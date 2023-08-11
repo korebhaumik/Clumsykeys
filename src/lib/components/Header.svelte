@@ -53,6 +53,7 @@
 		<!-- Menu -->
 		<div class="justify-between hidden ml-7 mb-1 sm:flex w-40">
 			<a
+				aria-label={`Game`}
 				href="/"
 				class={cn('transition text-dark-forest-accent-red', {
 					'text-dark-forest-accent-red': $theme === 'dark-forest',
@@ -63,6 +64,7 @@
 				<KeyboardSvg />
 			</a>
 			<a
+				aria-label={`Leaderboards`}
 				href={$game === 'playing' ? '' : '/leaderboards'}
 				class={cn('transition text-dark-forest-accent-purple', {
 					'text-dark-forest-accent-purple': $theme === 'dark-forest',
@@ -73,6 +75,7 @@
 				<RocketSvg />
 			</a>
 			<a
+				aria-label={`About`}
 				href="/"
 				class={cn('transition text-dark-forest-accent-yellow', {
 					'text-dark-forest-accent-yellow': $theme === 'dark-forest',
@@ -83,6 +86,7 @@
 			</a>
 			<!-- svelte-ignore a11y-invalid-attribute -->
 			<a
+				aria-label={`Settings`}
 				href=""
 				class={cn('transition text-dark-forest-accent-green', {
 					'text-dark-forest-accent-green': $theme === 'dark-forest',

@@ -28,7 +28,6 @@
 	viewBox="0 0 24 24"
 	stroke-width="2.5"
 	stroke="currentColor"
-	tabindex="1"
 	class={`w-7 h-7 ${variant.unhighlighted} ${variant.highlighted} p-1 focus:bg-dark-forest-fade rounded outline-none border-none `}
 >
 	<path
