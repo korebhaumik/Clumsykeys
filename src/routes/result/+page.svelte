@@ -72,7 +72,14 @@
 		window.addEventListener('resize', handleDynamicFooter, true);
 		() => window.removeEventListener('resize', handleDynamicFooter, true);
 	});
-
+	timeDataArr.update((arr) => {
+		// console.log($newTextConfig.time.value)
+		return arr.filter((ele) => {
+			// console.log(ele.time)
+			if ($newTextConfig.time.isHighlighted) return ele.time <= $newTextConfig.time.value;
+			else return true;
+		});
+	});
 	$: wpm = $timeDataArr.at(-1)!.wpm;
 	const sum = $timeDataArr.reduce((total, ele) => total + ele.raw, 0);
 	$: avgRaw = Math.ceil(sum / $timeDataArr.length);

@@ -124,7 +124,7 @@
 <main
 	class={`flex font-semibold px-4 hd:hidden ${bgVar.fade}  py-3 w-fit ${textVar.unhighlighted} rounded-lg`}
 >
-	<SettingsSvg variant="" />
+	<SettingsSvg />
 	<span class="ml-2">test settings</span>
 </main>
 
