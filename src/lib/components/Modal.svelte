@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { fade, scale, fly } from 'svelte/transition';
 	import {
-		getWords,
 		modalConfig,
 		newTextConfig,
-		theme,
 		updateModalContent,
 		updateModalCounter,
 		updateModalVisibility,
 		updateTestConfigCounter,
-		updateTestConfigLanguage,
-		inputEl
-	} from './store';
+		updateTestConfigLanguage
+	} from './config.store';
+	import { theme, inputEl } from './fun.store';
+	import { getWords } from './game.store';
+
 	// import SearchSvg from './SearchSVG.svelte';
 	import LangSvg from '$lib/assets/LangSVG.svelte';
 	import GlobeSvg from '$lib/assets/GlobeSVG.svelte';
@@ -25,7 +25,6 @@
 	import UserSvg from '$lib/assets/UserSVG.svelte';
 	import RocketSvg from '$lib/assets/RocketSVG.svelte';
 	import { goto } from '$app/navigation';
-	import { text } from '@sveltejs/kit';
 
 	let tempTimeCount: number;
 	let tempWordsCount: number;
@@ -87,11 +86,11 @@
 	/>
 	<!-- Content -->
 	<div
-		class={`absolute z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${textVar['highlighted']}`}
+		class={`absolute z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2  ${textVar['highlighted']}`}
 	>
 		<div transition:scale={{ start: 0.95, delay: 0, duration: 400 }}>
 			<div
-				class={`${bgVar.primary} rounded w-80 mx-auto sm:w-[30rem] h-fit`}
+				class={`${bgVar.primary} rounded-lg w-80 mx-auto sm:w-[30rem] border border-zinc-800 h-fit`}
 				transition:fly={{ duration: 400, y: 4 }}
 			>
 				<!-- lang -->

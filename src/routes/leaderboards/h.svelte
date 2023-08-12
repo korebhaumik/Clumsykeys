@@ -2,7 +2,7 @@
 	import img from '$lib/assets/404_monkey.webp';
 	import { fade } from 'svelte/transition';
 	import { browser } from '$app/environment';
-	import { theme } from '$lib/components/store';
+	import { theme } from '$lib/components/fun.store';
 	import { goto } from '$app/navigation';
 
 	const textVar = {

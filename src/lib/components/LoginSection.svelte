@@ -1,8 +1,7 @@
 <script lang="ts">
 	import GithubSvg from '$lib/assets/GithubSVG.svelte';
 	import GoogleSvg from '$lib/assets/GoogleSVG.svelte';
-	import img from '$lib/assets/login_monkey.png';
-	import { theme } from '$lib/components/store';
+	import { theme } from '$lib/components/fun.store';
 	import { fade } from 'svelte/transition';
 
 	const textVar = {

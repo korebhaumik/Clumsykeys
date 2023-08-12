@@ -6,21 +6,14 @@
 	import LockSvg from '../assets/LockSVG.svelte';
 	import MailSvg from '../assets/MailSVG.svelte';
 	import ShieldSvg from '../assets/ShieldSVG.svelte';
-	import { theme, game } from '$lib/components/store';
-	import { page } from '$app/stores';
-	import { footerEl, footerTop } from '$lib/components/store';
-	import { onMount } from 'svelte';
+	import { theme} from '$lib/components/fun.store';
+	import { game } from '$lib/components/game.store';
+	import { footerEl } from '$lib/components/fun.store';
 	import cn from '$lib/utils';
-	$: {
-		if ($footerEl.offsetTop) {
-			footerTop.set($footerEl.offsetTop);
-		}
-	}
 
 	let footerHeight = 0;
 	let innerWidth = 0;
 	let innerHeight = 0;
-	let outerHeight = 0;
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight />

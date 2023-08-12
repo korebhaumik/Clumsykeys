@@ -1,17 +1,19 @@
 <script lang="ts">
-	import { contentHeight, footerEl, resetTest, setGameState } from '$lib/components/store';
+	import { contentHeight, theme, footerEl } from '$lib/components/fun.store';
+	import { newTextConfig } from '$lib/components/config.store';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
+
 	import {
-		theme,
+		resetTest,
+		setGameState,
 		timeDataArr,
-		game,
-		newTextConfig,
 		wordsArr,
 		GlobalWordsDataArr,
 		incorrectCharCount,
 		charCount,
 		testStatus
-	} from '$lib/components/store';
+	} from '$lib/components/game.store';
+
 	import { onMount } from 'svelte';
 	import Graph from '$lib/components/Graph.svelte';
 	import { goto } from '$app/navigation';
@@ -45,10 +47,7 @@
 	function myfunction(e: any) {
 		if (e.key === 'Tab') {
 			e.preventDefault();
-			// console.log('tab');
 			resetButton.focus();
-			// resetTest();
-			// setGameState('waiting');
 		}
 	}
 	onMount(() => {

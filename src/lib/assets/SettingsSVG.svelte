@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { updateModalContent, updateModalVisibility } from '../components/store';
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

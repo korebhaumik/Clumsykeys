@@ -1,13 +1,14 @@
 <script lang="ts">
 	import Chart, { type ChartData } from 'chart.js/auto';
-	import { timeDataArr, theme } from '$lib/components/store';
+	import { theme } from '$lib/components/fun.store';
+	import { timeDataArr } from '$lib/components/game.store';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 
 	const colorVar = {
 		unhighlighted: '#848887',
 		['accent-error']: '#A95406',
-		['accent-main']: '#9BCD86',
+		['accent-main']: '#9BCD86'
 	};
 
 	$: {

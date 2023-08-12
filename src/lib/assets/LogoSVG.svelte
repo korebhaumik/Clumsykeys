@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { theme, game } from '$lib/components/store';
+	import { theme } from '$lib/components/fun.store';
+	import {game} from '$lib/components/game.store';
 	import cn from '$lib/utils';
 </script>
 

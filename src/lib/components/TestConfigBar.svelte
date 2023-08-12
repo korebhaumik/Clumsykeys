@@ -6,17 +6,15 @@
 	import SettingsSvg from '$lib/assets/SettingsSVG.svelte';
 	import TimerSvg from '$lib/assets/TimerSVG.svelte';
 	import WrenchSvg from '$lib/assets/WrenchSVG.svelte';
-	import { page } from '$app/stores';
-	import { inputEl } from './store';
-
+	import { inputEl, theme } from './fun.store';
 	import {
-		getWords,
 		updateModalContent,
 		updateModalVisibility,
-		updateTestConfigCounter
-	} from './store';
-	import { newTextConfig, updateTestConfigFormat } from './store';
-	import { theme } from './store';
+		updateTestConfigCounter,
+		newTextConfig,
+		updateTestConfigFormat
+	} from './config.store';
+	import { getWords } from '$lib/components/game.store';
 
 	const bgVar = {
 		primary: 'bg-dark-forest-primary',
@@ -210,12 +208,12 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<button
 		on:click={async () => {
-			$inputEl.focus();
 			updateTestConfigCounter('quotes', 'Random Quotes');
 			await getWords(100, {
 				type: 'quotes',
 				lang: 'english'
 			});
+			$inputEl.focus();
 		}}
 		class={`flex items-center cursor-pointer ${variantConfig.quotes} no-underline`}
 	>
@@ -366,9 +364,9 @@
 	<div
 		class={`flex items-center cursor-pointer ${textVar['accent-main']}  underline underline-offset-1 decoration-2`}
 		on:click={() => {
-			$inputEl.focus();
 			updateModalContent('language');
 			updateModalVisibility();
+			$inputEl.focus();
 		}}
 	>
 		<GlobeSvg />

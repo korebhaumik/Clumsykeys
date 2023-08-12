@@ -2,23 +2,28 @@
 	import { goto } from '$app/navigation';
 	import { blur, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	import { charCount, theme, inputEl, contentHeight, footerEl } from './store';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
 	import PlaySvg from '$lib/assets/PlaySVG.svelte';
-	import { game, setGameState, incorrectCharCount, testStatus } from './store';
-	import {
-		createTimer,
-		resetTest,
-		count,
-		TimerCount,
-		wordIndex,
-		timeDataArr,
-		WordCount,
-		GlobalWordsDataArr
-	} from './store';
 
-	import { newTextConfig } from './store';
-	import { getWords, wordsArr } from './store';
+	import { theme, inputEl, contentHeight, footerEl } from './fun.store';
+	import { newTextConfig } from './config.store';
+	import {
+		GlobalWordsDataArr,
+		TimerCount,
+		charCount,
+		WordCount,
+		count,
+		createTimer,
+		game,
+		getWords,
+		incorrectCharCount,
+		resetTest,
+		setGameState,
+		testStatus,
+		timeDataArr,
+		wordIndex,
+		wordsArr
+	} from './game.store';
 
 	onMount(() => {
 		contentHeight.set(0);
@@ -27,31 +32,16 @@
 			: ($footerEl.style.position = 'relative');
 	});
 
-	$: lang = $newTextConfig.language.value;
-	$: type = $newTextConfig.quotes.isHighlighted === true ? 'quotes' : 'words';
-
-	type GameState = 'waiting' | 'playing' | 'finished';
-
 	const textVar = {
 		highlighted: 'text-dark-forest-highlighted',
 		['accent-error']: 'text-dark-forest-accent-error',
 		unhighlighted: 'text-dark-forest-unhighlighted'
 	};
 
-	// const textVar = {
-	// 	highlighted: 'text-cardboard-highlighted',
-	// 	['accent-error']: 'text-cardboard-accent-error',
-	// 	unhighlighted: 'text-cardboard-unhighlighted '
-	// };
-
 	const bgVar = {
 		caret: 'bg-dark-forest-caret'
 		// caret: 'bg-cardboard-caret'
 	};
-
-	// const focusVar = {
-	// 	highlighted: 'focus:text-dark-forest-highlighted',
-	// };
 
 	$: {
 		if ($theme === 'dark-forest') {

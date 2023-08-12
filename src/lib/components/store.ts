@@ -14,17 +14,9 @@ import type {
 
 export let inputEl = writable({} as HTMLInputElement);
 export let footerEl = writable({} as HTMLElement);
-export let footerTop = writable(350 as number);
 export let contentEl = writable({} as HTMLElement);
 export let contentHeight = writable(0 as number);
 
-// footerEl.subscribe((el) => {
-// 	if (el.offsetTop) {
-// 		footerTop.set(el.offsetTop);
-// 	}
-// });
-
-// export const count = writable(0);
 export const theme = writable('dark-forest' as 'cardboard' | 'dark-forest' | 'sapphire');
 
 export const newTextConfig = writable({
@@ -149,10 +141,11 @@ export const timeDataArr = writable([
 ] as timeDataType[]);
 
 // export const TimerCount = writable(-1 as number);
-export const TimerCount = writable(30 as number);
-export const isTimer = writable(true as boolean);
-export const WordCount = writable(50 as number);
-export const wordIndex = writable(0 as number);
+import { isTimer, TimerCount, wordIndex, WordCount } from './game.store';
+// export const TimerCount = writable(30 as number);
+// export const isTimer = writable(true as boolean);
+// export const WordCount = writable(50 as number);
+// export const wordIndex = writable(0 as number);
 
 export const count = writable(0 as number);
 let tempCount = 0;

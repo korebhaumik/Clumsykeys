@@ -2,17 +2,19 @@
 	import Game from '$lib/components/Game.svelte';
 	import TestConfigBar from '$lib/components/TestConfigBar.svelte';
 	import { page } from '$app/stores';
+	import { theme } from '$lib/components/fun.store';
+
 	import {
-		theme,
 		game,
 		count,
 		WordCount,
 		wordIndex,
 		TimerCount,
 		timeDataArr,
-		isTimer
-	} from '$lib/components/store';
-	import { charCount, incorrectCharCount } from '$lib/components/store';
+		isTimer,
+		charCount,
+		incorrectCharCount
+	} from '$lib/components/game.store';
 
 	const textVar = {
 		unhighlighted: 'text-dark-forest-unhighlighted',

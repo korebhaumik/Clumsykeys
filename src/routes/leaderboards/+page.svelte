@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { footerEl} from '$lib/components/store';
-	import LeaderboardTable from '$lib/components/LeaderboardTable.svelte';
+	import { footerEl} from '$lib/components/fun.store';
+	import LeaderboardTable from '$lib/components/Table.Leaderboards.svelte';
 
 	import { onMount } from 'svelte';
 

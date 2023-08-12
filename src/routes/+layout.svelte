@@ -3,8 +3,8 @@
 	import Footer from '../lib/components/Footer.svelte';
 	import Header from '../lib/components/Header.svelte';
 	import Modal from '../lib/components/Modal.svelte';
-	import { updateModalContent, updateModalVisibility } from '$lib/components/store';
-	import { theme } from '$lib/components/store';
+	import { updateModalContent, updateModalVisibility } from '$lib/components/config.store';
+	import { theme } from '$lib/components/fun.store';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	onMount(() => {

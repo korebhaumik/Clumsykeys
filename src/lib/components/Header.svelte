@@ -8,8 +8,9 @@
 	import SettingsSvg from '../assets/SettingsSVG.svelte';
 	import UserSvg from '../assets/UserSVG.svelte';
 	import Sidebar from './Sidebar.svelte';
-	import { theme, game, updateModalContent, updateModalVisibility } from './store';
-	// import {textVar, bgVar,} from './store';
+	import { theme } from './fun.store';
+	import { game } from './game.store';
+	import { updateModalContent, updateModalVisibility } from './config.store';
 
 	$: isVisible = false;
 

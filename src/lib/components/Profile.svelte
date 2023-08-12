@@ -1,7 +1,8 @@
 <script lang="ts">
 	import UserFilledSvg from '$lib/assets/UserFilledSVG.svelte';
-	import { contentHeight, footerEl } from '$lib/components/store';
+	import { contentHeight, footerEl } from '$lib/components/fun.store';
 	import { onMount } from 'svelte';
+	import RecentTestsTable from './Table.Profile.svelte';
 	let offsetHeight = 0;
 	let innerHeight = 0;
 
@@ -92,13 +93,13 @@
 			</div>
 			<div class="flex flex-col">
 				<span class="text-sm text-dark-forest-unhighlighted">30 seconds</span>
-				<span class="text-2xl my-0.5">100 wpm</span>
-				<span class="text-base text-dark-forest-accent-error">99 %</span>
+				<span class="text-2xl my-0.5">92 wpm</span>
+				<span class="text-base text-dark-forest-accent-error">100 %</span>
 			</div>
 			<div class="flex flex-col">
 				<span class="text-sm text-dark-forest-unhighlighted">60 seconds</span>
-				<span class="text-2xl my-0.5">100 wpm</span>
-				<span class="text-base text-dark-forest-accent-error">99 %</span>
+				<span class="text-2xl my-0.5">85 wpm</span>
+				<span class="text-base text-dark-forest-accent-error">97 %</span>
 			</div>
 		</aside>
 		<aside
@@ -106,21 +107,22 @@
 		>
 			<div class="flex flex-col">
 				<span class="text-sm text-dark-forest-unhighlighted">25 words</span>
-				<span class="text-2xl my-0.5">100 wpm</span>
-				<span class="text-base text-dark-forest-accent-error">99 %</span>
+				<span class="text-2xl my-0.5">105 wpm</span>
+				<span class="text-base text-dark-forest-accent-error">100 %</span>
 			</div>
 			<div class="flex flex-col">
 				<span class="text-sm text-dark-forest-unhighlighted">50 words</span>
-				<span class="text-2xl my-0.5">100 wpm</span>
-				<span class="text-base text-dark-forest-accent-error">99 %</span>
+				<span class="text-2xl my-0.5">93 wpm</span>
+				<span class="text-base text-dark-forest-accent-error">98 %</span>
 			</div>
 			<div class="flex flex-col">
 				<span class="text-sm text-dark-forest-unhighlighted">100 words</span>
-				<span class="text-2xl my-0.5">100 wpm</span>
-				<span class="text-base text-dark-forest-accent-error">99 %</span>
+				<span class="text-2xl my-0.5">80 wpm</span>
+				<span class="text-base text-dark-forest-accent-error">96 %</span>
 			</div>
 		</aside>
 	</section>
 	<h1 class="mt-5">Recent Tests</h1>
-	<p class="mt-3 text-dark-forest-unhighlighted">This feature is in development</p>
+	<RecentTestsTable />
+	<!-- <p class="mt-3 text-dark-forest-unhighlighted">This feature is in development</p> -->
 </main>
