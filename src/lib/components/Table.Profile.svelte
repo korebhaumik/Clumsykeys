@@ -1,5 +1,6 @@
 <script lang="ts">
-	import cn from '$lib/utils';
+	import SparklesSvg from '$lib/assets/SparklesSVG.svelte';
+import cn from '$lib/utils';
 
 	const arr = [
 		{
@@ -65,7 +66,7 @@
 			})}
 		>
 			{#if tuple.wpm > 99}
-				<span class="absolute underline left-0 top-2 text-dark-forest-accent-main">PB</span>
+				<span class="absolute underline left-0 top-2 text-dark-forest-accent-main"><SparklesSvg/></span>
 			{/if}
 			<span class="pl-7">{tuple.wpm}</span>
 			<span>{tuple.raw}</span>
