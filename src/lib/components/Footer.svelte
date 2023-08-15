@@ -6,7 +6,7 @@
 	import LockSvg from '../assets/LockSVG.svelte';
 	import MailSvg from '../assets/MailSVG.svelte';
 	import ShieldSvg from '../assets/ShieldSVG.svelte';
-	import { theme} from '$lib/components/fun.store';
+	import { theme } from '$lib/components/fun.store';
 	import { game } from '$lib/components/game.store';
 	import { footerEl } from '$lib/components/fun.store';
 	import cn from '$lib/utils';
@@ -27,7 +27,7 @@
 		<!-- <TerminalSvg /> -->
 		<div class="flex items-center text-sm">
 			<div class="items-center hidden sm:flex">
-				<p class="font-medium">
+				<p>
 					<span
 						class={cn(
 							`inline-block px-3 py-1 rounded bg-dark-forest-command-bg text-dark-forest-command-text w-fit`,
@@ -39,7 +39,11 @@
 							}
 						)}>tab</span
 					>
-					+
+					<span
+						class={cn('font-medium mx-1 text-lg text-dark-forest-unhighlighted ', {
+							'text-dark-forest-unhighlighted': $theme === 'dark-forest'
+						})}>+</span
+					>
 					<span
 						class={cn(
 							`inline-block px-3 py-1 rounded bg-dark-forest-command-bg text-dark-forest-command-text w-fit`,
@@ -52,14 +56,14 @@
 						)}>enter</span
 					>
 				</p>
-				<li
+				<span
 					class={cn(`ml-3 text-dark-forest-credits `, {
 						'text-dark-forest-credits': $theme === 'dark-forest',
 						'text-cardboard-credits': $theme === 'cardboard'
 					})}
 				>
 					Restart Test
-				</li>
+				</span>
 			</div>
 			<div
 				class={cn(`flex items-center sm:ml-10 opacity-100`, {
@@ -78,7 +82,12 @@
 							}
 						)}>cmd</span
 					>
-					+
+					<span
+						class={cn('font-medium mx-1 text-lg text-dark-forest-unhighlighted', {
+							'text-dark-forest-unhighlighted': $theme === 'dark-forest'
+						})}>+</span
+					>
+
 					<span
 						class={cn(
 							`px-3 py-1 bg-dark-forest-command-bg text-dark-forest-command-text w-fit inline-block rounded`,
@@ -91,14 +100,14 @@
 						)}>k</span
 					>
 				</p>
-				<li
+				<span
 					class={cn(`ml-3 text-dark-forest-credits `, {
 						'text-dark-forest-credits': $theme === 'dark-forest',
 						'text-cardboard-credits': $theme === 'cardboard'
 					})}
 				>
 					Settings Menu
-				</li>
+				</span>
 			</div>
 		</div>
 	</div>

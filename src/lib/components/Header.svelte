@@ -52,11 +52,11 @@
 		</div>
 
 		<!-- Menu -->
-		<div class="justify-between hidden ml-7 mb-1 sm:flex w-40">
+		<div class="justify-between hidden ml-7 mb-1 sm:flex w-44">
 			<a
 				aria-label={`Game`}
 				href="/"
-				class={cn('transition text-dark-forest-accent-red', {
+				class={cn('transition px-2  text-dark-forest-accent-red', {
 					'text-dark-forest-accent-red': $theme === 'dark-forest',
 					'text-dark-forest-unhighlighted': $game === 'playing'
 				})}
@@ -67,7 +67,7 @@
 			<a
 				aria-label={`Leaderboards`}
 				href={$game === 'playing' ? '' : '/leaderboards'}
-				class={cn('transition text-dark-forest-accent-purple', {
+				class={cn('transition px-2 text-dark-forest-accent-purple', {
 					'text-dark-forest-accent-purple': $theme === 'dark-forest',
 					'text-dark-forest-unhighlighted': $game === 'playing'
 				})}
@@ -78,7 +78,7 @@
 			<a
 				aria-label={`About`}
 				href="/"
-				class={cn('transition text-dark-forest-accent-yellow', {
+				class={cn('transition px-2 text-dark-forest-accent-yellow', {
 					'text-dark-forest-accent-yellow': $theme === 'dark-forest',
 					'text-dark-forest-unhighlighted': $game === 'playing'
 				})}
@@ -89,7 +89,7 @@
 			<a
 				aria-label={`Settings`}
 				href=""
-				class={cn('transition text-dark-forest-accent-green', {
+				class={cn('transition px-2 rounded text-dark-forest-accent-green', {
 					'text-dark-forest-accent-green': $theme === 'dark-forest',
 					'text-dark-forest-unhighlighted': $game === 'playing'
 				})}

@@ -2,6 +2,7 @@
 	import { contentHeight, theme, footerEl } from '$lib/components/fun.store';
 	import { newTextConfig } from '$lib/components/config.store';
 	import ResetSvg from '$lib/assets/ResetSVG.svelte';
+	import cn from '$lib/utils';
 
 	import {
 		resetTest,

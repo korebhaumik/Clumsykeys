@@ -24,6 +24,7 @@
 		wordIndex,
 		wordsArr
 	} from './game.store';
+	import cn from '$lib/utils';
 
 	onMount(() => {
 		contentHeight.set(0);
@@ -532,7 +533,9 @@
 <!-- svelte-ignore a11y-missing-attribute -->
 <a
 	bind:this={resetEl}
-	class="block text-dark-forest-unhighlighted outline-none border-none mx-auto mt-5 w-fit"
+	class={cn('block text-dark-forest-unhighlighted outline-none border-none mx-auto mt-5 w-fit', {
+		'text-dark-forest-unhighlighted': $theme === 'dark-forest'
+	})}
 	type="button"
 	href="/"
 	on:focus={() => {
