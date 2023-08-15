@@ -104,13 +104,13 @@
 
 <svelte:window bind:innerWidth bind:innerHeight />
 
-<div class="grid grid-cols-9 gap-1 mt-5 text-dark-forest-unhighlighted">
+<div class="grid grid-cols-5 gap-1 mt-5 sm:grid-cols-6 md:grid-cols-9 text-dark-forest-unhighlighted">
 	<span class="pl-2">#</span>
-	<span class="col-span-3">name</span>
+	<span class="col-span-2  sm:col-span-3">name</span>
 	<span>wpm</span>
-	<span>raw</span>
-	<span>acc</span>
-	<span>std</span>
+	<span class="hidden md:inline-block">raw</span>
+	<span class="hidden md:inline-block">acc</span>
+	<span class="hidden md:inline-block">std</span>
 	<span>date</span>
 </div>
 
@@ -118,16 +118,16 @@
 	{#each arr as ele, index}
 		<row
 			bind:offsetHeight={h}
-			class={`grid grid-cols-9 text gap-1 py-2 rounded-lg ${
+			class={`grid grid-cols-5 sm:grid-cols-6 md:grid-cols-9 text gap-1 py-2 rounded-lg ${
 				index % 2 !== 0 ? 'bg-dark-forest-fade' : ''
 			}`}
 		>
 			<span class="pl-2">{index + 1}.</span>
-			<span class="col-span-3">{ele.name}</span>
+			<span class="col-span-2 sm:col-span-3">{ele.name}</span>
 			<span>{ele.wpm}</span>
-			<span>{ele.raw}</span>
-			<span>{ele.acc}%</span>
-			<span>{ele.std}</span>
+			<span class="hidden md:inline-block">{ele.raw}</span>
+			<span class="hidden md:inline-block">{ele.acc}%</span>
+			<span class="hidden md:inline-block">{ele.std}</span>
 			<span>{ele.date}</span>
 		</row>
 	{/each}

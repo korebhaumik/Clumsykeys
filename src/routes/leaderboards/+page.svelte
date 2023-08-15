@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { footerEl} from '$lib/components/fun.store';
+	import { footerEl } from '$lib/components/fun.store';
 	import LeaderboardTable from '$lib/components/Table.Leaderboards.svelte';
 
 	import { onMount } from 'svelte';
@@ -10,24 +10,22 @@
 	});
 </script>
 
-<div
-	class={`mt-5 text-dark-forest-highlighted`}
-	in:fade={{ duration: 100, delay: 400 }}
->
+<div class={`mt-5 text-dark-forest-highlighted`} in:fade={{ duration: 100, delay: 400 }}>
 	<div class="flex justify-between items-center">
 		<div>
-			<h1 class="text-lg">All Time English Leaderboards</h1>
+			<h1 class="hidden sm:text-base md:text-lg">All Time English Leaderboards</h1>
+			<h1 class="text-base md:text-lg sm:hidden">Leaderboards</h1>
 			<h2 class="text-dark-forest-unhighlighted">auto-update in 5 mins</h2>
 		</div>
 		<div class="text-sm flex flex-col items-end">
 			<div>
 				<button class="bg-dark-forest-accent-main text-black px-2 py-1 rounded">all time</button>
-				<button class="bg-dark-forest-fade px-2 py-1 rounded">daily</button>
+				<button class="bg-dark-forest-fade hidden sm:inline px-2 py-1 rounded">daily</button>
 			</div>
 			<div class="mt-2">
 				<button class="bg-dark-forest-fade px-2 py-1 rounded">15s</button>
 				<button class="bg-dark-forest-accent-main px-2 py-1 rounded text-black">30s</button>
-				<button class="bg-dark-forest-fade px-2 py-1 rounded">60s</button>
+				<button class="bg-dark-forest-fade px-2 py-1 rounded hidden sm:inline-block">60s</button>
 			</div>
 		</div>
 	</div>
