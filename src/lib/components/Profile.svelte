@@ -82,9 +82,9 @@
 		</aside>
 	</section>
 	<h1 class="mt-5">Personal Best</h1>
-	<section class="flex mt-5 text-dark-forest-highlighted">
+	<section class="flex flex-wrap max-w-[63rem] justify-between mt-5 text-dark-forest-highlighted">
 		<aside
-			class="relative flex px-5 py-5 w-[30rem] justify-between rounded-lg bg-dark-forest-fade/80"
+			class="relative flex px-5 py-5 w-[30rem] mb-2 justify-between rounded-lg bg-dark-forest-fade/80"
 		>
 			<div class="flex flex-col">
 				<span class="text-sm text-dark-forest-unhighlighted">15 seconds</span>
@@ -103,7 +103,7 @@
 			</div>
 		</aside>
 		<aside
-			class=" ml-10 relative flex px-5 py-5 w-[30rem] justify-between rounded-lg bg-dark-forest-fade/80"
+			class=" relative flex px-5 py-5 mb-2 w-[30rem] justify-between rounded-lg bg-dark-forest-fade/80"
 		>
 			<div class="flex flex-col">
 				<span class="text-sm text-dark-forest-unhighlighted">25 words</span>
