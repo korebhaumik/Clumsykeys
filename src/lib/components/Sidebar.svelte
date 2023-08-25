@@ -8,7 +8,7 @@
 	const notifs = [
 		{
 			type: 'info',
-			message: 'Engine version: 1.3, Node-version: 20.2.0,'
+			message: 'Engine version: 1.4, Node-version: 20.2.0,'
 		},
 		{
 			type: 'warning',
@@ -18,34 +18,6 @@
 			type: 'info',
 			message: 'New feature: Frost theme'
 		},
-		{
-			type: 'error',
-			message: 'Bug #13 Accuracy glitch above 130wpm'
-		},
-		{
-			type: 'warning',
-			message: 'Warning: Make separate stores'
-		},
-		{
-			type: 'warning',
-			message: 'Warning: Harden ts for engine.'
-		},
-		{
-			type: 'error',
-			message: 'Bug #21 Caret animation lag on safari.'
-		},
-		{
-			type: 'info',
-			message: 'New feature: Implement caching for different languages.'
-		},
-		{
-			type: 'info',
-			message: 'New feature: Implement new wala auth'
-		},
-		{
-			type: 'warning',
-			message: 'Warning: Reduce memory footprint.'
-		}
 	];
 </script>
 
