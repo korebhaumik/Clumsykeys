@@ -116,18 +116,48 @@
 
 	onMount(async () => {
 		if (userInstance) {
-			const { data, error } = await supabase.rpc('findrankbyemail', {
+			const { data: sm } = await supabase.rpc('findrank15byemail', {
 				emailstr: userInstance[0].email
 			});
-			if (!data) return;
-			const rank = data.toString();
-			if (rank.match(/1$/)) {
-				leaderboard['30sec'] = `${rank}st`;
-			} else if (rank.match(/2$/)) {
-				leaderboard['30sec'] = `${rank}nd`;
-			} else if (rank.match(/3$/)) {
-				leaderboard['30sec'] = `${rank}rd`;
-			} else leaderboard['30sec'] = `${rank}th`;
+			const { data: mid } = await supabase.rpc('findrankbyemail', {
+				emailstr: userInstance[0].email
+			});
+			const { data: lg } = await supabase.rpc('findrank60byemail', {
+				emailstr: userInstance[0].email
+			});
+
+			if (sm) {
+				const rankSm = sm.toString();
+				if (rankSm.match(/1$/)) {
+					leaderboard['15sec'] = `${rankSm}st`;
+				} else if (rankSm.match(/2$/)) {
+					leaderboard['15sec'] = `${rankSm}nd`;
+				} else if (rankSm.match(/3$/)) {
+					leaderboard['15sec'] = `${rankSm}rd`;
+				} else leaderboard['15sec'] = `${rankSm}th`;
+			}
+
+			if (mid) {
+				const rankMid = mid.toString();
+				if (rankMid.match(/1$/)) {
+					leaderboard['30sec'] = `${rankMid}st`;
+				} else if (rankMid.match(/2$/)) {
+					leaderboard['30sec'] = `${rankMid}nd`;
+				} else if (rankMid.match(/3$/)) {
+					leaderboard['30sec'] = `${rankMid}rd`;
+				} else leaderboard['30sec'] = `${rankMid}th`;
+			}
+
+			if (lg) {
+				const rankLg = lg.toString();
+				if (rankLg.match(/1$/)) {
+					leaderboard['60sec'] = `${rankLg}st`;
+				} else if (rankLg.match(/2$/)) {
+					leaderboard['60sec'] = `${rankLg}nd`;
+				} else if (rankLg.match(/3$/)) {
+					leaderboard['60sec'] = `${rankLg}rd`;
+				} else leaderboard['60sec'] = `${rankLg}th`;
+			}
 		}
 
 		contentHeight.set(offsetHeight);

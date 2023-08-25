@@ -104,40 +104,11 @@
 		username: string;
 		wpm: number;
 	};
-	let arr: Leaderboard[] = [];
-	export let supabase: SupabaseClient<Database>;
+	export let arr: Leaderboard[] = [];
 	let tableContainer: HTMLElement;
 	let h: number;
 	let innerWidth = 0;
 	let innerHeight = 0;
-
-	function formatDate() {
-		arr = arr.map((row) => {
-			const date = new Date(row.upserted_at);
-			const formattedDate = date.toLocaleDateString('en-US', {
-				year: 'numeric',
-				month: 'short',
-				day: 'numeric'
-			});
-			row.upserted_at = formattedDate;
-			return row;
-		});
-
-		// const options = { year: 'numeric', month: 'short', day: 'numeric' };
-	}
-	async function fetchLeaderboards() {
-		const { data, error } = await supabase.from('leaderboards').select('*').limit(10);
-		if (error) {
-			console.error(error);
-			return;
-		}
-		// console.log(data.sort((a, b) => a.wpm - b.wpm));
-		arr = data.sort((a, b) => b.wpm - a.wpm);
-	}
-	onMount(async() => {
-		await fetchLeaderboards();
-		formatDate();
-	});
 
 	$: {
 		if (tableContainer) {
@@ -177,4 +148,14 @@
 			<span>{ele.upserted_at}</span>
 		</row>
 	{/each}
+	{#if arr.length === 0}
+	<row
+			bind:offsetHeight={h}
+			class={`grid grid-cols-5 sm:grid-cols-6 md:grid-cols-9 text gap-1 py-2 rounded-lg ${
+				4 % 2 !== 0 ? 'bg-dark-forest-fade' : ''
+			}`}
+		>
+		<span class="text-dark-forest-unhighlighted">loading...</span>
+	</row>
+	{/if}
 </section>

@@ -263,15 +263,21 @@
 	// }
 	async function updateLeaderboard() {
 		if (!$newTextConfig.time.isHighlighted) return;
-		if ($newTextConfig.time.value != 30) return;
+		// if ($newTextConfig.time.value != 30) return;
+		console.log($newTextConfig.time.value)
+		let table = '';
+		if ($newTextConfig.time.value == 30) table = 'leaderboards';
+		if ($newTextConfig.time.value == 15) table = 'leaderboards_15';
+		if ($newTextConfig.time.value == 60) table = 'leaderboards_60';
+
 		const leaderboardsInstance = await supabase
-			.from('leaderboards')
+			.from(table)
 			.select('*')
 			.eq('email', session?.user.email);
 		if (leaderboardsInstance.error) throw new Error(leaderboardsInstance.error.message);
 		if (leaderboardsInstance.data?.length === 0) {
 			// console.log('hello world');
-			await supabase.from('leaderboards').insert([
+			await supabase.from(table).insert([
 				{
 					email: session!.user.email as string,
 					username,
@@ -287,7 +293,7 @@
 		const leaderboardData = leaderboardsInstance.data[0];
 		if (leaderboardData.wpm > wpm) return;
 		await supabase
-			.from('leaderboards')
+			.from(table)
 			.update({
 				wpm: wpm,
 				raw: avgRaw,

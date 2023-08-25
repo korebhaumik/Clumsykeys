@@ -42,6 +42,72 @@ export interface Database {
         }
         Relationships: []
       }
+      leaderboards_15: {
+        Row: {
+          acc: number
+          email: string
+          id: string
+          raw: number
+          std: number
+          upserted_at: string
+          username: string
+          wpm: number
+        }
+        Insert: {
+          acc: number
+          email: string
+          id?: string
+          raw: number
+          std: number
+          upserted_at?: string
+          username: string
+          wpm: number
+        }
+        Update: {
+          acc?: number
+          email?: string
+          id?: string
+          raw?: number
+          std?: number
+          upserted_at?: string
+          username?: string
+          wpm?: number
+        }
+        Relationships: []
+      }
+      leaderboards_60: {
+        Row: {
+          acc: number
+          email: string
+          id: string
+          raw: number
+          std: number
+          upserted_at: string
+          username: string
+          wpm: number
+        }
+        Insert: {
+          acc: number
+          email: string
+          id?: string
+          raw: number
+          std: number
+          upserted_at?: string
+          username: string
+          wpm: number
+        }
+        Update: {
+          acc?: number
+          email?: string
+          id?: string
+          raw?: number
+          std?: number
+          upserted_at?: string
+          username?: string
+          wpm?: number
+        }
+        Relationships: []
+      }
       users: {
         Row: {
           acc: number | null
@@ -97,6 +163,18 @@ export interface Database {
     Functions: {
       findpositionbyemail: {
         Args: Record<PropertyKey, never>
+        Returns: number
+      }
+      findrank15byemail: {
+        Args: {
+          emailstr: string
+        }
+        Returns: number
+      }
+      findrank60byemail: {
+        Args: {
+          emailstr: string
+        }
         Returns: number
       }
       findrankbyemail: {
