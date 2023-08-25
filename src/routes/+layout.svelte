@@ -1,5 +1,7 @@
 <script lang="ts">
 	import '../app.css';
+	import '@fontsource/comfortaa';
+	import '@fontsource/poppins';
 	import Footer from '../lib/components/Footer.svelte';
 	import Header from '../lib/components/Header.svelte';
 	import Modal from '../lib/components/Modal.svelte';
@@ -18,7 +20,7 @@
 				updateModalVisibility(false);
 			}
 		});
-		
+
 		// document.body.style.backgroundColor = '#EDEBE3';
 	});
 	let k = '';
@@ -66,7 +68,7 @@
 
 {#if browser}
 	<section class="px-5 py-0 big:px-0 mt-10 big:max-w-6xl big:mx-auto">
-		<Header {supabase} {session}/>
+		<Header {supabase} {session} />
 		<slot />
 		<Footer />
 	</section>

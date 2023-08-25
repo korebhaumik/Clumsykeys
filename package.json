@@ -33,6 +33,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource/comfortaa": "^5.0.8",
+		"@fontsource/poppins": "^5.0.8",
 		"@supabase/auth-helpers-sveltekit": "^0.10.2",
 		"@supabase/supabase-js": "^2.32.0",
 		"@sveltejs/adapter-vercel": "^3.0.2",
