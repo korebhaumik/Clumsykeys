@@ -18,7 +18,7 @@
 
 <svelte:window bind:innerWidth bind:innerHeight />
 <div
-	class="mx-auto mt-10 bottom-10 w-fit big:w-full big:bottom-10 big:max-w-6xl big:mx-auto"
+	class="mx-auto mt-10 bottom-10 sm:bottom-10 w-full big:w-full big:bottom-10 big:max-w-6xl big:mx-auto"
 	bind:this={$footerEl}
 	bind:offsetHeight={footerHeight}
 >

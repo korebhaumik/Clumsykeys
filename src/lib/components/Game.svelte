@@ -92,14 +92,16 @@
 				e.preventDefault();
 				// if (resetEl == document.activeElement) {
 				if (isBlur) {
-					resetEl.blur();
-					$inputEl.focus();
+					if (resetEl) resetEl.blur();
+					// console.log(resetEl);
+					if ($inputEl) $inputEl.focus();
 				} else resetEl.focus();
 			}
 		}
 		document.addEventListener('keydown', myfunction);
 		resetTest();
 		testStatus.set('protected');
+		letterIndex = 0;
 		wordsArr.update((prev) => {
 			prev = [];
 			return prev;
@@ -110,6 +112,7 @@
 			isNumber: $newTextConfig.numbers,
 			isPunctuation: $newTextConfig.punctuations
 		});
+		setGameState('waiting');
 		$inputEl.focus();
 		isBlur = false;
 
@@ -120,6 +123,7 @@
 
 	$: {
 		if (letterIndex && intervalId === null) {
+			//@ts-expect-error
 			intervalId = createTimer();
 			// console.log('intervalId: ', intervalId);
 		}
@@ -130,8 +134,10 @@
 			if (wordsDataArr.at(-1)!.endTime === -1) wordsDataArr.pop();
 			setGameState('finished');
 		}
-		if ($wordIndex === $WordCount) {
-			setGameState('finished');
+		if ($newTextConfig.words.isHighlighted) {
+			if ($wordIndex === $WordCount) {
+				setGameState('finished');
+			}
 		}
 	}
 

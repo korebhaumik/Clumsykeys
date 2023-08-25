@@ -24,6 +24,7 @@
 	let k = 'opacity-100';
 	let opac = 'opacity-0';
 	let gameOpac = 'opacity-100';
+	let speed: number | undefined = 0;
 	$: {
 		if ($theme === 'dark-forest') {
 			textVar.highlighted = 'text-dark-forest-highlighted';
@@ -66,7 +67,7 @@
 			opac = 'opacity-0';
 		}
 	}
-	let speed: number | undefined = 0;
+	
 	$: {
 		if ($timeDataArr.length > 1) speed = $timeDataArr.at(-2)?.wpm;
 		remaining = $TimerCount;

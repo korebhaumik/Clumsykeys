@@ -2,6 +2,8 @@
 	import { fade } from 'svelte/transition';
 	import { footerEl } from '$lib/components/fun.store';
 	import LeaderboardTable from '$lib/components/Table.Leaderboards.svelte';
+	export let data;
+	const { supabase, session } = data;
 
 	import { onMount } from 'svelte';
 
@@ -13,9 +15,9 @@
 <div class={`mt-5 text-dark-forest-highlighted`} in:fade={{ duration: 100, delay: 400 }}>
 	<div class="flex justify-between items-center">
 		<div>
-			<h1 class="hidden sm:text-base md:text-lg">All Time English Leaderboards</h1>
+			<h1 class="hidden sm:text-base sm:inline-block md:text-lg">All Time English Leaderboards</h1>
 			<h1 class="text-base md:text-lg sm:hidden">Leaderboards</h1>
-			<h2 class="text-dark-forest-unhighlighted">auto-update in 5 mins</h2>
+			<h2 class="text-dark-forest-unhighlighted">auto-updates every 5 mins</h2>
 		</div>
 		<div class="text-sm flex flex-col items-end">
 			<div>
@@ -29,5 +31,5 @@
 			</div>
 		</div>
 	</div>
-	<LeaderboardTable />
+	<LeaderboardTable {supabase} />
 </div>
