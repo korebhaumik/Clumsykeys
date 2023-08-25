@@ -20,6 +20,7 @@
 	import { goto } from '$app/navigation';
 	import ClipboardSvg from '$lib/assets/ClipboardSVG.svelte';
 	import FireSvg from '$lib/assets/FireSVG.svelte';
+	import Profile from '$lib/components/Profile.svelte';
 
 	let resetButton: HTMLAnchorElement;
 	const textVar = {
@@ -72,6 +73,243 @@
 		window.addEventListener('resize', handleDynamicFooter, true);
 		() => window.removeEventListener('resize', handleDynamicFooter, true);
 	});
+
+	export let data;
+	const { supabase, session } = data;
+	let username: string = 'anonymous';
+	type PB = {
+		'15sec': {
+			wpm: number;
+			acc: number;
+		};
+		'30sec': {
+			wpm: number;
+			acc: number;
+		};
+		'60sec': {
+			wpm: number;
+			acc: number;
+		};
+		'25words': {
+			wpm: number;
+			acc: number;
+		};
+		'50words': {
+			wpm: number;
+			acc: number;
+		};
+		'100words': {
+			wpm: number;
+			acc: number;
+		};
+	};
+	type RecentTest = {
+		wpm: number;
+		raw: number;
+		acc: number;
+		std: number;
+		chars: [number, number, number];
+		mode: string;
+		lang: string;
+		date: Date;
+	};
+	async function fetchLatestProfile() {
+		const userInstance = await supabase.from('users').select('*').eq('email', session?.user.email);
+		// console.log(userInstance);
+		if (userInstance.data) {
+			// console.log(userInstance.data[0].pb);
+			username = userInstance.data[0].username;
+			// console.log(userInstance.data[0].recent_tests);
+			return {
+				LtestsCompleted: userInstance.data[0].testsCompleted,
+				LtestsStarted: userInstance.data[0].testsStarted,
+				Lpb: JSON.parse(userInstance.data[0].pb as string) as PB,
+				LRecentTests: JSON.parse(userInstance.data[0].recent_tests as string) as RecentTest[],
+				Lwpm: userInstance.data[0].wpm ?? 0,
+				Lraw: userInstance.data[0].raw ?? 0,
+				Lacc: userInstance.data[0].acc ?? 100,
+				Lstd: userInstance.data[0].std ?? 0,
+				LtimeTyping: userInstance.data[0].timeTyping ?? 0
+			};
+		} else throw new Error('User not found');
+	}
+
+	type ProfileProps = Awaited<ReturnType<typeof fetchLatestProfile>>;
+	function avg(n: number, Lavg: number, current: number) {
+		// console.log(n, Lavg, current);
+		if (isFloat(current)) return parseFloat((((n - 1) / n) * Lavg + (1 / n) * current).toFixed(2));
+		// console.log(((n - 1) / n) * Lavg + (1 / n) * current);
+		return Math.floor(((n - 1) / n) * Lavg + (1 / n) * current);
+	}
+	function isFloat(value: number) {
+		if (typeof value === 'number' && !Number.isNaN(value) && !Number.isInteger(value)) {
+			return true;
+		}
+
+		return false;
+	}
+	function updatePB(Lpb: PB) {
+		if ($newTextConfig.time.isHighlighted) {
+			if ($newTextConfig.time.value === 15) {
+				if (Lpb['15sec'].wpm === null || Lpb['15sec'].wpm < wpm) {
+					Lpb['15sec'].wpm = wpm;
+					Lpb['15sec'].acc = accuracy;
+				}
+			}
+			if ($newTextConfig.time.value === 30) {
+				if (Lpb['30sec'].wpm === null || Lpb['30sec'].wpm < wpm) {
+					Lpb['30sec'].wpm = wpm;
+					Lpb['30sec'].acc = accuracy;
+				}
+			}
+			if ($newTextConfig.time.value === 60) {
+				if (Lpb['60sec'].wpm === null || Lpb['60sec'].wpm < wpm) {
+					Lpb['60sec'].wpm = wpm;
+					Lpb['60sec'].acc = accuracy;
+				}
+			}
+		}
+		if ($newTextConfig.words.isHighlighted) {
+			if ($newTextConfig.words.value === 25) {
+				if (Lpb['25words'].wpm === null || Lpb['25words'].wpm < wpm) {
+					Lpb['25words'].wpm = wpm;
+					Lpb['25words'].acc = accuracy;
+				}
+			}
+			if ($newTextConfig.words.value === 50) {
+				if (Lpb['50words'].wpm === null || Lpb['50words'].wpm < wpm) {
+					Lpb['50words'].wpm = wpm;
+					Lpb['50words'].acc = accuracy;
+				}
+			}
+			if ($newTextConfig.words.value === 100) {
+				if (Lpb['100words'].wpm === null || Lpb['100words'].wpm < wpm) {
+					Lpb['100words'].wpm = wpm;
+					Lpb['100words'].acc = accuracy;
+				}
+			}
+		}
+		return;
+	}
+	function updateRecentTests(LRecentTests: RecentTest[]) {
+		if (LRecentTests.length === 5) LRecentTests.pop();
+		LRecentTests.unshift({
+			wpm,
+			raw: avgRaw,
+			acc: accuracy,
+			std: standardDeviation,
+			chars: [$charCount, $incorrectCharCount, 0],
+			mode: $newTextConfig.time.isHighlighted
+				? `time ${$newTextConfig.time.value}s`
+				: `words ${$newTextConfig.words.value}`,
+			lang: $newTextConfig.language.value,
+			date: new Date()
+		});
+	}
+	async function updateLatestProfile({
+		LtestsCompleted,
+		LtestsStarted,
+		Lpb,
+		LRecentTests,
+		// pb: JSON.parse(userInstance.data[0].pb as string)
+		Lwpm,
+		Lraw,
+		Lacc,
+		Lstd,
+		LtimeTyping
+	}: ProfileProps) {
+		updatePB(Lpb);
+		updateRecentTests(LRecentTests);
+		const FtestCompleted = LtestsCompleted + 1;
+		const FtimeTyping = LtimeTyping + $timeDataArr.at(-1)!.time;
+		const Fwpm = avg(FtestCompleted, Lwpm, wpm);
+		const Facc = avg(FtestCompleted, Lacc, accuracy);
+		const Fraw = avg(FtestCompleted, Lraw, avgRaw);
+		const Fstd = avg(FtestCompleted, Lstd, standardDeviation);
+		await supabase
+			.from('users')
+			.update({
+				wpm: Fwpm,
+				raw: Fraw,
+				acc: Facc,
+				std: Fstd,
+				timeTyping: FtimeTyping,
+				testsCompleted: FtestCompleted,
+				testsStarted: FtestCompleted,
+				pb: JSON.stringify(Lpb),
+				recent_tests: JSON.stringify(LRecentTests)
+			})
+			.eq('email', session?.user.email);
+	}
+	// async function updateLeaderboard() {
+	// 	const leaderboard = await supabase.from('leaderboard').select('*');
+	// 	const leaderboardData = leaderboard.data;
+	// 	const leaderboardDataSorted = leaderboardData!.sort((a, b) => b.wpm - a.wpm);
+	// 	const leaderboardDataSortedSliced = leaderboardDataSorted.slice(0, 10);
+	// 	const leaderboardDataSortedSlicedEmails = leaderboardDataSortedSliced.map((ele) => ele.email);
+	// 	const leaderboardDataSortedSlicedEmailsSet = new Set(leaderboardDataSortedSlicedEmails);
+	// 	if (!leaderboardDataSortedSlicedEmailsSet.has(session?.user.email)) {
+	// 		await supabase.from('leaderboard').insert([
+	// 			{
+	// 				email: session?.user.email,
+	// 				wpm: wpm,
+	// 				raw: avgRaw,
+	// 				acc: accuracy,
+	// 				std: standardDeviation,
+	// 				timeTyping: $timeDataArr.at(-1)!.time
+	// 			}
+	// 		]);
+	// 	}
+	// }
+	async function updateLeaderboard() {
+		if (!$newTextConfig.time.isHighlighted) return;
+		if ($newTextConfig.time.value != 30) return;
+		const leaderboardsInstance = await supabase
+			.from('leaderboards')
+			.select('*')
+			.eq('email', session?.user.email);
+		if (leaderboardsInstance.error) throw new Error(leaderboardsInstance.error.message);
+		if (leaderboardsInstance.data?.length === 0) {
+			// console.log('hello world');
+			await supabase.from('leaderboards').insert([
+				{
+					email: session!.user.email as string,
+					username,
+					wpm: wpm,
+					raw: avgRaw,
+					acc: accuracy,
+					std: standardDeviation
+				}
+			]);
+			return;
+		}
+
+		const leaderboardData = leaderboardsInstance.data[0];
+		if (leaderboardData.wpm > wpm) return;
+		await supabase
+			.from('leaderboards')
+			.update({
+				wpm: wpm,
+				raw: avgRaw,
+				acc: accuracy,
+				std: standardDeviation,
+				upserted_at: new Date().toISOString()
+			})
+			.eq('email', session?.user.email);
+	}
+
+	onMount(async () => {
+		if ($testStatus !== 'valid') return;
+		// console.log('hello world', session?.user.email);
+		try {
+			if (!session) return;
+			await updateLatestProfile(await fetchLatestProfile());
+			await updateLeaderboard();
+		} catch (err: any) {
+			console.error(err);
+		}
+	});
+
 	timeDataArr.update((arr) => {
 		// console.log($newTextConfig.time.value)
 		return arr.filter((ele) => {
@@ -100,7 +338,7 @@
 	const mean = wpmArr.reduce((acc, val) => acc + val, 0) / wpmArr.length;
 	const variance =
 		wpmArr.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0) / (wpmArr.length - 1);
-	const standardDeviation = Math.sqrt(variance).toFixed(2);
+	const standardDeviation = parseFloat(Math.sqrt(variance).toFixed(2));
 
 	// console.log(standardDeviation); // Output: 1.5811388300841898
 	// $: raw = $timeDataArr.at(-1)!.raw;
