@@ -88,7 +88,7 @@
 			</a>
 			<a
 				aria-label={`About`}
-				href="/"
+				href="/about"
 				class={cn('transition px-2 text-dark-forest-accent-yellow', {
 					'text-dark-forest-accent-yellow': $theme === 'dark-forest',
 					'text-dark-forest-unhighlighted': $game === 'playing'
