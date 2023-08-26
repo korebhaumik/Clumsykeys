@@ -513,7 +513,7 @@
 					resetTest();
 					document.removeEventListener('keydown', myfunction);
 					setGameState('waiting');
-					await goto('/');
+					await goto('/about');
 				}}
 				class={`block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border`}
 				>Contact Support</button
@@ -549,7 +549,7 @@
 					resetTest();
 					document.removeEventListener('keydown', myfunction);
 					setGameState('waiting');
-					await goto('/');
+					await goto('/about');
 				}}
 				class={`block ml-2 px-4 py-3 mt-2 font-medium text-sm rounded w-fit border`}
 				>Contact Support</button
