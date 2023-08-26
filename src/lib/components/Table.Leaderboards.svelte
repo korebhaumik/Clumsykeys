@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { SupabaseClient } from '@supabase/supabase-js';
+	import type { Session, SupabaseClient } from '@supabase/supabase-js';
 	import type { Database } from '../../types/supabase';
 	import { onMount } from 'svelte';
+	import cn from '$lib/utils';
 
 	// const arr = [
 	// 	{
@@ -93,7 +94,7 @@
 	// 		date: '15 Jul, 23'
 	// 	}
 	// ];
-
+	export let session: Session | null;
 	type Leaderboard = {
 		acc: number;
 		upserted_at: string;
@@ -135,9 +136,11 @@
 	{#each arr as ele, index}
 		<row
 			bind:offsetHeight={h}
-			class={`grid grid-cols-5 sm:grid-cols-6 md:grid-cols-9 text gap-1 py-2 rounded-lg ${
-				index % 2 !== 0 ? 'bg-dark-forest-fade' : ''
-			}`}
+			class={cn(`grid grid-cols-5 sm:grid-cols-6 md:grid-cols-9 text gap-1 py-2 rounded-lg`, {
+				'bg-dark-forest-fade': index % 2 !== 0,
+				'outline -outline-offset-2 outline-dark-forest-caret/60': session && session.user.email === ele.email,
+				// 'outline -outline-offset-2 outline-dark-forest-accent-main/60': session && session.user.email === ele.email,
+			})}
 		>
 			<span class="pl-2">{index + 1}.</span>
 			<span class="col-span-2 sm:col-span-3">{ele.username}</span>
@@ -149,13 +152,17 @@
 		</row>
 	{/each}
 	{#if arr.length === 0}
-	<row
+		<row
 			bind:offsetHeight={h}
 			class={`grid grid-cols-5 sm:grid-cols-6 md:grid-cols-9 text gap-1 py-2 rounded-lg ${
 				4 % 2 !== 0 ? 'bg-dark-forest-fade' : ''
 			}`}
 		>
-		<span class="text-dark-forest-unhighlighted">loading...</span>
-	</row>
+			<span class="text-dark-forest-unhighlighted">loading...</span>
+		</row>
 	{/if}
 </section>
+
+<!-- class={`grid grid-cols-5 sm:grid-cols-6 md:grid-cols-9 text gap-1 py-2 rounded-lg ${
+	index % 2 !== 0 ? 'bg-dark-forest-fade' : ''
+}`} -->

@@ -6,7 +6,7 @@
 	import cn from '$lib/utils';
 	import toast, { Toaster } from 'svelte-french-toast';
 	export let data;
-	const { supabase } = data;
+	const { supabase, session } = data;
 
 	type Leaderboard = {
 		acc: number;
@@ -115,5 +115,5 @@
 			</div>
 		</div>
 	</div>
-	<LeaderboardTable {arr} />
+	<LeaderboardTable {arr} {session} />
 </div>
