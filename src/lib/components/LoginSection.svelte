@@ -140,7 +140,7 @@
 			on:keydown={handleKeyboardSumbit}
 			type="email"
 			placeholder="name@provider.com"
-			class="w-full px-4 py-3 mt-5 text-sm border rounded bg-inherit border-cardboard-500"
+			class="w-full px-4 py-3 mt-5 text-sm border rounded bg-inherit outline-none border-dark-forest-unhighlighted"
 		/>
 		<button
 			on:click={handleSumbit}
@@ -149,18 +149,18 @@
 		>
 		<div class=" mt-3 flex items-center">
 			<p class=" min-w-max">Or Continue With</p>
-			<hr class="w-full ml-2 border-cardboard-500" />
+			<hr class="w-full ml-2 border-dark-forest-unhighlighted" />
 		</div>
 		<button
 		on:click={handleGoogleSignIn}
-			class="w-full py-3 mt-3 text-sm border rounded border-cardboard-500 text-cardboard-900 flex justify-center items-center"
+			class="w-full py-3 mt-3 text-sm border rounded border-dark-forest-highlighted text-cardboard-900 flex justify-center items-center"
 		>
 			<GoogleSvg size="sm" />
 			<span class="ml-1">Google</span>
 		</button>
 		<button
 			on:click={handleGithubSignIn}
-			class="w-full py-3 mt-3 text-sm border rounded border-cardboard-500 text-cardboard-900 flex justify-center items-center"
+			class="w-full py-3 mt-3 text-sm border rounded border-dark-forest-highlighted text-cardboard-900 flex justify-center items-center"
 		>
 			<GithubSvg />
 			<span class="ml-1">GitHub</span>
