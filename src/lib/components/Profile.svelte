@@ -115,6 +115,9 @@
 	};
 
 	onMount(async () => {
+		contentHeight.set(offsetHeight);
+		handleDynamicFooter();
+		window.addEventListener('resize', handleDynamicFooter, true);
 		if (userInstance) {
 			const { data: sm } = await supabase.rpc('findrank15byemail', {
 				emailstr: userInstance[0].email
@@ -159,10 +162,6 @@
 				} else leaderboard['60sec'] = `${rankLg}th`;
 			}
 		}
-
-		contentHeight.set(offsetHeight);
-		handleDynamicFooter();
-		window.addEventListener('resize', handleDynamicFooter, true);
 
 		() => window.removeEventListener('resize', handleDynamicFooter, true);
 	});
