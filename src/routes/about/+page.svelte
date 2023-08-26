@@ -28,7 +28,7 @@
 	in:fade={{ delay: 400, duration: 150 }}
 >
 	<section class="w-[30rem] relative text-dark-forest-highlighted">
-		<h1 class="text-4xl">Your feedback is highly valuable to us.</h1>
+		<h1 class="text-4xl">Your <span class="underline underline-offset-0 decoration-dark-forest-accent-main">feedback</span> is highly valuable to us.</h1>
 		<p class="text-white text-opacity-50 text-base mt-3">
 			We strive to provide you with the best typing experience and the best platform to improve your
 			skills.
