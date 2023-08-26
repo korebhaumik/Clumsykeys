@@ -1,17 +1,30 @@
 <script lang="ts">
 	import DollarSvg from '$lib/assets/DollarSVG.svelte';
 	import { footerEl } from '$lib/components/fun.store';
+	import cn from '$lib/utils';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
-
+	let innerHeight: number;
 	onMount(async () => {
 		$footerEl.style.position = 'absolute';
 	});
+
+	$: {
+		if (innerHeight) {
+			innerHeight > 700
+				? ($footerEl.style.position = 'absolute')
+				: ($footerEl.style.position = 'relative');
+		}
+	}
 </script>
 
+<svelte:window bind:innerHeight />
 <div
-	class=" absolute top-[43%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl flex justify-between font-medium mt-10"
+	class={cn(' w-full max-w-6xl flex justify-between font-medium mt-10', {
+		'mt-10 mb-20': innerHeight < 700,
+		'absolute top-[43%] left-1/2 -translate-x-1/2 -translate-y-1/2': innerHeight > 700
+	})}
 	in:fade={{ delay: 400, duration: 150 }}
 >
 	<section class="w-[30rem] relative text-dark-forest-highlighted">
