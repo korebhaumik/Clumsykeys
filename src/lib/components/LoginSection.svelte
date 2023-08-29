@@ -167,7 +167,7 @@
 		</button>
 	</div>
 	<div
-		class="h-full relative bg-black w-[37rem] border border-dark-forest-unhighlighted/50 px-20 pr-16 py-12 pb-8 rounded-lg mt-2"
+		class="hidden sm:block h-full relative bg-black w-[37rem] border border-dark-forest-unhighlighted/50 px-20 pr-16 py-12 pb-8 rounded-lg mt-2"
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
