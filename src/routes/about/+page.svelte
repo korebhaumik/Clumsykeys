@@ -6,29 +6,34 @@
 	import { fade } from 'svelte/transition';
 
 	let innerHeight: number;
+	let innerWidth: number;
 	onMount(async () => {
 		$footerEl.style.position = 'absolute';
 	});
 
 	$: {
 		if (innerHeight) {
-			innerHeight > 700
+			innerHeight > 700 && innerWidth > 1000
 				? ($footerEl.style.position = 'absolute')
 				: ($footerEl.style.position = 'relative');
 		}
 	}
 </script>
 
-<svelte:window bind:innerHeight />
+<svelte:window bind:innerHeight bind:innerWidth />
 <div
-	class={cn(' w-full max-w-6xl flex justify-between font-medium mt-10', {
-		'mt-10 mb-20': innerHeight < 700,
-		'absolute top-[43%] left-1/2 -translate-x-1/2 -translate-y-1/2': innerHeight > 700
+	class={cn(' px-5 big:px-0 w-full max-w-6xl flex flex-wrap justify-between  font-medium mt-10', {
+		'mt-10 mb-20': innerHeight < 700 || innerWidth < 1000,
+		'absolute top-[43%] left-1/2 -translate-x-1/2 -translate-y-1/2': innerHeight > 700 && innerWidth > 1000,
 	})}
 	in:fade={{ delay: 400, duration: 150 }}
 >
-	<section class="w-[30rem] relative text-dark-forest-highlighted">
-		<h1 class="text-4xl">Your <span class="underline underline-offset-0 decoration-dark-forest-accent-main">feedback</span> is highly valuable to us.</h1>
+	<section class="max-w-[30rem] relative text-dark-forest-highlighted">
+		<h1 class="text-3xl sm:text-4xl">
+			Your <span class="underline underline-offset-0 decoration-dark-forest-accent-main"
+				>feedback</span
+			> is highly valuable to us.
+		</h1>
 		<p class="text-white text-opacity-50 text-base mt-3">
 			We strive to provide you with the best typing experience and the best platform to improve your
 			skills.
@@ -37,7 +42,7 @@
 			Feel free to post any queries you may have.
 		</p>
 		<div
-			class="w-full absolute bottom-0 px-[25px] py-5 bg-neutral-900 rounded-lg border border-white border-opacity-10 flex-col justify-start items-start gap-2.5 inline-flex"
+			class="w-full my-5 lg:absolute bottom-0 px-[25px] py-5 bg-neutral-900 rounded-lg border border-white border-opacity-10 flex-col justify-start items-start gap-2.5 inline-flex"
 		>
 			<div class="text-white text-base font-medium leading-tight">Help us grow !!</div>
 			<div class=" text-white text-opacity-50 text-sm font-medium leading-tight">

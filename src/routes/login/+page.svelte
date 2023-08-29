@@ -5,8 +5,10 @@
 	const { session, supabase, userInstance } = data;
 </script>
 
-{#if session && userInstance}
-	<Profile {userInstance} {supabase} />
-{:else}
-	<LoginSection {supabase} />
-{/if}
+<div class="px-5 sm:px-0">
+	{#if session && userInstance}
+		<Profile {userInstance} {supabase} />
+	{:else}
+		<LoginSection {supabase} />
+	{/if}
+</div>
