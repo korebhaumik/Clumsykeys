@@ -21,6 +21,7 @@
 	import ClipboardSvg from '$lib/assets/ClipboardSVG.svelte';
 	import FireSvg from '$lib/assets/FireSVG.svelte';
 	import Profile from '$lib/components/Profile.svelte';
+	import toast, { Toaster } from 'svelte-french-toast';
 
 	let resetButton: HTMLAnchorElement;
 	const textVar = {
@@ -64,6 +65,7 @@
 	});
 	let offsetHeight = 0;
 	let innerHeight = 0;
+	let innerWidth = 0;
 
 	const handleDynamicFooter = () => {
 		!($contentHeight > innerHeight - 60 - 200)
@@ -355,7 +357,8 @@
 	const accuracy = Math.floor((($charCount - $incorrectCharCount) * 100) / $charCount);
 </script>
 
-<svelte:window bind:innerHeight />
+<svelte:window bind:innerHeight bind:innerWidth />
+<Toaster/>
 {#if $testStatus === 'valid'}
 	<div class="px-5 big:px-0" bind:offsetHeight>
 		<div class={`mt-10 ${textVar.unhighlighted} justify-between sm:flex w-full`}>
@@ -387,8 +390,9 @@
 						<p>random quotes</p>
 					{/if}
 					<p>{$newTextConfig.language.value}</p>
-					<p>{$newTextConfig.punctuations ? 'punctuations' : 'no punctuations'}</p>
-					<p>{$newTextConfig.numbers ? 'numbers' : 'no numbers'}</p>
+
+					<p class="hidden sm:block">{$newTextConfig.punctuations ? 'punctuations' : 'no punctuations'}</p>
+					<p class="hidden sm:block">{$newTextConfig.numbers ? 'numbers' : 'no numbers'}</p>
 				</div>
 			</div>
 			<div>
@@ -404,13 +408,13 @@
 					<p class="text-3xl">{$charCount}/{$incorrectCharCount}/0</p>
 				</div>
 			</div>
-			<div>
+			<div class="mt-2 sm:mt-0">
 				<h1>wpm standard deviation</h1>
 				<div class={`${textVar['accent-main']} mt-2 text-sm`}>
 					<p class="text-3xl">{standardDeviation}</p>
 				</div>
 			</div>
-			<div>
+			<div class="mt-2 sm:mt-0">
 				<h1>session</h1>
 				<div class={`${textVar['accent-main']} mt-2  text-sm`}>
 					<p class="text-3xl">{$timeDataArr.at(-1)?.time} s</p>
@@ -452,23 +456,26 @@
 				}}
 			/>
 		</a>
-
 		<div class="flex items-center text-dark-forest-unhighlighted">
-			<h1 class="text-white">input history</h1>
+			<h1 class="text-white text-lg inline sm:hidden">Inp Hst</h1>
+			<h1 class="text-white hidden sm:inline">input history</h1>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<button
 				on:click={() => {
+					toast.success('Copied to clipboard', {
+						duration: 2000,
+					});
 					navigator.clipboard.writeText($wordsArr.join(' '));
 				}}
 			>
 				<ClipboardSvg variant="w-5 h-5 ml-2" />
 			</button>
 			<FireSvg variant="w-5 h-5 ml-2" />
-			<div class="flex text-xs leading-none text-black font-semibold rounded-lg ml-2">
-				<span class="px-2 py-1 pt-1.5 rounded-l bg-dark-forest-accent-error">0-30</span>
-				<span class={`px-2 py-1 pt-1.5 bg-[#DBA9A1]`}>30-60</span>
-				<span class="px-2 py-1 pt-1.5 bg-white">60-90</span>
-				<span class="px-2 py-1 pt-1.5 bg-[#CFE4C6]">90-120</span>
+			<div class="flex text-xs sm:text-xs leading-none text-black font-semibold rounded-lg ml-2">
+				<span class="px-2 py-1 pt-1.5 rounded-l bg-dark-forest-accent-error">{innerWidth<500 ?"<30":"0-30"}</span>
+				<span class={`px-2 py-1 pt-1.5 bg-[#DBA9A1]`}>{innerWidth<500 ?"<60":"30-60"}</span>
+				<span class="px-2 py-1 pt-1.5 bg-white">{innerWidth<500 ?"<90":"60-90"}</span>
+				<span class="px-2 py-1 pt-1.5 bg-[#CFE4C6]">{innerWidth<500 ?"<120":"90-120"}</span>
 				<span class="px-2 py-1 pt-1.5 rounded-r bg-dark-forest-accent-main">120+</span>
 			</div>
 		</div>
