@@ -36,7 +36,9 @@
 		<!-- logo -->
 		<div class="flex items-end w-fit">
 			<!-- <LogoSvg fg={textVar['logo-icon-fg']} bg={textVar['logo-icon-bg']} /> -->
-			<LogoSvg />
+			<a href="/">
+				<LogoSvg />
+			</a>
 
 			<div class="flex flex-col items-start ml-3 font-normal font-poppins">
 				<span
