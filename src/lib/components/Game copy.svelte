@@ -449,6 +449,10 @@
 		class="sr-only"
 		id="boss"
 		type="text"
+		autocapitalize="none"
+		autocomplete="off"
+		autocorrect="off"
+		spellcheck="false"
 		bind:this={$inputEl}
 		bind:value={tempTypedLetter}
 		on:input={handleInputEvent}
