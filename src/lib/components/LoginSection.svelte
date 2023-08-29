@@ -131,7 +131,7 @@
 	class={` ${textVar.highlighted} absolute top-[calc(50%-3%)] flex flex-wrap items-center -translate-y-1/2 w-[calc(100%-10%)] max-w-6xl justify-between`}
 	in:fade={{ delay: 400, duration: 150 }}
 >
-	<div class="w-[21rem] sm:w-[23rem]">
+	<div class="w-full sm:w-[23rem]">
 		<h1 class="text-xl">Welcome back</h1>
 		<h2 class={`${textVar.unhighlighted}`}>Enter your email to sign into your account</h2>
 
