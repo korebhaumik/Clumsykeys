@@ -436,6 +436,7 @@
 				resetTest();
 				document.removeEventListener('keydown', myfunction);
 				setGameState('waiting');
+				$footerEl.style.position = 'absolute'
 				await goto('/');
 			}}
 			on:focus={() => {
@@ -511,6 +512,7 @@
 					resetTest();
 					document.removeEventListener('keydown', myfunction);
 					setGameState('waiting');
+					$footerEl.style.position = 'absolute'
 					await goto('/');
 				}}
 				class={`block px-4 py-3 mt-2 font-medium text-sm rounded w-fit ${bgVar['accent-error']} ${textVar.highlighted}`}
