@@ -9,6 +9,7 @@
 	import SettingsSvg from '$lib/assets/SettingsSVG.svelte';
 	import KeyboardSvg from '$lib/assets/KeyboardSVG.svelte';
 	import { updateModalContent, updateModalVisibility } from './config.store';
+	import { contentHeight, footerEl } from './fun.store';
 
 	const dispatch = createEventDispatcher();
 	let menuEl: HTMLDivElement;
@@ -61,7 +62,10 @@
 	<div class="mt-3 text-dark-forest-unhighlighted">
 		<a
 			href="/"
-			on:click={() => dispatch('CustomClickEvent', { isVisible: false })}
+			on:click={() => {
+                contentHeight.set(0);
+                $footerEl.style.position = 'absolute';
+                dispatch('CustomClickEvent', { isVisible: false })}}
 			class="inline-flex gap-3"
 		>
 			<KeyboardSvg />
