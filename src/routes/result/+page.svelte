@@ -52,9 +52,13 @@
 			resetButton.focus();
 		}
 	}
-	onMount(() => {
+	onMount(async() => {
 		document.addEventListener('keydown', myfunction);
 		setGameState('waiting');
+		if ($testStatus === 'protected') {
+			// setGameState('waiting');
+			await goto('/');
+		}
 
 		return () => document.removeEventListener('keydown', myfunction);
 	});
@@ -264,7 +268,7 @@
 	async function updateLeaderboard() {
 		if (!$newTextConfig.time.isHighlighted) return;
 		// if ($newTextConfig.time.value != 30) return;
-		console.log($newTextConfig.time.value)
+		console.log($newTextConfig.time.value);
 		let table = '';
 		if ($newTextConfig.time.value == 30) table = 'leaderboards';
 		if ($newTextConfig.time.value == 15) table = 'leaderboards_15';
@@ -353,7 +357,7 @@
 
 <svelte:window bind:innerHeight />
 {#if $testStatus === 'valid'}
-	<div bind:offsetHeight>
+	<div class="px-5 big:px-0" bind:offsetHeight>
 		<div class={`mt-10 ${textVar.unhighlighted} justify-between sm:flex w-full`}>
 			<div class="flex items-center sm:flex-col sm:items-start">
 				<div class="w-fit">
@@ -485,7 +489,7 @@
 	</div>
 	<!-- <p class="text-white">{$wordsArr}</p> -->
 {:else if $testStatus === 'invalid'}
-	<div class="absolute top-[45%] -translate-y-1/2 text-dark-forest-highlighted">
+	<div class=" px-5 big:px-0 absolute top-[45%] -translate-y-1/2 text-dark-forest-highlighted">
 		<p class="font-bold">: (</p>
 		<h1 class={`${textVar['accent-error']} mt-2 text-2xl`}>Invalid Test</h1>
 		<p class={`mt-2 ${textVar.highlighted}`}>
@@ -521,7 +525,7 @@
 		</div>
 	</div>
 {:else}
-	<div class="absolute top-[45%] -translate-y-1/2 text-dark-forest-highlighted">
+	<!-- <div class="absolute top-[45%] -translate-y-1/2 text-dark-forest-highlighted">
 		<p class="font-bold">: (</p>
 		<h1 class={`${textVar['accent-error']} mt-2 text-2xl`}>Protected Route</h1>
 		<p class={`mt-2 ${textVar.highlighted}`}>
@@ -555,5 +559,5 @@
 				>Contact Support</button
 			>
 		</div>
-	</div>
+	</div> -->
 {/if}
