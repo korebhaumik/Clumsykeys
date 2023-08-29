@@ -8,7 +8,7 @@
 	import SettingsSvg from '../assets/SettingsSVG.svelte';
 	import UserSvg from '../assets/UserSVG.svelte';
 	import Sidebar from './Sidebar.svelte';
-	import { footerEl, theme } from './fun.store';
+	import { contentHeight, footerEl, theme } from './fun.store';
 	import { game } from './game.store';
 	import { updateModalContent, updateModalVisibility } from './config.store';
 	import type { Session, SupabaseClient } from '@supabase/supabase-js';
@@ -43,7 +43,13 @@
 		<!-- logo -->
 		<div class="flex items-end w-fit">
 			<!-- <LogoSvg fg={textVar['logo-icon-fg']} bg={textVar['logo-icon-bg']} /> -->
-			<a href="/" on:click={() => ($footerEl.style.position = 'absolute')}>
+			<a
+				href="/"
+				on:click={() => {
+					contentHeight.set(0);
+					$footerEl.style.position = 'absolute';
+				}}
+			>
 				<LogoSvg />
 			</a>
 
