@@ -23,7 +23,7 @@
 
 <!-- {#if isVisible} -->
 <div
-	class="w-80 bg-dark-forest-highlighted text-dark-forest-primary absolute h-screen right-0 top-0 px-5 z-20"
+	class="w-80 text-dark-forest-highlighted bg-dark-forest-primary border-l border-l-zinc-700/90 absolute h-screen right-0 top-0 px-5 z-20"
 	transition:fly={{ duration: 400, x: 200 }}
 >
 	<div class="flex mt-10">

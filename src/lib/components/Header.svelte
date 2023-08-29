@@ -13,13 +13,20 @@
 	import { updateModalContent, updateModalVisibility } from './config.store';
 	import type { Session, SupabaseClient } from '@supabase/supabase-js';
 	import { goto, invalidate } from '$app/navigation';
+	import MenuSvg from '$lib/assets/MenuSVG.svelte';
+	import Menu from './Menu.svelte';
 
 	$: isVisible = false;
+	$: menuIsVisible = false;
 
 	export let supabase: SupabaseClient;
 	export let session: Session | null;
 	function handleEvent(e: any) {
 		isVisible = !isVisible;
+		// console.log(e);
+	}
+	function handleMenuEvent(e: any) {
+		menuIsVisible = !menuIsVisible;
 		// console.log(e);
 	}
 	function reloadPage() {
@@ -31,7 +38,7 @@
 	}
 </script>
 
-<header class="flex items-end justify-between">
+<header class="px-5 big:px-0 flex items-end justify-between">
 	<div class="flex items-end">
 		<!-- logo -->
 		<div class="flex items-end w-fit">
@@ -65,7 +72,7 @@
 		</div>
 
 		<!-- Menu -->
-		<div class="justify-between hidden ml-7 mb-1 sm:flex w-44">
+		<div class="justify-between hidden sm:flex ml-7 mb-1 w-44">
 			<a
 				aria-label={`Game`}
 				href="/"
@@ -128,7 +135,7 @@
 			<!-- <a href="/login" class="text-xs px-2 py-1 border rounded-lg bg-dark-forest-accent-main text-black">Logout</a> -->
 			{#if session}
 				<button
-					on:click={async() => {
+					on:click={async () => {
 						await supabase.auth.signOut();
 						await invalidate('supabase:auth');
 						goto('/');
@@ -154,15 +161,28 @@
 				<UserSvg />
 			</a>
 			<button
+				class="hidden sm:inline-block"
 				on:click={() => {
 					isVisible = !isVisible;
 				}}
 			>
 				<NotifSvg />
 			</button>
+			<button
+				class="sm:hidden inline-block"
+				on:click={() => {
+					menuIsVisible = !menuIsVisible;
+				}}
+			>
+				<MenuSvg />
+			</button>
 		</div>
 	{/if}
 	{#if isVisible}
 		<Sidebar on:CustomClickEvent={handleEvent} />
 	{/if}
+	{#if menuIsVisible}
+		<Menu on:CustomClickEvent={handleMenuEvent} {menuIsVisible} />
+	{/if}
+
 </header>
