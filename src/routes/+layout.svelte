@@ -67,7 +67,7 @@
 </script>
 
 {#if browser}
-	<section class="px-5 py-0 big:px-0 mt-10 big:max-w-6xl big:mx-auto">
+	<section class=" py-0 big:px-0 mt-10 big:max-w-6xl big:mx-auto">
 		<Header {supabase} {session} />
 		<slot />
 		<Footer />
