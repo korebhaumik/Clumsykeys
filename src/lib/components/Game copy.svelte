@@ -27,10 +27,11 @@
 	import cn from '$lib/utils';
 
 	onMount(() => {
-		contentHeight.set(0);
-		!($contentHeight > innerHeight - 60 - 100)
-			? ($footerEl.style.position = 'absolute')
-			: ($footerEl.style.position = 'relative');
+		// contentHeight.set(0);
+		$footerEl.style.position = 'absolute'
+		// !($contentHeight > innerHeight - 60 - 100)
+		// 	? ($footerEl.style.position = 'absolute')
+		// 	: ($footerEl.style.position = 'relative');
 	});
 
 	const textVar = {
@@ -175,9 +176,10 @@
 			})();
 		}
 	}
-
-	const handleInputEvent = (e: any) => {
-		e as any as InputEvent;
+	// @ts-ignore
+	const handleInputEvent = (ev: any) => {
+		const e = ev as InputEvent;
+		e;
 		if (tempTypedLetter.length > 1) {
 			typedLetter = tempTypedLetter[1] as string;
 		} else typedLetter = '';
@@ -187,7 +189,9 @@
 		}
 
 		if ($game === 'playing') {
-			caretEl.className = `transition-all absolute ${bgVar.caret} h-5 rounded-full w-0.5 top-[3px]`;
+			caretEl.className = cn(
+				`transition-all absolute bg-dark-forest-caret h-5 rounded-full w-0.5 top-[3px]`
+			);
 			if (letterIndex === 0) {
 				populateWords();
 			}
@@ -229,9 +233,6 @@
 	type ChangeEvent = InputEvent & Event & { currentTarget: EventTarget & HTMLInputElement };
 
 	const updateGameState = (e: ChangeEvent) => {
-		// e.inputType;
-		// console.log(e);
-		// console.log(e.inputType, e.data);
 		if (e.inputType === 'deleteContentBackward') {
 			tempTypedLetter = ' ';
 			typedLetter = '';
@@ -470,7 +471,7 @@
 			isBlur = false;
 		}}
 	>
-		<div bind:this={wordsEl} class={`overflow-hidden h-28`} transition:fly>
+		<div bind:this={wordsEl} class={cn(`overflow-hidden h-28`)} transition:fly>
 			{#each $wordsArr as word}
 				<span class="mr-2 text-xl">
 					{#each word as letter}
@@ -484,7 +485,9 @@
 
 		<div
 			bind:this={caretEl}
-			class={`caret new transition-all absolute ${bgVar.caret} h-5 rounded-full w-0.5 top-[3px]`}
+			class={cn(
+				`caret new transition-all absolute bg-dark-forest-caret h-5 rounded-full w-0.5 top-[3px]`
+			)}
 		/>
 	</div>
 
@@ -507,10 +510,6 @@
 		</div>
 	{/if}
 </section>
-<!-- <section class="text-xl text-dark-forest-highlighted sm:hidden">
-	Support for mobile devices is coming soon!
-</section> -->
-<!-- svelte-ignore a11y-missing-attribute -->
 <a
 	bind:this={resetEl}
 	class={cn('block text-dark-forest-unhighlighted outline-none border-none mx-auto mt-5 w-fit', {
@@ -557,7 +556,6 @@
 		if (e.key === 'Enter') {
 			//@ts-ignore
 			clearInterval(intervalId);
-			// console.log(intervalId);
 			intervalId = null;
 			lineH = 0;
 			lineNum = 0;

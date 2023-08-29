@@ -86,11 +86,11 @@
 	/>
 	<!-- Content -->
 	<div
-		class={`absolute z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2  ${textVar['highlighted']}`}
+		class={`absolute z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${textVar['highlighted']}`}
 	>
 		<div transition:scale={{ start: 0.95, delay: 0, duration: 400 }}>
 			<div
-				class={`${bgVar.primary} rounded-lg w-80 mx-auto sm:w-[30rem] border border-zinc-800 h-fit`}
+				class={`${bgVar.primary} rounded-lg w-80 mx-auto sm:w-[30rem] border  border-zinc-700/90 text-dark-forest-unhighlighted h-fit`}
 				transition:fly={{ duration: 400, y: 4 }}
 			>
 				<!-- lang -->
@@ -210,7 +210,8 @@
 										isPunctuation: $newTextConfig.punctuations
 									});
 									updateModalCounter('time');
-									updateModalVisibility();
+									updateModalContent('timeCounter');
+									// updateModalVisibility();
 								}}>Timer</button
 							>
 							<button
@@ -224,7 +225,8 @@
 										isNumber: $newTextConfig.numbers,
 										isPunctuation: $newTextConfig.punctuations
 									});
-									updateModalVisibility();
+									// updateModalVisibility();
+									updateModalContent('wordsCounter');
 								}}>Words</button
 							>
 							<button
@@ -237,7 +239,8 @@
 										lang: $newTextConfig.language.value,
 										type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words'
 									});
-									updateModalVisibility();
+									// updateModalVisibility();
+									updateModalContent('quotesCounter');
 								}}>Quotes</button
 							>
 						</div>
@@ -472,26 +475,11 @@
 				{#if $modalConfig.content === 'menu'}
 					<!-- Settings -->
 					<div>
-						<div class="flex px-5 pt-4">
+						<div class="flex text-dark-forest-highlighted px-5 pt-4">
 							<SettingsSvg />
 							<h1 class="ml-2 font-medium">Settings Menu</h1>
 						</div>
 						<div class="flex flex-col items-start w-full py-3 text-sm">
-							<button
-								class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => {
-									updateModalVisibility();
-									goto('/');
-								}}
-							>
-								<ResetSvg
-									variant={{
-										highlighted: textVar.highlighted,
-										unhighlighted: textVar.highlighted
-									}}
-								/>
-								<span class="ml-2">Reset Test</span>
-							</button>
 							<button
 								class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
 								on:click={() => updateModalVisibility()}
@@ -499,44 +487,62 @@
 								<NotifSvg />
 								<span class="ml-2">Notifications</span>
 							</button>
-							<button
-								class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => updateModalContent('theme')}
-							>
-								<MoonSvg />
-								<span class="ml-2">Theme</span>
-							</button>
-							<button
-								class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => updateModalContent('language')}
-							>
-								<GlobeSvg />
-								<span class="ml-2">Language</span></button
-							>
-							<button
-								class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-								on:click={() => updateModalContent('testType')}
-							>
-								<ConfigSvg />
-								<span class="ml-2">Test type</span></button
-							>
-							{#if $modalConfig.counter === 'time'}
+							<div class="flex w-full items-center justify-between">
 								<button
 									class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-									on:click={() => updateModalContent('timeCounter')}
+									on:click={() => updateModalContent('theme')}
 								>
-									<TimerSvg />
-									<span class="ml-2">Time counter</span></button
+									<MoonSvg />
+									<span class="ml-2">Theme</span>
+								</button>
+								<span class="w-40 inline-block">dark-forest</span>
+							</div>
+							<div class="flex w-full items-center justify-between">
+								<button
+									class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
+									on:click={() => updateModalContent('language')}
 								>
+									<GlobeSvg />
+									<span class="ml-2">Language</span></button
+								>
+								<span class="w-40 inline-block">{$newTextConfig.language.value}</span>
+							</div>
+
+							<div class="flex w-full items-center justify-between">
+								<button
+									class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
+									on:click={() => updateModalContent('testType')}
+								>
+									<ConfigSvg />
+									<span class="ml-2">Test type</span></button
+								>
+								<span class="w-40 inline-block"
+									>{$newTextConfig.time.isHighlighted ? 'Timer' : 'Words'}</span
+								>
+							</div>
+							{#if $modalConfig.counter === 'time'}
+								<div class="flex w-full items-center justify-between">
+									<button
+										class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
+										on:click={() => updateModalContent('timeCounter')}
+									>
+										<TimerSvg />
+										<span class="ml-2">Time counter</span></button
+									>
+									<span class="w-40 inline-block">{$newTextConfig.time.value} secs</span>
+								</div>
 							{/if}
 							{#if $modalConfig.counter === 'words'}
-								<button
-									class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
-									on:click={() => updateModalContent('wordsCounter')}
-								>
-									<TimerSvg />
-									<span class="ml-2">Words counter</span></button
-								>
+								<div class="flex w-full items-center justify-between">
+									<button
+										class="flex items-center w-full py-2 pl-5 text-left align-baseline hover:bg-cardboard-300"
+										on:click={() => updateModalContent('wordsCounter')}
+									>
+										<TimerSvg />
+										<span class="ml-2">Words counter</span></button
+									>
+									<span class="w-40 inline-block">{$newTextConfig.words.value} wrds</span>
+								</div>
 							{/if}
 							{#if $modalConfig.counter === 'quotes'}
 								<button

@@ -119,7 +119,13 @@
 
 <!-- 972 -->
 <!-- {#if $page.url.pathname === '/'} -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <main
+	on:click={() => {
+		updateModalContent('menu');
+		updateModalVisibility();
+
+	}}
 	class={`flex font-semibold px-4 hd:hidden ${bgVar.fade}  py-3 w-fit ${textVar.unhighlighted} rounded-lg`}
 >
 	<SettingsSvg />
