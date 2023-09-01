@@ -38,7 +38,7 @@
 		// const options = { year: 'numeric', month: 'short', day: 'numeric' };
 	}
 	async function fetchLeaderboards(tableName: Table) {
-		const { data, error } = await supabase.from(tableName).select('*').limit(10);
+		const { data, error } = await supabase.from(tableName).select('*').limit(50);
 		if (error) {
 			console.error(error);
 			return;
