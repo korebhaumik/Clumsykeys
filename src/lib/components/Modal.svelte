@@ -26,8 +26,8 @@
 	import RocketSvg from '$lib/assets/RocketSVG.svelte';
 	import { goto } from '$app/navigation';
 
-	let tempTimeCount: number;
-	let tempWordsCount: number;
+	let tempTimeCount: number = 30;
+	let tempWordsCount: number = 50;
 
 	const textVar = {
 		primary: 'text-dark-forest-primary',
