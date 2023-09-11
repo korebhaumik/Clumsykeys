@@ -30,7 +30,7 @@
 		<NotifSvg />
 		<h1 class="ml-2">Notifications</h1>
 	</div>
-	<div class="mt-3 overflow-scroll h-[83%]">
+	<div class="mt-3 no-scrollbar overflow-scroll h-[83%]">
 		{#each notifs as notif}
 			<div class="flex relative h-fit ml-2 mb-2">
 				{#if notif.type === 'info'}

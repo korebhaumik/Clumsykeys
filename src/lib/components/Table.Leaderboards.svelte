@@ -130,15 +130,19 @@
 	<span class="hidden md:inline-block">date</span>
 </div>
 
-<section bind:this={tableContainer} class={`mt-3 overflow-scroll scroll-smooth`}>
+<section bind:this={tableContainer} class={`mt-3 overflow-scroll no-scrollbar scroll-smooth`}>
 	{#each arr as ele, index}
 		<row
 			bind:offsetHeight={h}
-			class={cn(`grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 text gap-1 py-2 rounded-lg`, {
-				'bg-dark-forest-fade': index % 2 !== 0,
-				'outline -outline-offset-2 outline-dark-forest-caret/60': session && session.user.email === ele.email,
-				// 'outline -outline-offset-2 outline-dark-forest-accent-main/60': session && session.user.email === ele.email,
-			})}
+			class={cn(
+				`grid grid-cols-4 overflow-y-scroll sm:grid-cols-6 md:grid-cols-9 text gap-1 py-2 rounded-lg`,
+				{
+					'bg-dark-forest-fade': index % 2 !== 0,
+					'outline -outline-offset-2 outline-dark-forest-caret/60':
+						session && session.user.email === ele.email
+					// 'outline -outline-offset-2 outline-dark-forest-accent-main/60': session && session.user.email === ele.email,
+				}
+			)}
 		>
 			<span class="pl-2">{index + 1}.</span>
 			<span class="col-span-2 sm:col-span-3">{ele.username}</span>
@@ -164,3 +168,15 @@
 <!-- class={`grid grid-cols-5 sm:grid-cols-6 md:grid-cols-9 text gap-1 py-2 rounded-lg ${
 	index % 2 !== 0 ? 'bg-dark-forest-fade' : ''
 }`} -->
+
+<style>
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* For IE, Edge and Firefox */
+	.scrollbar-hide {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+</style>

@@ -73,7 +73,7 @@
 </script>
 
 <div
-	class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 lg:grid-cols-8 gap-1 mt-3 text-dark-forest-unhighlighted"
+	class="grid grid-cols-3 no-scrollbar sm:grid-cols-4 md:grid-cols-7 lg:grid-cols-8 gap-1 mt-3 text-dark-forest-unhighlighted"
 >
 	<span class="pl-7">wpm</span>
 	<span class="hidden col-span-1 sm:inline-block">wpm (raw)</span>
@@ -85,7 +85,7 @@
 	<span>date</span>
 </div>
 
-<div class="mt-2">
+<div class="mt-2 no-scrollbar">
 	{#each recentTests as tuple, index}
 		<row
 			class={cn(
