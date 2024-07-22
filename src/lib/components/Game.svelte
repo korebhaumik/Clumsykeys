@@ -106,7 +106,7 @@
 			prev = [];
 			return prev;
 		});
-		await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 200, {
+		await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 400, {
 			lang: $newTextConfig.language.value,
 			type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
 			isNumber: $newTextConfig.numbers,
@@ -468,7 +468,7 @@
 	}
 
 	$: isBlur = false;
-	let resetEl: HTMLAnchorElement;
+	let resetEl: HTMLButtonElement;
 </script>
 
 <section class="hidden sm:block relative">
@@ -537,13 +537,12 @@
 	Support for mobile devices is coming soon!
 </section>
 <!-- svelte-ignore a11y-missing-attribute -->
-<a
+<button
 	bind:this={resetEl}
 	class={cn('block text-dark-forest-unhighlighted outline-none border-none mx-auto mt-5 w-fit', {
 		'text-dark-forest-unhighlighted': $theme === 'dark-forest'
 	})}
 	type="button"
-	href="/"
 	on:focus={() => {
 		resetEl.style.color = 'white';
 		resetEl.style.backgroundColor = '#242A2D';
@@ -555,30 +554,37 @@
 		resetEl.style.backgroundColor = 'inherit';
 		resetEl.style.borderRadius = '0';
 	}}
-	on:click={async () => {
-		//@ts-ignore
-		clearInterval(intervalId);
-		letterIndex = 0;
-		caretEl.style.left = '0px';
-		caretEl.style.top = '3px';
-		typedLetter = '';
-		resetTest();
-		await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 500, {
-			lang: $newTextConfig.language.value,
-			type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
-			isNumber: $newTextConfig.numbers,
-			isPunctuation: $newTextConfig.punctuations
-		});
-		setGameState('waiting');
-
-		$inputEl.focus();
-		for (let i = 0; i < $wordsArr.length; i++) {
-			for (let j = 0; j < $wordsArr[i].length; j++) {
-				// console.log(wordsEl.children[i].children[j].children[0]);
-				wordsEl.children[i].children[j].children[0].className = textVar.unhighlighted;
+		on:click={async () => {
+			//@ts-ignore
+			clearInterval(intervalId);
+			// console.log(intervalId);
+			intervalId = null;
+			lineH = 0;
+			lineNum = 0;
+			count.set(0);
+			letterIndex = 0;
+			caretEl.style.left = '0px';
+			caretEl.style.top = '3px';
+			typedLetter = '';
+			resetTest();
+			await getWords($newTextConfig.words.isHighlighted ? $newTextConfig.words.value : 500, {
+				lang: $newTextConfig.language.value,
+				type: $newTextConfig.quotes.isHighlighted ? 'quotes' : 'words',
+				isNumber: $newTextConfig.numbers,
+				isPunctuation: $newTextConfig.punctuations
+			});
+			setGameState('waiting');
+	
+			for (let i = 0; i < $wordsArr.length; i++) {
+				for (let j = 0; j < $wordsArr[i].length; j++) {
+					wordsEl.children[i].children[j].replaceChildren(
+						wordsEl.children[i].children[j].children[0]
+					);
+					wordsEl.children[i].children[j].children[0].className = textVar.unhighlighted;
+				}
 			}
-		}
-	}}
+			$inputEl.focus();
+		}}
 	on:keydown={async (e) => {
 		if (e.key === 'Enter') {
 			//@ts-ignore
@@ -619,7 +625,7 @@
 			unhighlighted: ''
 		}}
 	/>
-</a>
+</button>
 
 <style>
 	@keyframes blink {

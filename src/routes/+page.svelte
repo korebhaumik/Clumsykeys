@@ -1,6 +1,6 @@
 <script lang="ts">
 	// import Game from '$lib/components/Game.svelte';
-	import Game from '$lib/components/Game copy.svelte';
+	import Game from '$lib/components/Game.svelte';
 	import TestConfigBar from '$lib/components/TestConfigBar.svelte';
 	import { page } from '$app/stores';
 	import { theme } from '$lib/components/fun.store';
